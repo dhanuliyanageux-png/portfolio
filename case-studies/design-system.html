@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.className="js";</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Founding a design system — Your Name</title>
+  <meta name="description" content="Case study: building a design system, contribution model, and docs adopted across three squads." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html">Your&nbsp;Name<span class="dot">.</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../work.html" aria-current="page">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="cs-header">
+        <div class="container">
+          <p class="eyebrow reveal">Internal Platform · Case study</p>
+          <h1 class="reveal">Founding a design system three squads actually use</h1>
+          <p class="dek reveal">Three teams, three button components, zero shared language. I built the system — and the process around it — that got everyone contributing instead of forking.</p>
+        </div>
+      </header>
+
+      <div class="container">
+        <dl class="cs-meta reveal">
+          <div><dt>Role</dt><dd>Design systems lead</dd></div>
+          <div><dt>Responsibilities</dt><dd>Tokens, component design, docs, contribution model, adoption</dd></div>
+          <div><dt>Team</dt><dd>2 designers (part-time), 3 engineers, design-ops</dd></div>
+          <div><dt>Timeline</dt><dd>2024 · ongoing, first 6 months covered here</dd></div>
+        </dl>
+
+        <figure class="cs-hero figure-wide reveal">
+          <div class="thumb"><div class="placeholder wide"><span>Hero — component library overview</span></div></div>
+          <figcaption>The core library: tokens, primitives, and patterns, documented in one place.</figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <div class="prose">
+
+          <h2 class="reveal">The challenge</h2>
+          <p class="reveal">Rapid team growth left the product visually fragmented — inconsistent spacing, four shades of “primary blue,” and accessibility regressions shipping unnoticed. Every squad rebuilt the same components slightly differently, and design-to-dev handoff meant re-specifying things that should have been settled once.</p>
+
+          <h2 class="reveal">Approach</h2>
+          <p class="reveal">I treated adoption as the actual deliverable. A perfect library nobody uses is a failure. So the work ran on three tracks in parallel:</p>
+          <ul class="reveal">
+            <li><strong>Foundations first.</strong> A token layer (color, type, space, radius, elevation) mapped 1:1 between Figma and code.</li>
+            <li><strong>Migrate the highest-traffic components</strong> — button, input, select, modal, table — with real usage audited from production.</li>
+            <li><strong>A contribution model</strong> so squads could propose and land changes without a bottleneck.</li>
+          </ul>
+
+          <figure class="figure-wide reveal">
+            <div class="thumb"><div class="placeholder wide"><span>Token map — Figma variables ↔ CSS custom properties</span></div></div>
+            <figcaption>One source of truth, two consumers. Renames propagate everywhere.</figcaption>
+          </figure>
+
+          <div class="pullquote reveal">
+            <p>The system only works if contributing to it is easier than working around it.</p>
+          </div>
+
+          <h2 class="reveal">Documentation</h2>
+          <p class="reveal">Each component page covers anatomy, variants, states, content guidelines, accessibility notes, and a live code sample. Written for the person reaching for it at 4pm, not for a design-system connoisseur.</p>
+
+          <figure class="reveal">
+            <div class="thumb"><div class="placeholder"><span>Component doc page — button</span></div></div>
+            <figcaption>Usage, do/don't, props, and a11y in a single scroll.</figcaption>
+          </figure>
+
+          <h2 class="reveal">Impact</h2>
+          <div class="impact-stats reveal">
+            <div class="stat"><b>120+</b><span>Components adopted across 3 squads</span></div>
+            <div class="stat"><b>−40%</b><span>Design-to-dev handoff cycle time</span></div>
+            <div class="stat"><b>0</b><span>Net-new contrast failures since launch</span></div>
+          </div>
+          <p class="reveal"><strong>What I'd do differently:</strong> I documented governance too late. For the first two months “who decides” was ambiguous and a few changes stalled. Writing that down early would have saved weeks.</p>
+
+        </div>
+
+        <nav class="next-project reveal" aria-label="Next case study">
+          <a href="ai-item-summaries.html">
+            <span>
+              <span class="eyebrow">Next case study</span>
+              <span class="np-title">Empowering item discovery with Gen AI summaries</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="../index.html">Home</a>
+        <a href="../work.html">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+        <a href="mailto:you@example.com">Email</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </nav>
+      <p class="copy">© <span data-year>2026</span> Your Name. Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.className="js";</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Onboarding redesign — Your Name</title>
+  <meta name="description" content="Case study: turning a 14-step setup wizard into a guided activation checklist." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html">Your&nbsp;Name<span class="dot">.</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../work.html" aria-current="page">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="cs-header">
+        <div class="container">
+          <p class="eyebrow reveal">SaaS Platform · Case study</p>
+          <h1 class="reveal">Rebuilding onboarding to get teams to value on day one</h1>
+          <p class="dek reveal">New workspaces had to clear 14 setup steps before they could do anything useful. Most never finished. We rebuilt it around what actually signals activation.</p>
+        </div>
+      </header>
+
+      <div class="container">
+        <dl class="cs-meta reveal">
+          <div><dt>Role</dt><dd>Lead designer</dd></div>
+          <div><dt>Responsibilities</dt><dd>Journey mapping, prototyping, UX writing, A/B test design</dd></div>
+          <div><dt>Team</dt><dd>1 designer, PM, 4 engineers, lifecycle marketing</dd></div>
+          <div><dt>Timeline</dt><dd>Q1 2024 · ~10 weeks</dd></div>
+        </dl>
+
+        <figure class="cs-hero figure-wide reveal">
+          <div class="thumb"><div class="placeholder wide"><span>Hero — new checklist experience</span></div></div>
+          <figcaption>The redesigned onboarding: a persistent, skippable checklist tied to real milestones.</figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <div class="prose">
+
+          <h2 class="reveal">The challenge</h2>
+          <p class="reveal">The wizard forced every new workspace through the same linear path — invite teammates, connect integrations, configure settings — before showing the product. Funnel data told the story: <strong>61%</strong> of workspaces dropped before step 6, and the ones that did finish weren't more likely to stick.</p>
+
+          <div class="pullquote reveal">
+            <p>I just want to see if this thing works before I go bug my whole team to sign up.</p>
+            <cite>Trial admin, discovery interview</cite>
+          </div>
+
+          <h2 class="reveal">Reframe</h2>
+          <p class="reveal">We stopped treating setup as a gate. Working with data, we defined <strong>three activation moments</strong> that actually predicted retention — create a project, complete one real task in it, and invite a second person — and designed everything around reaching those, fast.</p>
+
+          <figure class="figure-wide reveal">
+            <div class="thumb"><div class="placeholder wide"><span>Old linear wizard vs. new milestone map</span></div></div>
+            <figcaption>From a fixed sequence to a set of milestones the user can approach in any order.</figcaption>
+          </figure>
+
+          <h2 class="reveal">Design</h2>
+          <ul class="reveal">
+            <li><strong>Drop into the product immediately</strong> with a sample project already populated.</li>
+            <li><strong>A persistent checklist</strong> in the corner — progress you can see, steps you can skip or snooze.</li>
+            <li><strong>Contextual nudges</strong> instead of modals: the invite prompt appears when you'd naturally want a teammate.</li>
+          </ul>
+
+          <figure class="reveal">
+            <div class="thumb"><div class="placeholder"><span>Checklist component states</span></div></div>
+            <figcaption>Empty, in-progress, dismissed, and complete states for the checklist.</figcaption>
+          </figure>
+
+          <h2 class="reveal">Testing</h2>
+          <p class="reveal">Prototype tests with 12 trial admins, then a staged A/B test at 50/50. We watched setup completion, time to first real task, and week-4 retention as a guardrail.</p>
+
+          <h2 class="reveal">Impact</h2>
+          <div class="impact-stats reveal">
+            <div class="stat"><b>+38%</b><span>Setup completion</span></div>
+            <div class="stat"><b>−22%</b><span>Time to first project</span></div>
+            <div class="stat"><b>+6pt</b><span>Week-4 retention (activated cohort)</span></div>
+          </div>
+          <p class="reveal"><strong>What I'd do differently:</strong> the mobile checklist shipped as a compressed version of desktop. It needed its own layout from the start.</p>
+
+        </div>
+
+        <nav class="next-project reveal" aria-label="Next case study">
+          <a href="design-system.html">
+            <span>
+              <span class="eyebrow">Next case study</span>
+              <span class="np-title">Founding a design system three squads actually use</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="../index.html">Home</a>
+        <a href="../work.html">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+        <a href="mailto:you@example.com">Email</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </nav>
+      <p class="copy">© <span data-year>2026</span> Your Name. Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
