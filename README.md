@@ -25,7 +25,7 @@ case-studies/
   onboarding-redesign.html     Case study
   design-system.html           Case study
 assets/
-  css/style.css                All styling + design tokens + dark mode
+  css/style.css                All styling + design tokens (light theme)
   js/main.js                   Mobile nav, scroll reveal, footer year
   img/                         Put your images here
   resume.pdf                   Drop your résumé here (linked from the nav)
@@ -39,6 +39,8 @@ All copy is placeholder. Search-and-replace these:
 - [ ] **`you@example.com`** → your email
 - [ ] **`https://www.linkedin.com/`** → your LinkedIn URL
 - [ ] **`Your City`**, hero tagline, and the "meta-inline" line in `index.html`
+- [ ] **Hero rotating words** — the `data-rotate="clear | usable | …"` attribute on the
+      `.rotator` span in `index.html` (pipe-separated; edit or add your own)
 - [ ] **Strengths** section in `index.html` — six cells
 - [ ] **Testimonials** in `index.html` — names, titles, quotes
 - [ ] **About** page — background list, tools, "outside work", pull quote
@@ -53,7 +55,8 @@ All copy is placeholder. Search-and-replace these:
 ## Design tokens
 
 Colors, type scale, spacing, and radius live as CSS custom properties at the top of
-`assets/css/style.css` (`:root { … }`), with a `prefers-color-scheme: dark` override.
+`assets/css/style.css` (`:root { … }`). The site is light-theme only, like the
+reference — there's no dark mode.
 Change the accent in one place: `--accent`.
 
 Fonts are Fraunces (display) + Inter (body), loaded from Google Fonts. Swap the

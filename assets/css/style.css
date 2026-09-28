@@ -6,14 +6,16 @@
 
 /* ---------- Design tokens ---------- */
 :root {
-  /* Color — light */
-  --bg:            #FBFAF8;
+  color-scheme: light;
+
+  /* Color — light theme only (matches the reference site) */
+  --bg:            #FDFCFA;
   --bg-elevated:   #FFFFFF;
-  --bg-sunken:     #F1EFEA;
+  --bg-sunken:     #F3F1EC;
   --text:          #1A1A1A;
   --text-soft:     #55524C;
   --text-faint:    #8A867E;
-  --border:        #E3E0D8;
+  --border:        #E5E2DA;
   --accent:        #2F43E0;
   --accent-soft:   #E9EBFC;
   --accent-text:   #1B2AA8;
@@ -40,32 +42,16 @@
   --shadow: 0 1px 2px rgba(20, 18, 14, 0.04), 0 12px 32px -12px rgba(20, 18, 14, 0.12);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:            #14130F;
-    --bg-elevated:   #1D1B16;
-    --bg-sunken:     #100F0C;
-    --text:          #F4F1EA;
-    --text-soft:     #B7B2A7;
-    --text-faint:    #857F72;
-    --border:        #322F27;
-    --accent:        #9AA6FF;
-    --accent-soft:   #20223A;
-    --accent-text:   #C3CBFF;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 16px 40px -16px rgba(0,0,0,0.6);
-  }
-}
-
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; background: var(--bg); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 body {
   margin: 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: var(--font-sans);
   font-size: var(--step-0);
@@ -595,3 +581,97 @@ figure figcaption {
 .skip-link:focus { transform: none; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+/* =========================================================
+   Landing accents — creative, minimal
+   1. Fine paper grain over the whole page
+   2. Slow-rotating "compass" mark behind the hero
+   3. Oversized outline numerals on the work list
+   ========================================================= */
+
+/* 1 — grain: a barely-there texture so the flat off-white has some life */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+
+/* 2 — hero mark */
+.hero { position: relative; overflow: clip; }
+.hero > .container { position: relative; z-index: 1; }
+.hero-mark {
+  position: absolute;
+  top: 50%;
+  right: -7%;
+  width: min(46vw, 540px);
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  color: var(--accent);
+  opacity: 0.09;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-mark svg { width: 100%; height: 100%; display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-mark svg { animation: hero-spin 90s linear infinite; }
+}
+@keyframes hero-spin { to { transform: rotate(360deg); } }
+@media (max-width: 640px) {
+  .hero-mark { opacity: 0.055; right: -14%; }
+}
+
+/* 3 — index numerals */
+.work-list { counter-reset: work; }
+.work-item__body { counter-increment: work; }
+.work-item__body::before {
+  content: counter(work, decimal-leading-zero);
+  display: block;
+  font: 400 clamp(2rem, 5vw, 3rem) / 1 var(--font-display);
+  letter-spacing: 0.02em;
+  color: var(--text-faint);
+  margin-bottom: 0.9rem;
+  transition: color 0.25s ease;
+}
+@supports ((-webkit-text-stroke: 1px black)) {
+  .work-item__body::before {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    transition: -webkit-text-stroke-color 0.25s ease, color 0.25s ease;
+  }
+  .work-item:hover .work-item__body::before {
+    -webkit-text-stroke-color: var(--accent);
+    color: var(--accent-soft);
+  }
+}
+.work-item__body { transition: transform 0.25s ease; }
+.work-item:hover .work-item__body { transform: translateX(6px); }
+
+/* =========================================================
+   Hero word rotator — the value proposition, alive
+   ========================================================= */
+.rotator {
+  display: inline-block;
+  text-align: left;
+  color: var(--accent);
+  font-style: italic;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.4s ease, filter 0.4s ease;
+}
+.rotator.is-swapping { transform: translateY(-0.4em); opacity: 0; filter: blur(5px); }
+.rotator.is-entering { transform: translateY(0.4em); opacity: 0; filter: blur(5px); transition: none; }
+
+/* =========================================================
+   Case study screenshots — exported Figma frames
+   ========================================================= */
+figure.shot { margin-block: clamp(1.75rem, 4vw, 2.75rem); }
+figure.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
