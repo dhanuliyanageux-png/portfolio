@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="t">Schematic of an application page showing two positions for the page-search icon</title>
+  <desc id="d">A simplified page with a global search bar in the top bar. The page-search icon appears in two places: dashed at the top right (the relocated position tested in round one) and solid at the left of the page (the recommended position). An arrow shows the move from right to left.</desc>
+
+  <rect width="800" height="450" fill="#F3F1EC"/>
+
+  <!-- app window -->
+  <rect x="40" y="34" width="720" height="382" rx="14" fill="#FFFFFF" stroke="#E2DFD7"/>
+
+  <!-- top bar with global search -->
+  <path d="M40 48a14 14 0 0 1 14-14h692a14 14 0 0 1 14 14v38H40z" fill="#F7F6F3"/>
+  <line x1="40" y1="86" x2="760" y2="86" stroke="#E7E4DC"/>
+  <circle cx="68" cy="60" r="9" fill="#D9D5CB"/>
+  <rect x="250" y="47" width="300" height="26" rx="13" fill="#FFFFFF" stroke="#DAD6CC"/>
+  <circle cx="269" cy="60" r="5" fill="none" stroke="#9A968C" stroke-width="1.6"/>
+  <line x1="273" y1="64" x2="277" y2="68" stroke="#9A968C" stroke-width="1.6" stroke-linecap="round"/>
+  <text x="288" y="64.5" font-size="12" fill="#8C887E">Global search</text>
+  <circle cx="722" cy="60" r="10" fill="#D9D5CB"/>
+
+  <!-- page title + toolbar -->
+  <text x="64" y="122" font-size="20" font-weight="600" fill="#1A1A1A">Page title</text>
+  <line x1="64" y1="140" x2="736" y2="140" stroke="#ECE9E2"/>
+
+  <!-- left-side controls -->
+  <rect x="112" y="152" width="22" height="22" rx="6" fill="#EDEAE3"/>
+  <rect x="142" y="152" width="22" height="22" rx="6" fill="#EDEAE3"/>
+  <!-- right-side controls -->
+  <rect x="592" y="152" width="22" height="22" rx="6" fill="#EDEAE3"/>
+  <rect x="622" y="152" width="22" height="22" rx="6" fill="#EDEAE3"/>
+  <rect x="652" y="152" width="22" height="22" rx="6" fill="#EDEAE3"/>
+
+  <!-- position B: recommended, left (solid) -->
+  <circle cx="75" cy="163" r="14" fill="#2F43E0"/>
+  <circle cx="73.5" cy="161.5" r="5" fill="none" stroke="#FFFFFF" stroke-width="1.8"/>
+  <line x1="77.5" y1="165.5" x2="82" y2="170" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- position A: relocated, top right (dashed) -->
+  <circle cx="712" cy="163" r="14" fill="#FFFFFF" stroke="#2F43E0" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <circle cx="710.5" cy="161.5" r="5" fill="none" stroke="#2F43E0" stroke-width="1.8"/>
+  <line x1="714.5" y1="165.5" x2="719" y2="170" stroke="#2F43E0" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- arrow right -> left -->
+  <path d="M690 200 C 560 236, 250 236, 106 200" fill="none" stroke="#2F43E0" stroke-width="1.6" stroke-dasharray="5 5" stroke-linecap="round"/>
+  <path d="M116 192 L102 199 L114 208" fill="none" stroke="#2F43E0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- labels -->
+  <text x="712" y="196" font-size="12" font-weight="600" fill="#2F43E0" text-anchor="end" transform="translate(28 0)">Round 1: top right</text>
+  <text x="64" y="196" font-size="12" font-weight="600" fill="#2F43E0">Recommended: left</text>
+
+  <!-- content placeholder rows -->
+  <g fill="#F1EFE9">
+    <rect x="64" y="268" width="672" height="16" rx="5"/>
+    <rect x="64" y="296" width="672" height="16" rx="5"/>
+    <rect x="64" y="324" width="672" height="16" rx="5"/>
+    <rect x="64" y="352" width="672" height="16" rx="5"/>
+    <rect x="64" y="380" width="480" height="16" rx="5"/>
+  </g>
+  <text x="400" y="440" font-size="11" fill="#8C887E" text-anchor="middle">Schematic, not to scale</text>
+</svg>

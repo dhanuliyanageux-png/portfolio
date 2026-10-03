@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.className="js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Date Filter Re-Design — Your Name</title>
-  <meta name="description" content="Case study: research and redesign of the date filter component for IFS Cloud (2025 R1)." />
+  <title>Four ways to pick a date — Dhanushka Liyanage</title>
+  <meta name="description" content="Research case study: interviews, session analytics, support tickets and a competitive review diagnosed why IFS Cloud's date filter converted at only 32.31%. A redesigned information architecture lifted it to 35.12%." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=28" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
@@ -18,7 +18,7 @@
 
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="../index.html">Your&nbsp;Name<span class="dot">.</span></a>
+      <a class="brand" href="../index.html">Dhanushka&nbsp;Liyanage<span class="dot">.</span></a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
       <nav class="nav" id="nav" aria-label="Primary">
         <a href="../index.html">Home</a>
@@ -33,99 +33,546 @@
     <article>
       <header class="cs-header">
         <div class="container">
-          <p class="eyebrow reveal">IFS · Case study</p>
-          <h1 class="reveal">Date Filter Re-Design</h1>
-          <p class="dek reveal">A research-led rework of the date filter — the control people reach for on nearly every list and report in IFS Cloud. Shipped in 2025&nbsp;R1.</p>
+          <p class="eyebrow reveal">IFS Cloud · Research case study</p>
+          <h1 class="reveal">Four ways to pick a date, and none of them worked</h1>
+          <p class="dek reveal">The date filter is one of the most-used controls in IFS Cloud, and most people who opened it never touched the calendar. Research found the real problem, a redesign fixed it, and the conversion number moved from 32.31% to 35.12%.</p>
         </div>
       </header>
 
       <div class="container">
+        <nav class="cs-toc reveal" aria-label="On this page">
+          <a href="#problem"><span>01</span>Problem</a>
+          <a href="#audit"><span>02</span>Audit</a>
+          <a href="#research"><span>03</span>Research</a>
+          <a href="#diagnosis"><span>04</span>Diagnosis</a>
+          <a href="#evidence"><span>05</span>Evidence</a>
+          <a href="#hypothesis"><span>06</span>Hypothesis</a>
+          <a href="#design"><span>07</span>Redesign</a>
+          <a href="#usability"><span>08</span>Usability test</a>
+          <a href="#iteration"><span>09</span>Iteration</a>
+          <a href="#result"><span>10</span>Result</a>
+        </nav>
+
         <dl class="cs-meta reveal">
-          <div><dt>Role</dt><dd>Product designer — research &amp; interaction design</dd></div>
-          <div><dt>Focus</dt><dd>Discovery research, competitive analysis, interaction redesign</dd></div>
-          <div><dt>Release</dt><dd>IFS Cloud 2025 R1</dd></div>
-          <div><dt>Status</dt><dd>Completed &amp; shipped</dd></div>
+          <div><dt>Role</dt><dd>Lead product designer — research and interaction design</dd></div>
+          <div><dt>Methods</dt><dd>User interviews, session-replay analytics, support-ticket and community review, competitive benchmarking, UX audit, heuristic review, usability test</dd></div>
+          <div><dt>Metric</dt><dd>Calendar-use conversion: 32.31% → 35.12%</dd></div>
+          <div><dt>Product</dt><dd>IFS Cloud — date filter, used across lists and reports</dd></div>
         </dl>
 
-        <figure class="cs-hero figure-wide reveal">
-          <img src="../assets/img/date-filter-cover.png" alt="Date Filter Re-Design — research project cover, IFS Cloud 2025 R1" width="1600" height="750" style="border-radius: var(--radius); border: 1px solid var(--border);" />
-          <figcaption>Project cover. Replace with a hero shot of the redesigned filter in context.</figcaption>
+        <figure class="cs-hero figure-wide shot reveal">
+          <img src="../assets/img/date-filter/date-range-ui.png" alt="The redesigned date filter: Exact Date and Date Range tabs, Start Date and End Date fields, and a Quick Ranges panel listing Last 2/5/7 Days, This Week, This Month, This Year, Last/Next Week, Month and Year, and a custom Next N Days/Months/Years option." width="2598" height="1746" />
+          <figcaption>The redesigned filter: a Quick Ranges panel replaces the guesswork with named, recognisable options.</figcaption>
         </figure>
       </div>
 
       <div class="container">
         <div class="prose">
 
-          <!-- ───────────────────────────────────────────────
-               PLACEHOLDER NARRATIVE
-               The Figma file shared only contains the cover slide,
-               so the sections below are a scaffold. Replace the
-               italicised prompts with your real project story and
-               swap each placeholder block for a screen from Figma.
-               ─────────────────────────────────────────────── -->
+          <h2 class="reveal" id="problem"><span class="cs-step">01 · Problem</span>Two-thirds of the people who needed a date never reached the calendar</h2>
+          <p class="reveal">The date filter sits inside almost every list and report page in IFS Cloud. Not everyone who opens the filter pane needs to search by date — plenty of people are there for other filters entirely. But among the people who do open it looking for a date, we track one thing: do they go on to actually use the calendar, or do they give up first?</p>
+          <p class="reveal">That number was <strong>32.31%</strong>. The goal wasn't to make everyone use the calendar — it was to get the people who already needed it to <strong>35% or more</strong>. A modest-sounding target, but it meant fixing whatever was losing two-thirds of the people who had a real date in mind.</p>
+        </div>
 
-          <h2 class="reveal">Context</h2>
-          <p class="reveal"><em>Placeholder — where the date filter lives and why it matters. Roughly: it appears on every list, report, and dashboard in the product; users interact with it constantly; the old pattern predated the current design system.</em></p>
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 150" role="img" aria-label="Among people who opened the date filter looking for a date, 32.31% went on to use the calendar and 67.69% did not. The redesign target was 35% or more, and an internal stretch hypothesis was 40%." xmlns="http://www.w3.org/2000/svg">
+              <g font-family="Inter, sans-serif">
+                <text x="20" y="26" font-size="12" font-weight="600" fill="var(--text)">Of the people who opened the filter looking for a date</text>
+                <rect x="20" y="44" width="860" height="36" rx="8" fill="var(--bg-sunken)" stroke="var(--border)" />
+                <rect x="20" y="44" width="278" height="36" rx="8" fill="var(--accent)" />
+                <text x="36" y="67" font-size="12.5" font-weight="600" fill="#fff">32.31% used the calendar</text>
+                <text x="392" y="67" font-size="12.5" fill="var(--text-soft)">67.69% did not</text>
+                <line x1="321" y1="36" x2="321" y2="90" stroke="var(--text)" stroke-width="1.5" />
+                <line x1="364" y1="36" x2="364" y2="90" stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <text x="316" y="108" font-size="11" font-weight="600" fill="var(--text)" text-anchor="end">Target: 35%+</text>
+                <text x="370" y="108" font-size="11" fill="var(--text-soft)">Internal stretch hypothesis: 40%</text>
+                <text x="20" y="136" font-size="11" fill="var(--text-soft)">The goal was not to make everyone use the calendar, but to get the people who already needed it to 35% or more.</text>
+              </g>
+            </svg>
+            <figcaption>The metric: among people who opened the filter looking for a date, how many went on to use the calendar.</figcaption>
+          </figure>
+        </div>
 
-          <h2 class="reveal">The problem</h2>
-          <p class="reveal"><em>Placeholder — the specific pain. What went wrong with the old date filter? Common candidates: too many clicks to set a range, unclear relative vs. absolute dates ("last 30 days" vs. a fixed range), inconsistent behaviour across modules, poor keyboard and screen-reader support, no way to save a frequently used range.</em></p>
+        <div class="prose">
+          <h2 class="reveal" id="audit"><span class="cs-step">02 · Audit</span>Before any research, I audited the filter against UX laws and IFS heuristics</h2>
+          <p class="reveal">The goal of a UX audit is to find usability issues, design flaws and areas for improvement. I started with the filter as it stood in the search pane: four ways to specify a date, dropdowns of preset options, and a calendar. I checked it against established UX laws and the IFS heuristics, and used a severity scale to rank what I found, up to the “usability catastrophe” that has to be fixed before release.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 470" role="img" aria-label="What the audit found. Four ways to pick a date break Hick's Law. A hidden active state breaks visibility of system status. Everything shown at once ignores progressive disclosure. Splitting date selection into categories breaks Jakob's Law. During versus between two dates breaks consistency and standards. No guard on bad ranges breaks error prevention." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrDA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <text x="20" y="26" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">WHAT THE PANEL DID</text>
+                <text x="340" y="26" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">PRINCIPLE BROKEN</text>
+                <text x="620" y="26" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">WHAT THE AUDIT SAW</text>
+                <rect x="20" y="40" width="270" height="60" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="36" y="66" font-size="12.5" font-weight="600" fill="var(--text)">Four ways to pick a date</text><text x="36" y="84" font-size="11" fill="var(--text-soft)">Exact date, between two dates, during, in range</text>
+                <line x1="290" y1="70" x2="334" y2="70" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <rect x="340" y="40" width="230" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" /><text x="356" y="66" font-size="12.5" font-weight="600" fill="var(--accent-text)">Hick's Law</text><text x="356" y="84" font-size="11" fill="var(--accent-text)">More choices, slower decisions</text>
+                <line x1="570" y1="70" x2="614" y2="70" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <text x="624" y="66" font-size="11" fill="var(--text-soft)">Each method needs its own mental model; people must</text><text x="624" y="84" font-size="11" fill="var(--text-soft)">choose a method before they can choose a date.</text>
+                <rect x="20" y="110" width="270" height="60" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="36" y="136" font-size="12.5" font-weight="600" fill="var(--text)">The active state is hidden</text><text x="36" y="154" font-size="11" fill="var(--text-soft)">Which method, and what the final range is</text>
+                <line x1="290" y1="140" x2="334" y2="140" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <rect x="340" y="110" width="230" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" /><text x="356" y="136" font-size="12.5" font-weight="600" fill="var(--accent-text)">Visibility of system status</text><text x="356" y="154" font-size="11" fill="var(--accent-text)">Nielsen, and IFS heuristics 1 and 5</text>
+                <line x1="570" y1="140" x2="614" y2="140" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <text x="624" y="136" font-size="11" fill="var(--text-soft)">Unclear which method is active or what the final range</text><text x="624" y="154" font-size="11" fill="var(--text-soft)">is, and “last week” never says which dates it means.</text>
+                <rect x="20" y="180" width="270" height="60" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="36" y="206" font-size="12.5" font-weight="600" fill="var(--text)">Everything shown at once</text><text x="36" y="224" font-size="11" fill="var(--text-soft)">All methods visible together</text>
+                <line x1="290" y1="210" x2="334" y2="210" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <rect x="340" y="180" width="230" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" /><text x="356" y="206" font-size="12.5" font-weight="600" fill="var(--accent-text)">Progressive disclosure</text><text x="356" y="224" font-size="11" fill="var(--accent-text)">Reveal complexity gradually</text>
+                <line x1="570" y1="210" x2="614" y2="210" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <text x="624" y="206" font-size="11" fill="var(--text-soft)">No gradual introduction of complexity, and no clear</text><text x="624" y="224" font-size="11" fill="var(--text-soft)">path for simple versus advanced searches.</text>
+                <rect x="20" y="250" width="270" height="60" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="36" y="276" font-size="12.5" font-weight="600" fill="var(--text)">Split into separate categories</text><text x="36" y="294" font-size="11" fill="var(--text-soft)">Single date, range and presets apart</text>
+                <line x1="290" y1="280" x2="334" y2="280" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <rect x="340" y="250" width="230" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" /><text x="356" y="276" font-size="12.5" font-weight="600" fill="var(--accent-text)">Jakob's Law</text><text x="356" y="294" font-size="11" fill="var(--accent-text)">Familiar patterns elsewhere</text>
+                <line x1="570" y1="280" x2="614" y2="280" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <text x="624" y="276" font-size="11" fill="var(--text-soft)">Google Analytics puts single date, range and quick</text><text x="624" y="294" font-size="11" fill="var(--text-soft)">options in one interface; splitting them feels inconsistent.</text>
+                <rect x="20" y="320" width="270" height="60" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="36" y="346" font-size="12.5" font-weight="600" fill="var(--text)">During vs between two dates</text><text x="36" y="364" font-size="11" fill="var(--text-soft)">Same job, dropdowns versus a calendar</text>
+                <line x1="290" y1="350" x2="334" y2="350" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <rect x="340" y="320" width="230" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" /><text x="356" y="346" font-size="12.5" font-weight="600" fill="var(--accent-text)">Consistency and standards</text><text x="356" y="364" font-size="11" fill="var(--accent-text)">IFS heuristic</text>
+                <line x1="570" y1="350" x2="614" y2="350" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <text x="624" y="346" font-size="11" fill="var(--text-soft)">Redundant features with different interfaces (dropdowns</text><text x="624" y="364" font-size="11" fill="var(--text-soft)">versus a calendar) for the same task break consistency.</text>
+                <rect x="20" y="390" width="270" height="60" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="36" y="416" font-size="12.5" font-weight="600" fill="var(--text)">No guard on bad ranges</text><text x="36" y="434" font-size="11" fill="var(--text-soft)">Conflicting or reversed dates allowed</text>
+                <line x1="290" y1="420" x2="334" y2="420" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <rect x="340" y="390" width="230" height="60" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" /><text x="356" y="416" font-size="12.5" font-weight="600" fill="var(--accent-text)">Error prevention</text><text x="356" y="434" font-size="11" fill="var(--accent-text)">IFS heuristic</text>
+                <line x1="570" y1="420" x2="614" y2="420" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDA)" />
+                <text x="624" y="416" font-size="11" fill="var(--text-soft)">Users can set invalid ranges without a warning, such as</text><text x="624" y="434" font-size="11" fill="var(--text-soft)">an end date before the start date.</text>
+              </g>
+            </svg>
+            <figcaption>Six findings from the audit, each tied to the principle it breaks.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <div class="pullquote reveal">
+            <p>The idea is to have user friendly search and filtering capabilities, instead of typing SQL like queries, give UIs with fields, This is a common practice in the software world!</p>
+            <cite>An IFS community post, kept as evidence in the audit</cite>
+          </div>
+          <h3 class="reveal">What the audit recommended</h3>
+          <p class="reveal">Recommendations were tiered by effort, so the quick wins could land first.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="options">
+            <div class="option is-chosen">
+              <span class="tag is-accent">Quick wins</span>
+              <h4>Fix what confuses today</h4>
+              <p>Remove “In range” or explain it better. Allow range selection in a single calendar. Improve error handling for the Clear button. Show the selected dates in a summary panel.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Mid-term · 1–2 months</span>
+              <h4>Make it more capable</h4>
+              <p>Introduce logical conditions (AND, OR, NOT). Enable relative date filtering, such as “Last X days”. Improve calendar interactions: hover previews and an auto-filled end date.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Long-term · 3 months and above</span>
+              <h4>Go further</h4>
+              <p>Enable time-based filtering, such as 10:00 AM to 12:00 PM. Introduce AI-based recommendations, such as suggesting relevant date ranges. Add keyboard shortcuts for power users.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">The audit's conclusion was that the filter caused usability issues through cognitive overload, dual calendars and vague options, and that a redesign built on simplicity, logical conditions and better feedback should bring faster date selection, higher adoption (a 40% calendar-usage target) and fewer errors (a 30% reduction in misclicks). Those were the audit's expectations, not measured results. Its next step was to test the new design and iterate on feedback.</p>
+          <p class="reveal">Three of the recommendations are visible in the redesign below: “In range” is gone, relative ranges became Quick Ranges, and logical conditions live in the Advanced Date Search.</p>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="research"><span class="cs-step">03 · Research</span>Five kinds of evidence had to agree before I trusted any of them</h2>
+          <p class="reveal">I didn't start from the assumption that the calendar itself was broken. A 32.31% conversion rate is a single flat number — it can't tell you whether people are confused, uninterested, or something else entirely. So before designing anything, I pulled together five different kinds of evidence and made sure they agreed with each other before trusting any one of them.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col">Method</th><th scope="col">What it was</th><th scope="col">What it was good for</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">User interviews</th>
+                  <td>Talking through how people actually think about a date when they're searching, in their own words.</td>
+                  <td>Surfacing the mental model behind a search, not just the click path.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Session-replay analytics</th>
+                  <td>Page-level interaction data — clicks, expansions, and which exact filter options people touched on a live production page.</td>
+                  <td>Turning "people seem confused" into an actual count.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Support tickets and community posts</th>
+                  <td>Issues already logged against the date filter, including tickets tracked in Jira.</td>
+                  <td>Confusion that was already costing support time, not hypothetical.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Competitive review</th>
+                  <td>How SAP, Microsoft Dynamics, Salesforce and Oracle handle date filtering in their own enterprise tools.</td>
+                  <td>Checking whether "relative" date language (last week, next 30 days) was an IFS-specific idea or an established pattern.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Heuristic audit</th>
+                  <td>The existing filter checked directly against IFS's own usability standards.</td>
+                  <td>A structured, repeatable pass, independent of any one user's opinion.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">What the research found</h3>
+          <p class="reveal">Every method wrote its findings as a hypothesis, not an opinion: <em>since we observed X, we believe changing Y will cause Z</em> — a format that forces a claim to name its own evidence before it's allowed to influence the design. Five of those observations mattered most:</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="bias-grid">
+            <div class="bias-card"><h4>Manual entry felt slower than it should</h4><p>People who preferred typing a date by hand found the interface slower and less intuitive than other methods — a direct signal from interviews, not a guess about typing speed.</p></div>
+            <div class="bias-card"><h4>A pattern users already knew was invisible here</h4><p>People familiar with "In-Range" from IFS's own Enterprise Explorer didn't realise the equivalent existed in this filter at all — the same company, teaching two different vocabularies for the same idea.</p></div>
+            <div class="bias-card"><h4>One preset quietly generated error clicks</h4><p>Fullstory showed the "Today" option collecting an unusually high number of error clicks — people were either mis-clicking it or unsure what it actually did.</p></div>
+            <div class="bias-card"><h4>Two "advanced" options went almost untouched</h4><p>"In-Range" and "During" saw very little use in session data, and what use they did get looked uncertain — a sign people didn't understand them well enough to reach for them.</p></div>
+            <div class="bias-card"><h4>Two calendars, and no idea why</h4><p>Session replays showed people struggling to understand why a date range needed two separate calendars, leading to wrong selections and frequent use of the "Clear" button to start over.</p></div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="diagnosis"><span class="cs-step">04 · Diagnosis</span>Four options that were really two ideas</h2>
+          <p class="reveal">The old filter offered four options for specifying a date: <strong>Exact date</strong>, <strong>Between two dates</strong>, <strong>During</strong>, and <strong>In range</strong>. Laid out, they looked like four distinct choices. In practice, they were two ideas — a single exact date, or a range of dates — wearing four different names.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <img src="../assets/img/date-filter/ia-diagram.png" alt="Diagram: the old filter's four radio options (Exact date, Between two dates, During, In range) map to only two real concepts, Exact Date and Date Ranges. Reasoning notes list why four options increased decision-making time and cognitive load. The new information architecture branches Search Date Filter into Exact Date Search and Date Range Search, each with its own calendar, presets and timezone step, plus a separate Advanced Date Search." width="3840" height="2160" loading="lazy" />
+            <figcaption>Left: the old filter's four options, mapped back to the two concepts they actually represented. Right: the redesigned information architecture.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">Having four visible options before you've even picked a date has real costs:</p>
           <ul class="reveal">
-            <li><em>Pain point one — with a number if you have one (support tickets, task time, drop-off).</em></li>
-            <li><em>Pain point two.</em></li>
-            <li><em>Pain point three.</em></li>
+            <li><strong>Four different ways to select a date increases decision-making time</strong> — people had to work out which option matched their intent before they could start.</li>
+            <li><strong>Each method needed a different mental model,</strong> even though two pairs of them meant almost the same thing.</li>
+            <li><strong>Users had to understand which method to choose</strong> before they could even begin choosing a date.</li>
+            <li><strong>There was no gradual introduction of complexity</strong> — everything was visible at once, whether you needed it or not.</li>
+            <li><strong>All options showing simultaneously raised cognitive load</strong> for a control most people use in passing.</li>
+            <li><strong>There was no clear path</strong> separating a simple, everyday search from a more advanced one.</li>
+          </ul>
+          <p class="reveal">This is what a 32.31% conversion rate actually looked like up close: not a broken calendar, but a decision the interface made people take before they were ready to.</p>
+
+          <h3 class="reveal">Grounding it in real tasks</h3>
+          <p class="reveal">Alongside the audit, I worked through concrete use cases — a specific person, a specific task, a specific date phrase — to keep the redesign anchored in how people actually ask for dates rather than in the filter's existing categories.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <img src="../assets/img/date-filter/exact-date-usecase.png" alt="Use case 1, Exact Date. User: an analyst. Task: retrieve order details on Yesterday. Expected action: the user selects Exact Date, enters the date, and retrieves results. A speech bubble reads: I want to retrieve all purchase orders on Yesterday." width="3840" height="2160" loading="lazy" />
+            <figcaption>One of the use cases used to test the new structure: an analyst who thinks in terms of a single named day, not a filter mode.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="evidence"><span class="cs-step">05 · Evidence</span>What the data showed, and what others already do</h2>
+          <p class="reveal">The interviews and the audit explained <em>why</em> the filter felt hard. To check that the same pattern showed up when nobody was being watched, I pulled click-level analytics off the live production page — the actual radio options people clicked before the redesign shipped.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <img src="../assets/img/date-filter/old-filter-production.png" alt="Production analytics tool showing the old date filter's four radio options — Exact date, Between two dates, During, In range — with click and user counts overlaid on each option, data values masked." width="1250" height="800" loading="lazy" />
+            <figcaption>Page-level click analytics on the live filter, captured before the redesign. Exact numbers are small — this is a low-traffic control — but the pattern across sessions matched what interviews and the audit were already saying.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <div class="stat-grid reveal">
+            <div class="stat-card"><b>4 users</b><span>Clicked the "During" option — 8 clicks total, several re-opening it more than once before moving on</span></div>
+            <div class="stat-card"><b>2 users</b><span>Clicked "Between two dates," the option closest in meaning to "During"</span></div>
+          </div>
+          <p class="reveal">These are small, single-page counts, not a statistically powered study — I'm treating them as directional, not conclusive. But directional was enough: people were re-clicking between options that meant almost the same thing, on a live page, with no interviewer in the room to ask "what were you expecting?" It was the same confusion the interviews described, showing up in raw behaviour instead of self-report.</p>
+
+          <h3 class="reveal">Looking outward: how others do it</h3>
+          <p class="reveal">Before assuming IFS needed a new idea, I checked whether one already existed elsewhere. I reviewed how SAP, Microsoft Dynamics, Salesforce and Oracle handle date filtering in their own enterprise products. The clearest reference point was Salesforce: its relative-date filters in Lightning reports — options like "last week" or "next 30 days" phrased as names rather than raw date math — were already a shipped, mature pattern in a tool used by a comparable audience. That gave the "Quick Ranges" direction real precedent, rather than betting the redesign on an untested idea.</p>
+
+          <h2 class="reveal" id="hypothesis"><span class="cs-step">06 · Hypothesis</span>From insight to a brief, and a hypothesis</h2>
+          <p class="reveal">I turned the five findings into "how might we" questions, grouped by the theme each one pointed at, so the redesign had a clear brief before any screen got drawn:</p>
+          <ul class="reveal">
+            <li><strong>Clarity and usability</strong> — could the terminology be simple enough that each option was self-explanatory, with no near-duplicate choices like "In-Range" and "Between Two Dates"?</li>
+            <li><strong>Consistency</strong> — could every option share the same interaction pattern, and the same language the rest of IFS Cloud already used?</li>
+            <li><strong>Error prevention and feedback</strong> — could real-time validation catch an invalid range before someone had to click "Clear" and start over?</li>
+            <li><strong>Flexibility</strong> — could quick, predefined ranges and detailed custom ones live in the same flow without either one adding weight to the other?</li>
+            <li><strong>Efficiency</strong> — could someone switch between a simple and an advanced search without losing what they'd already entered?</li>
           </ul>
 
-          <h2 class="reveal">Research approach</h2>
-          <p class="reveal"><em>Placeholder — what you actually did. For example: N stakeholder interviews, a competitive teardown of date pickers across analytics and enterprise tools, a heuristic review of the current component, and/or an unmoderated task-based study with N participants.</em></p>
-
-          <figure class="figure-wide reveal">
-            <div class="thumb"><div class="placeholder wide"><span>Competitive teardown / research board</span></div></div>
-            <figcaption>Replace with your research artefact — competitive grid, affinity map, or current-state audit.</figcaption>
-          </figure>
-
-          <h2 class="reveal">What we learned</h2>
-          <p class="reveal"><em>Placeholder — the 3–4 findings that drove the redesign. Lead each with the insight, not the activity.</em></p>
-
           <div class="pullquote reveal">
-            <p><em>“A representative user quote from your research goes here.”</em></p>
-            <cite>Research participant</cite>
+            <p>We believe that reducing the date selection methods from four options to two primary options (Single Date and Date Range) will increase calendar usage from 32.31% to our target of 40%, because it reduces cognitive load and aligns with UX laws including Hick's Law.</p>
+            <cite>The hypothesis written before any screen was designed</cite>
           </div>
 
-          <h3 class="reveal">Finding 1 — <em>short label</em></h3>
-          <p class="reveal"><em>What you saw, and the design implication.</em></p>
-          <h3 class="reveal">Finding 2 — <em>short label</em></h3>
-          <p class="reveal"><em>What you saw, and the design implication.</em></p>
-          <h3 class="reveal">Finding 3 — <em>short label</em></h3>
-          <p class="reveal"><em>What you saw, and the design implication.</em></p>
+          <p class="reveal">40% was the internal stretch case built into that hypothesis — a deliberately ambitious bar to design against. The number IFS formally tracked, and the one reported here, was the more conservative 35%+ target, reached at 35.12%. I'd rather report the number I was actually held to than the more flattering one.</p>
+        </div>
 
-          <h2 class="reveal">Redesign direction</h2>
-          <p class="reveal"><em>Placeholder — the core decisions. e.g. a single entry point with relative presets up front, absolute range one tap away, consistent behaviour tokenised into the design system, full keyboard + ARIA support, and a "recent ranges" memory.</em></p>
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1120 350" role="img" aria-label="From evidence to outcome. Five kinds of evidence: user interviews, session-replay analytics, support tickets and community posts, a competitive review and a heuristic audit, converge on one diagnosis: not a broken calendar but a decision made before people were ready. That became a hypothesis that four options reduced to two would cut cognitive load, then a redesign with Exact Date, Date Range, Quick Ranges and an Advanced path, and an outcome of 32.31% rising to 35.12%." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrD2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="20" y="20" width="230" height="52" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="34" y="42" font-size="12" font-weight="600" fill="var(--text)">User interviews</text><text x="34" y="59" font-size="11" fill="var(--text-soft)">The mental model behind a search</text>
+                <rect x="20" y="84" width="230" height="52" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="34" y="106" font-size="12" font-weight="600" fill="var(--text)">Session-replay analytics</text><text x="34" y="123" font-size="11" fill="var(--text-soft)">Turns “confused” into a count</text>
+                <rect x="20" y="148" width="230" height="52" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="34" y="170" font-size="12" font-weight="600" fill="var(--text)">Support tickets and posts</text><text x="34" y="187" font-size="11" fill="var(--text-soft)">Confusion already costing time</text>
+                <rect x="20" y="212" width="230" height="52" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="34" y="234" font-size="12" font-weight="600" fill="var(--text)">Competitive review</text><text x="34" y="251" font-size="11" fill="var(--text-soft)">SAP, Dynamics, Salesforce, Oracle</text>
+                <rect x="20" y="276" width="230" height="52" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.2" /><text x="34" y="298" font-size="12" font-weight="600" fill="var(--text)">Heuristic audit</text><text x="34" y="315" font-size="11" fill="var(--text-soft)">A repeatable pass vs IFS standards</text>
 
-          <figure class="figure-wide reveal">
-            <div class="thumb"><div class="placeholder wide"><span>Before → after comparison</span></div></div>
-            <figcaption>Replace with a side-by-side of the old and new filter.</figcaption>
+                <polyline points="250,46 270,46 270,174 286,174" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+                <polyline points="250,110 270,110 270,174 286,174" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+                <line x1="250" y1="174" x2="286" y2="174" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+                <polyline points="250,238 270,238 270,174 286,174" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+                <polyline points="250,302 270,302 270,174 286,174" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+
+                <rect x="290" y="124" width="180" height="100" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="306" y="150" font-size="13" font-weight="600" fill="var(--accent-text)">Diagnosis</text>
+                <text x="306" y="171" font-size="11" fill="var(--accent-text)">Not a broken calendar:</text>
+                <text x="306" y="187" font-size="11" fill="var(--accent-text)">a decision made before</text>
+                <text x="306" y="203" font-size="11" fill="var(--accent-text)">people were ready to.</text>
+                <line x1="470" y1="174" x2="506" y2="174" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+
+                <rect x="510" y="124" width="180" height="100" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="526" y="150" font-size="13" font-weight="600" fill="var(--text)">Hypothesis</text>
+                <text x="526" y="171" font-size="11" fill="var(--text-soft)">Four options become two</text>
+                <text x="526" y="187" font-size="11" fill="var(--text-soft)">(Single Date, Date Range)</text>
+                <text x="526" y="203" font-size="11" fill="var(--text-soft)">to cut cognitive load.</text>
+                <line x1="690" y1="174" x2="726" y2="174" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+
+                <rect x="730" y="124" width="180" height="100" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="746" y="150" font-size="13" font-weight="600" fill="var(--text)">Redesign</text>
+                <text x="746" y="171" font-size="11" fill="var(--text-soft)">Exact Date, Date Range,</text>
+                <text x="746" y="187" font-size="11" fill="var(--text-soft)">Quick Ranges, and an</text>
+                <text x="746" y="203" font-size="11" fill="var(--text-soft)">Advanced path.</text>
+                <line x1="910" y1="174" x2="946" y2="174" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrD2)" />
+
+                <rect x="950" y="124" width="150" height="100" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="966" y="150" font-size="13" font-weight="600" fill="var(--accent-text)">Outcome</text>
+                <text x="966" y="180" font-size="15" font-weight="600" fill="var(--accent-text)">32.31%</text>
+                <text x="966" y="200" font-size="15" font-weight="600" fill="var(--accent-text)">→ 35.12%</text>
+              </g>
+            </svg>
+            <figcaption>No single method carried the case. Five kinds of evidence agreed on one diagnosis, which became a hypothesis, a redesign and a number.</figcaption>
           </figure>
+        </div>
 
-          <figure class="reveal">
-            <div class="thumb"><div class="placeholder"><span>Final component — states</span></div></div>
-            <figcaption>Default, open, relative preset selected, custom range, error, and disabled states.</figcaption>
+        <div class="prose">
+          <h2 class="reveal" id="design"><span class="cs-step">07 · Redesign</span>Four confusing options became two honest ones</h2>
+          <p class="reveal">The fix wasn't to add features — it was to collapse four confusing options into two honest ones, and let each grow into its own detail instead of dumping everything on screen at once.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="shot-grid">
+            <figure class="shot">
+              <img src="../assets/img/date-filter/old-filter-ui.png" alt="Before: the old date filter dropdown, showing four radio options — Exact date, Between two dates, During (highlighted), In range — above a plain calendar with a Today shortcut." width="300" height="340" loading="lazy" />
+              <figcaption><b>Before</b> — four options with overlapping meanings, no hierarchy, and no named ranges. This is the actual production filter, captured from the same session-replay tool used for the click data above.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/date-filter/date-range-tab.png" alt="After: the redesigned Date Range tab, showing From and To fields, a collapsed Quick Ranges section, a timezone selector reading UTC 5+30 Asia/Colombo, and Set and Clear buttons." width="608" height="710" loading="lazy" />
+              <figcaption><b>After</b> — one of two named modes. Quick Ranges and timezone sit one step below the main fields instead of competing with them for attention.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="prose">
+          <ul class="reveal">
+            <li><strong>Two real modes, not four.</strong> Exact Date and Date Range are now the only top-level choice, matching what the options actually meant all along.</li>
+            <li><strong>Quick Ranges replace open-ended guessing.</strong> Instead of typing raw dates, people can pick Last 2/5/7 Days, This Week/Month/Year, Last or Next Week/Month/Year, or a custom "Next N Days/Months/Years" — named ranges that match how people actually talk about dates.</li>
+            <li><strong>Complexity is layered, not flattened.</strong> Timezone handling and preset ranges sit a step below the initial choice, so a simple search stays simple.</li>
+            <li><strong>Power users get their own path.</strong> An Advanced Date Search sits alongside the basic flow, with conditional rules (for example, "order date is equal to a date AND a range is excluded") and settings like timezone-aware search and weekdays-only search — without cluttering the everyday case.</li>
+          </ul>
+          <p class="reveal">The use-case work also surfaced the value of timezone awareness directly inside the date logic itself, since "yesterday" or "next 20 days" means something different depending on where you sit — reflected in the timezone selector built into both the basic and advanced flows.</p>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="usability"><span class="cs-step">08 · Usability test</span>Four tasks, written the way people actually ask for dates</h2>
+          <p class="reveal">With a first design in place I wrote a test script and four tasks. Each one puts the participant in a specific role with a specific date phrase, then watches which route they take and asks what they noticed afterwards. Together they cover a single day with a timezone, a range that starts in the past, a range that looks forward, and a whole year.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="options options--2">
+            <div class="option">
+              <span class="tag">Task 1 · 5–6 min</span>
+              <h4>Single date with a timezone</h4>
+              <p>A quality assurance supervisor at a Seattle facility needs every report scheduled and completed yesterday, in Pacific Time (UTC−8).</p>
+              <p><strong>Watch for:</strong> finds the date filter, finds “Yesterday” or picks the day on the calendar, sets the timezone to Pacific Time and applies the filter.</p>
+              <p><strong>Afterwards, ask:</strong> “How easily were you able to find the ‘Yesterday’ option?” and “Was it clear how to set the timezone?”</p>
+            </div>
+            <div class="option">
+              <span class="tag">Task 2 · 5–6 min</span>
+              <h4>Year to date</h4>
+              <p>A financial analyst is examining budget reporting from the start of 2024 to today.</p>
+              <p><strong>Watch for:</strong> finds the date range filter, sets a start date by typing or from the calendar, sets today as the end date and applies.</p>
+              <p><strong>Afterwards, ask:</strong> “What method did you use to select this date range?” and “Did you notice other ways to achieve the same result?”</p>
+            </div>
+            <div class="option">
+              <span class="tag">Task 3 · 5–6 min</span>
+              <h4>Forward-looking range</h4>
+              <p>A maintenance supervisor needs the maintenance programs due for revision within the next 40 days.</p>
+              <p><strong>Watch for:</strong> creates a range starting today, extends it 40 days into the future and applies.</p>
+              <p><strong>Afterwards, ask:</strong> “How intuitive was it to create this forward-looking date range?” and “What challenges, if any, did you encounter?”</p>
+            </div>
+            <div class="option">
+              <span class="tag">Task 4 · 5–6 min</span>
+              <h4>A full year</h4>
+              <p>A maintenance supervisor is reviewing anomaly configurations for 2024.</p>
+              <p><strong>Watch for:</strong> finds the date range filter, selects the full 2024 range and applies.</p>
+              <p><strong>Afterwards, ask:</strong> how they approached selecting the whole year, and whether they found any shortcuts or presets.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Add the usability test findings here (what participants did, where they struggled) once you have them. -->
+
+        <div class="prose">
+          <h2 class="reveal" id="iteration"><span class="cs-step">09 · Iteration</span>The design file after testing: what went, what stayed in step, and what had to be settled</h2>
+          <p class="reveal">The iteration is recorded in the design file as a spec: Exact Date and Date Range in light and dark, their anatomy, a block of design decisions, and an FAQ of special remarks for engineering. These are the decisions that mattered most.</p>
+          <h3 class="reveal">The dropdown that hid the main job</h3>
+          <p class="reveal">One decision was a removal. I took out the collapsible “Date Range” dropdown on the Date Range tab, because it hid the primary function of the filter and added no meaningful value in that context. The From and To fields are now visible the moment the tab opens. The decision was logged at a morning meeting on 3 November 2025.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 400" role="img" aria-label="Before and after on the Date Range tab. Before, a collapsible Date Range dropdown sat above the From and To fields. After, the dropdown is removed and the From and To fields are visible straight away, above the Quick Ranges row, the timezone row and the Set and Clear buttons." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrDI" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <text x="40" y="28" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">BEFORE</text>
+                <text x="520" y="28" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--accent-text)">AFTER</text>
+                <rect x="40" y="40" width="340" height="340" rx="10" fill="var(--bg-elevated)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <rect x="52" y="52" width="150" height="30" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="127" y="72" font-size="11.5" fill="var(--text-soft)" text-anchor="middle">Exact Date</text>
+                <rect x="208" y="52" width="160" height="30" rx="6" fill="var(--bg-sunken)" stroke="var(--text-faint)" /><text x="288" y="72" font-size="11.5" font-weight="600" fill="var(--text)" text-anchor="middle">Date Range</text>
+                <rect x="52" y="94" width="316" height="34" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="68" y="116" font-size="11.5" fill="var(--text-soft)">Date Range</text><path d="M340,114 l5,-5 l5,5" fill="none" stroke="var(--text-soft)" stroke-width="1.5" />
+                <line x1="48" y1="111" x2="372" y2="111" stroke="var(--accent)" stroke-width="2" />
+                <text x="56" y="148" font-size="10" fill="var(--text-soft)">From</text><rect x="56" y="154" width="308" height="28" rx="5" fill="var(--bg)" stroke="var(--text-faint)" stroke-width="1.3" /><text x="66" y="172" font-size="10.5" fill="var(--text-faint)">Eg: 10/17/2025</text>
+                <text x="56" y="208" font-size="10" fill="var(--text-soft)">To</text><rect x="56" y="214" width="308" height="28" rx="5" fill="var(--bg)" stroke="var(--text-faint)" stroke-width="1.3" /><text x="66" y="232" font-size="10.5" fill="var(--text-faint)">Eg: 10/17/2025</text>
+                <rect x="52" y="258" width="316" height="32" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="68" y="279" font-size="11.5" fill="var(--text)">Last 2 Days</text><text x="332" y="279" font-size="12" fill="var(--text-soft)">✕  ›</text>
+                <rect x="52" y="298" width="316" height="28" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="68" y="316" font-size="10.5" fill="var(--text-soft)">UTC 5+30 Asia/Colombo</text>
+                <rect x="52" y="336" width="156" height="28" rx="5" fill="var(--accent)" /><text x="130" y="354" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">SET</text><rect x="212" y="336" width="156" height="28" rx="5" fill="var(--bg)" stroke="var(--text-faint)" /><text x="290" y="354" font-size="11" fill="var(--text-soft)" text-anchor="middle">CLEAR</text>
+                <line x1="392" y1="190" x2="506" y2="190" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrDI)" />
+                <text x="449" y="178" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">dropdown removed</text>
+                <rect x="520" y="40" width="340" height="300" rx="10" fill="var(--bg-elevated)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <rect x="532" y="52" width="150" height="30" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="607" y="72" font-size="11.5" fill="var(--text-soft)" text-anchor="middle">Exact Date</text>
+                <rect x="688" y="52" width="160" height="30" rx="6" fill="var(--bg-sunken)" stroke="var(--text-faint)" /><text x="768" y="72" font-size="11.5" font-weight="600" fill="var(--text)" text-anchor="middle">Date Range</text>
+                <text x="536" y="104" font-size="10" fill="var(--text-soft)">From</text><rect x="536" y="110" width="308" height="28" rx="5" fill="var(--bg)" stroke="var(--text-faint)" stroke-width="1.3" /><text x="546" y="128" font-size="10.5" fill="var(--text-faint)">Eg: 10/17/2025</text>
+                <text x="536" y="164" font-size="10" fill="var(--text-soft)">To</text><rect x="536" y="170" width="308" height="28" rx="5" fill="var(--bg)" stroke="var(--text-faint)" stroke-width="1.3" /><text x="546" y="188" font-size="10.5" fill="var(--text-faint)">Eg: 10/17/2025</text>
+                <rect x="532" y="214" width="316" height="32" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="548" y="235" font-size="11.5" fill="var(--text)">Last 2 Days</text><text x="812" y="235" font-size="12" fill="var(--text-soft)">✕  ›</text>
+                <rect x="532" y="254" width="316" height="28" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="548" y="272" font-size="10.5" fill="var(--text-soft)">UTC 5+30 Asia/Colombo</text>
+                <rect x="532" y="292" width="156" height="28" rx="5" fill="var(--accent)" /><text x="610" y="310" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">SET</text><rect x="692" y="292" width="156" height="28" rx="5" fill="var(--bg)" stroke="var(--text-faint)" /><text x="770" y="310" font-size="11" fill="var(--text-soft)" text-anchor="middle">CLEAR</text>
+              </g>
+            </svg>
+            <figcaption>The Date Range tab before and after the dropdown was removed. Schematic redrawn from the design file.</figcaption>
           </figure>
+        </div>
 
-          <h2 class="reveal">Outcome</h2>
+        <div class="prose">
+          <h3 class="reveal">Quick ranges and the calendar share state</h3>
+          <p class="reveal">A natural question was whether people could use quick ranges and the calendar together. Disabling one while the other is in use would not work, because a person might change their mind. So both stay editable and in step: choosing “Last 2 Days” puts the first day in From and the last day in To, and changing a date afterwards clears the quick range. That also lets people nudge a quick range by a day either way.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 250" role="img" aria-label="Quick Ranges and the date fields stay in sync. Choosing Last 2 Days in Quick Ranges fills the From field with the first day and the To field with the last day. Editing a date in From or To afterwards clears the quick range choice." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrDS" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+                <marker id="arrDS2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="30" y="40" width="270" height="170" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="46" y="66" font-size="12" font-weight="600" fill="var(--text)">Quick Ranges</text>
+                <rect x="42" y="80" width="246" height="30" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3" /><text x="56" y="100" font-size="11.5" font-weight="600" fill="var(--accent-text)">Last 2 Days</text>
+                <rect x="42" y="116" width="246" height="30" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="56" y="136" font-size="11.5" fill="var(--text-soft)">Last 5 Days</text>
+                <rect x="42" y="152" width="246" height="30" rx="6" fill="var(--bg)" stroke="var(--border)" /><text x="56" y="172" font-size="11.5" fill="var(--text-soft)">This Week</text>
+
+                <rect x="600" y="40" width="270" height="170" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="616" y="66" font-size="12" font-weight="600" fill="var(--text)">Date Range</text>
+                <text x="616" y="92" font-size="10" fill="var(--text-soft)">From</text><rect x="616" y="98" width="238" height="30" rx="5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3" /><text x="628" y="118" font-size="11.5" fill="var(--accent-text)">first day of the range</text>
+                <text x="616" y="150" font-size="10" fill="var(--text-soft)">To</text><rect x="616" y="156" width="238" height="30" rx="5" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3" /><text x="628" y="176" font-size="11.5" fill="var(--accent-text)">last day of the range</text>
+
+                <line x1="300" y1="98" x2="594" y2="98" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrDS2)" />
+                <text x="447" y="86" font-size="11" font-weight="600" fill="var(--accent-text)" text-anchor="middle">choose a quick range</text>
+                <text x="447" y="118" font-size="11" fill="var(--text-soft)" text-anchor="middle">fills both fields</text>
+                <line x1="594" y1="160" x2="306" y2="160" stroke="var(--text-soft)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrDS)" />
+                <text x="447" y="148" font-size="11" font-weight="600" fill="var(--text)" text-anchor="middle">edit a date by hand</text>
+                <text x="447" y="180" font-size="11" fill="var(--text-soft)" text-anchor="middle">clears the quick range</text>
+              </g>
+            </svg>
+            <figcaption>The two inputs stay in step: a quick range fills the fields, and editing the fields clears the quick range.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Smaller questions, settled in the spec</h3>
+        </div>
+
+        <div class="wide reveal">
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col">Question</th><th scope="col">What the design file records</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Can people use quick ranges and the calendar together?</th><td>Yes. Both can be filled. Choosing a quick range fills From and To; changing a date by hand clears the quick range.</td></tr>
+                <tr><th scope="row">Which colour shows the active tab?</th><td>Blue. The tab view is built from two toolbar buttons, so blue is the buttons' default colour.</td></tr>
+                <tr><th scope="row">Do the listed dates follow the timezone?</th><td>Worked through as a scenario: a user in Colombo changes the timezone first, then opens Quick Ranges and cannot tell whether the dates listed beside each range follow the timezone she chose.</td></tr>
+                <tr><th scope="row">How does a custom range work inside Quick Ranges?</th><td>The menu ends with a Custom Date Range: pick a number and a unit (days, months or years), tick “Including Today” if needed, then Apply or Discard.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="result"><span class="cs-step">10 · Result</span>The target was met: 32.31% → 35.12%</h2>
           <div class="impact-stats reveal">
-            <div class="stat"><b>2025 R1</b><span>Shipped in the IFS Cloud release</span></div>
-            <div class="stat"><b>—</b><span>Add a metric: task time, clicks, or ticket volume</span></div>
-            <div class="stat"><b>—</b><span>Add a metric: adoption or satisfaction</span></div>
+            <div class="stat"><b>32.31%</b><span>Calendar-use conversion before the redesign</span></div>
+            <div class="stat"><b>35%+</b><span>Target set for the redesign</span></div>
+            <div class="stat"><b>35.12%</b><span>Calendar-use conversion after launch</span></div>
           </div>
-          <p class="reveal"><em>Placeholder — what changed after launch, and what you'd do differently next time.</em></p>
+          <p class="reveal">The target was met and slightly exceeded. It's not a dramatic-looking number on its own, but it represents real people who previously opened the filter pane, saw four confusing options, and closed it without finding their date — who now complete the task instead.</p>
+        </div>
 
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 200" role="img" aria-label="Calendar use among people who opened the date filter looking for a date: 32.31% before the redesign and 35.12% after launch, against a target of 35% or more." xmlns="http://www.w3.org/2000/svg">
+              <g font-family="Inter, sans-serif">
+                <text x="20" y="65" font-size="13" font-weight="600" fill="var(--text)">Before</text>
+                <text x="20" y="125" font-size="13" font-weight="600" fill="var(--text)">After launch</text>
+                <rect x="140" y="44" width="452.3" height="32" rx="6" fill="var(--text-faint)" />
+                <rect x="140" y="104" width="491.7" height="32" rx="6" fill="var(--accent)" />
+                <text x="578" y="65" font-size="13" font-weight="600" fill="#fff" text-anchor="end">32.31%</text>
+                <text x="618" y="125" font-size="13" font-weight="600" fill="#fff" text-anchor="end">35.12%</text>
+                <line x1="630" y1="30" x2="630" y2="148" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="5 4" />
+                <text x="630" y="22" font-size="11" font-weight="600" fill="var(--text)" text-anchor="middle">Target: 35%+</text>
+                <line x1="140" y1="160" x2="840" y2="160" stroke="var(--border)" />
+                <g font-size="10" fill="var(--text-soft)" text-anchor="middle">
+                  <text x="140" y="178">0%</text><text x="280" y="178">10%</text><text x="420" y="178">20%</text><text x="560" y="178">30%</text><text x="700" y="178">40%</text><text x="840" y="178">50%</text>
+                </g>
+              </g>
+            </svg>
+            <figcaption>Calendar use among people who opened the filter looking for a date. The target was met and slightly exceeded.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">What I took from it</h3>
+          <ul class="reveal">
+            <li><strong>A flat conversion number can hide a structural problem.</strong> The calendar wasn't the issue; the decision in front of it was.</li>
+            <li><strong>Options that look distinct aren't always distinct.</strong> Four labels for two concepts cost people time before they'd even started.</li>
+            <li><strong>Real use cases keep a redesign honest.</strong> Testing against a specific analyst asking for "yesterday's orders" caught things a component-level review wouldn't have.</li>
+            <li><strong>No single method carried the case on its own.</strong> Interviews explained the confusion, support tickets and production click data showed it was already costing time at scale, and the competitive review showed a fix was already proven elsewhere. It was the five methods agreeing with each other, not any one of them, that made the diagnosis trustworthy enough to redesign around.</li>
+          </ul>
         </div>
 
         <nav class="next-project reveal" aria-label="Next case study">
-          <a href="ai-item-summaries.html">
+          <a href="timezone-awareness.html">
             <span>
               <span class="eyebrow">Next case study</span>
-              <span class="np-title">Empowering item discovery with Gen AI summaries</span>
+              <span class="np-title">One date, four clocks: making timezone visible across IFS Cloud</span>
             </span>
             <span class="arrow" aria-hidden="true">→</span>
           </a>
@@ -141,10 +588,10 @@
         <a href="../work.html">Work</a>
         <a href="../about.html">About</a>
         <a href="../assets/resume.pdf">Résumé</a>
-        <a href="mailto:you@example.com">Email</a>
+        <a href="mailto:dhanuliyanage.ux@gmail.com">Email</a>
         <a href="https://www.linkedin.com/">LinkedIn</a>
       </nav>
-      <p class="copy">© <span data-year>2026</span> Your Name. Built from scratch.</p>
+      <p class="copy">© <span data-year>2026</span> Dhanushka Liyanage. Built from scratch.</p>
     </div>
   </footer>
 

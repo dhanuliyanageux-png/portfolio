@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <script>document.documentElement.className="js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Smart Editor — Your Name</title>
+  <title>Smart Editor — Dhanushka Liyanage</title>
   <meta name="description" content="Case study: designing Smart Editor, the AI writing assistant built into IFS Cloud's central framework and reused across HCM, finance, supply chain and project modules." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=6" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=28" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
@@ -18,7 +18,7 @@
 
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="../index.html">Your&nbsp;Name<span class="dot">.</span></a>
+      <a class="brand" href="../index.html">Dhanushka&nbsp;Liyanage<span class="dot">.</span></a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
       <nav class="nav" id="nav" aria-label="Primary">
         <a href="../index.html">Home</a>
@@ -35,11 +35,21 @@
         <div class="container">
           <p class="eyebrow reveal">IFS Cloud · Case study</p>
           <h1 class="reveal">Smart Editor: AI writing help, built once and used everywhere</h1>
-          <p class="dek reveal">An AI writing assistant added to IFS Cloud's central framework, so every product group — HCM, finance, supply chain, projects — can generate, rewrite and summarise content inside their own screens. Core release shipped in 25R1.</p>
+          <p class="dek reveal">Every IFS Cloud product group writes text, and each could have built its own AI help. I designed one assistant in the central framework that any group can use in its own screens. The core release shipped in 25R1.</p>
         </div>
       </header>
 
       <div class="container">
+        <nav class="cs-toc reveal" aria-label="On this page">
+          <a href="#problem"><span>01</span>Problem</a>
+          <a href="#research"><span>02</span>Research</a>
+          <a href="#options"><span>03</span>Options</a>
+          <a href="#design"><span>04</span>Final design</a>
+          <a href="#validation"><span>05</span>Validation</a>
+          <a href="#iteration"><span>06</span>Iteration</a>
+          <a href="#result"><span>07</span>Result</a>
+        </nav>
+
         <dl class="cs-meta reveal">
           <div><dt>Role</dt><dd>Lead product designer</dd></div>
           <div><dt>Focus</dt><dd>Interaction design, AI UX, accessibility, validation</dd></div>
@@ -53,14 +63,15 @@
         </figure>
       </div>
 
+      <!-- 01 · PROBLEM -->
       <div class="container">
         <div class="prose">
+          <h2 class="reveal" id="problem"><span class="cs-step">01 · Problem</span>Every team writes text. None should have to build its own AI.</h2>
+          <p class="reveal">IFS is a large ERP platform with many product areas: projects, finance, supply chain, HCM and more. Every one of them has people writing text: job descriptions, forecast reports, notes, summaries.</p>
+          <p class="reveal">The question was how those groups would get AI writing help. If each built its own, they would solve the same interaction problem separately. Smart Editor was introduced instead as a shared tool in the central framework, so groups can use it in their own apps. HCM, for example, can configure it to write a job description.</p>
+          <p class="reveal">It was one of the biggest projects I've led, and I worked on it as its designer.</p>
 
-          <h2 class="reveal">Context</h2>
-          <p class="reveal">IFS is a large ERP platform with many product areas — projects, finance, supply chain, HCM and more. Every one of them has people writing text: job descriptions, forecast reports, notes, summaries.</p>
-          <p class="reveal">Smart Editor was introduced as a shared tool in the central framework, so those groups can use AI writing help in their own apps instead of each building their own. HCM, for example, can configure it to write a job description. It was one of the biggest projects I've led, and I worked on it as its designer.</p>
-
-          <h2 class="reveal">One tool, many jobs</h2>
+          <h3 class="reveal">One tool, many jobs</h3>
           <p class="reveal">Because it lives in the framework, the same pattern has to work for very different content and users. Smart Editor is used to:</p>
           <ul class="reveal">
             <li>Generate daily forecast reports for supply chain</li>
@@ -69,98 +80,174 @@
             <li>Summarise long reports</li>
             <li>Generate content from given metadata</li>
           </ul>
-          <p class="reveal">That was the design challenge: an interaction flexible enough for every product group, and light enough that it never gets in the way of someone who is just writing.</p>
 
-          <h2 class="reveal">Starting with what people already use</h2>
-          <p class="reveal">I began by looking at the writing assistants people already know — Confluence, Notion and a range of Chrome extensions — and asked how they behave and how they feel to use.</p>
+          <div class="pullquote reveal">
+            <p>The design challenge: an interaction flexible enough for every product group, and light enough that it never gets in the way of someone who is just writing.</p>
+          </div>
+        </div>
+      </div>
 
-          <figure class="figure-wide shot reveal">
+      <!-- 02 · RESEARCH -->
+      <div class="container">
+        <div class="prose">
+          <h2 class="reveal" id="research"><span class="cs-step">02 · Research</span>Learn from the assistants people use, then design for real people</h2>
+
+          <h3 class="reveal">What people already use</h3>
+          <p class="reveal">I began by looking at the writing assistants people already know (Confluence, Notion and a range of Chrome extensions) and asked how they behave and how they feel to use.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
             <img src="../assets/img/smart-editor/inspirations.png" alt="Inspiration board of writing assistants in Confluence, Notion and browser extensions." width="1920" height="1080" loading="lazy" />
             <figcaption>Inspiration: how existing writing assistants behave and feel.</figcaption>
           </figure>
+        </div>
 
-          <h2 class="reveal">How it works</h2>
-          <p class="reveal">The interaction is two small widgets, so the writer stays in their document.</p>
-          <h3 class="reveal">1 — Select text, choose an action</h3>
-          <p class="reveal">When a user selects text, a compact widget appears next to it. From there they can summarise, modify or generate content.</p>
+        <div class="prose">
+          <h3 class="reveal">Who it's for</h3>
+          <p class="reveal">To keep the work grounded I wrote short stories, starting with Maya, a recruiting officer at a large company who writes job summaries and descriptions to attract talent. The design was validated with HCM. Two more scenarios set the range the design had to cover.</p>
+        </div>
 
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/flow-rewrite-selection.png" alt="A user highlights text in an IFS Cloud field and opens Smart Editor with the Rewrite action." width="1440" height="872" loading="lazy" />
-            <figcaption>Highlight text, or click the Smart Editor button, and choose an action.</figcaption>
-          </figure>
+        <div class="wide reveal">
+          <div class="options">
+            <div class="option">
+              <span class="tag">Scenario 1</span>
+              <h4>Job description with fine control</h4>
+              <p>A hiring manager asks Maya for a QA engineer job description, using information already in IFS but without the certification requirements. Advanced mode lets her switch those attributes off.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Scenario 2</span>
+              <h4>Notes to structured text</h4>
+              <p>Nina in HR Talent Acquisition has rough meeting notes and no time to write up activities for a performance evaluation page. Smart Editor turns the notes into clear content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <h3 class="reveal">2 — Review the result, then decide</h3>
-          <p class="reveal">Choosing an action opens a second widget with the result. The user can replace their original text with it, or insert it below and keep both.</p>
+      <!-- 03 · OPTIONS -->
+      <div class="container">
+        <div class="prose">
+          <h2 class="reveal" id="options"><span class="cs-step">03 · Options</span>Two structural calls shaped everything else</h2>
+          <p class="reveal">The brief pulled two ways: flexible enough for every group, light enough to stay out of the writer's way. Two decisions came out of that tension.</p>
+        </div>
 
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/flow-ai-suggestion.png" alt="The second widget showing an AI suggestion with Replace, Discard and Regenerate buttons beneath the highlighted text." width="1440" height="872" loading="lazy" />
-            <figcaption>The result widget: replace the original, discard the suggestion, or regenerate it.</figcaption>
-          </figure>
+        <div class="wide reveal">
+          <h3>Decision 1 · Where should the assistant live?</h3>
+          <div class="options">
+            <div class="option">
+              <span class="tag">The alternative</span>
+              <h4>A separate assistant in each product group</h4>
+              <p>Each group would design, build and maintain its own, and users would meet a different assistant in every module.</p>
+            </div>
+            <div class="option is-chosen">
+              <span class="tag is-accent">Chosen</span>
+              <h4>One shared tool in the central framework</h4>
+              <p>Groups add it to their own fields and adapt it through recipes, so the interaction stays consistent while the use cases differ.</p>
+            </div>
+          </div>
+        </div>
 
-          <h3 class="reveal">3 — Advanced mode, when a quick action isn't enough</h3>
-          <p class="reveal">Advanced Smart Editor opens in a drawer with more control: history, and toggles under “AI Inputs” to customise the answer — for example switching Basic Information, Job Certification or Job Format on and off. A single click moves the user from the quick widget into it, keeping their text and context. It also opens on its own when the text is too long for the compact widget.</p>
+        <div class="wide reveal">
+          <h3>Decision 2 · How much interface should a quick action need?</h3>
+          <div class="options">
+            <div class="option">
+              <span class="tag">The alternative</span>
+              <h4>One surface for everything</h4>
+              <p>A compact widget alone has no room for long text or finer control. A full panel alone is heavy for fixing a single sentence.</p>
+            </div>
+            <div class="option is-chosen">
+              <span class="tag is-accent">Chosen</span>
+              <h4>Two levels: a quick widget and an advanced drawer</h4>
+              <p>The widget handles select, act, review. One click moves to the drawer, keeping the user's text and context. It opens on its own when the text is too long for the widget.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/flow-advanced-mode.png" alt="The Advance Assist drawer open beside a Jobs form, showing an AI suggestion with Replace, Discard and Rewrite." width="1440" height="872" loading="lazy" />
-            <figcaption>Advanced mode opens in a drawer beside the form — here because the text was too long for the compact widget.</figcaption>
-          </figure>
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/design-advanced-transition.png" alt="Design slide: from the quick widget to the Advance Assist drawer, with AI Inputs toggles for Basic Information, Add Job Certification and Add Job Format." width="1920" height="1080" loading="lazy" />
-            <figcaption>One click from the quick widget to advanced options, including the AI Inputs toggles.</figcaption>
-          </figure>
+      <!-- 04 · FINAL DESIGN -->
+      <div class="container">
+        <div class="prose">
+          <h2 class="reveal" id="design"><span class="cs-step">04 · Final design</span>Two small widgets keep the writer in their document</h2>
+          <p class="reveal">Select text and a compact widget appears next to it. Choosing an action opens a second widget with the result. For more control, one click opens advanced mode in a drawer, with history and toggles under “AI Inputs” to customise the answer, such as switching Basic Information, Job Certification or Job Format on and off.</p>
+        </div>
 
-          <h2 class="reveal">Design decisions</h2>
+        <div class="wide reveal">
+          <div class="shot-grid">
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/flow-rewrite-selection.png" alt="A user highlights text in an IFS Cloud field and opens Smart Editor with the Rewrite action." width="1440" height="872" loading="lazy" />
+              <figcaption><b>1 · Select and choose.</b> Highlight text, or click the Smart Editor button, then summarise, modify or generate.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/flow-ai-suggestion.png" alt="The second widget showing an AI suggestion with Replace, Discard and Regenerate buttons beneath the highlighted text." width="1440" height="872" loading="lazy" />
+              <figcaption><b>2 · Review and decide.</b> Replace the original, insert the result below and keep both, discard it, or regenerate.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/flow-advanced-mode.png" alt="The Advance Assist drawer open beside a Jobs form, showing an AI suggestion with Replace, Discard and Rewrite." width="1440" height="872" loading="lazy" />
+              <figcaption><b>3 · Advanced mode.</b> A drawer beside the form, opened here because the text was too long for the compact widget.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/design-advanced-transition.png" alt="Design slide: from the quick widget to the Advance Assist drawer, with AI Inputs toggles for Basic Information, Add Job Certification and Add Job Format." width="1920" height="1080" loading="lazy" />
+              <figcaption><b>4 · One click across.</b> From the quick widget to advanced options, including the AI Inputs toggles.</figcaption>
+            </figure>
+          </div>
+        </div>
 
-          <h3 class="reveal">Dynamic suggestions</h3>
-          <p class="reveal">Highlighting a phrase or sentence gives tailored suggestions for that text, without breaking the writer's flow.</p>
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/design-dynamic-suggestions.png" alt="Design slide: dynamic suggestions when a phrase is highlighted." width="1920" height="1080" loading="lazy" />
-          </figure>
-
-          <h3 class="reveal">Partial text assistance</h3>
-          <p class="reveal">Users can select just part of the text for AI help, so the rest of their content is never rewritten by accident.</p>
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/design-partial-text.png" alt="Design slide: partial text assistance on a selected portion of text." width="1920" height="1080" loading="lazy" />
-          </figure>
-
-          <h3 class="reveal">Fits any text field</h3>
-          <p class="reveal">It works in note fields, multi-text inputs and other content-editing fields, so product groups can add it wherever it's useful.</p>
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/design-field-integration.png" alt="Design slide: Smart Editor integrated into note fields and multi-text input fields." width="1920" height="1080" loading="lazy" />
-          </figure>
-
-          <h3 class="reveal">A single click into advanced mode</h3>
-          <p class="reveal">Users move to detailed configuration in one step, without starting over (see the advanced mode screens above).</p>
+        <div class="prose">
+          <h3 class="reveal">Decisions inside the design</h3>
+          <ul class="reveal">
+            <li><strong>Dynamic suggestions.</strong> Highlighting a phrase or sentence gives tailored suggestions for that text, without breaking the writer's flow.</li>
+            <li><strong>Partial text assistance.</strong> Users can select just part of the text for AI help, so the rest of their content is never rewritten by accident.</li>
+            <li><strong>Replace or insert.</strong> The result can replace the original or sit below it, so the user decides how much of the original to keep.</li>
+            <li><strong>Fits any text field.</strong> It works in note fields, multi-text inputs and other content-editing fields, so product groups can add it wherever it's useful.</li>
+          </ul>
 
           <h3 class="reveal">Accessibility from the start</h3>
           <ul class="reveal">
-            <li><strong>A distinct “glitter pen” button</strong> marks every input and note field that has Smart Editor enabled.</li>
+            <li><strong>A distinct “glitter pen” button</strong> marks every input and note field that has Smart Editor enabled. (Usability testing later showed it could be mistaken for an edit button, so the icon changed; see <a href="#iteration">what changed after validation</a>.)</li>
             <li><strong>Tooltip guidance</strong> on the button helps people activate it.</li>
             <li><strong>Keyboard access:</strong> the editor can be opened without a mouse, using a shortcut such as Ctrl+E.</li>
             <li><strong>Inclusive design:</strong> people with different levels of technical confidence should be able to use it intuitively.</li>
           </ul>
-          <figure class="figure-wide shot reveal">
-            <img src="../assets/img/smart-editor/design-accessibility.png" alt="Design slide: accessibility considerations, with two tooltip states for the glitter pen button." width="1920" height="1080" loading="lazy" />
-            <figcaption>Tooltip states for the glitter pen button: “Start writing to unlock AI-powered assistance” and “Click for AI-powered assistance”.</figcaption>
-          </figure>
+        </div>
 
-          <h2 class="reveal">Built to be reused: two tiers of “recipes”</h2>
+        <div class="wide reveal">
+          <div class="shot-grid">
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/design-dynamic-suggestions.png" alt="Design slide: dynamic suggestions when a phrase is highlighted." width="1920" height="1080" loading="lazy" />
+              <figcaption><b>Dynamic suggestions</b> for a highlighted phrase.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/design-partial-text.png" alt="Design slide: partial text assistance on a selected portion of text." width="1920" height="1080" loading="lazy" />
+              <figcaption><b>Partial text assistance</b> on a selected portion only.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/design-field-integration.png" alt="Design slide: Smart Editor integrated into note fields and multi-text input fields." width="1920" height="1080" loading="lazy" />
+              <figcaption><b>Any text field:</b> note fields and multi-text inputs.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/smart-editor/design-accessibility.png" alt="Design slide: accessibility considerations, with two tooltip states for the glitter pen button." width="1920" height="1080" loading="lazy" />
+              <figcaption><b>Tooltip states</b> for the glitter pen button: “Start writing to unlock AI-powered assistance” and “Click for AI-powered assistance”.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Built to be reused: two tiers of “recipes”</h3>
           <p class="reveal">Behind the interface, Smart Editor has two tiers, so product teams can adapt it without redesigning it:</p>
           <ul class="reveal">
             <li><strong>Product group recipes</strong> — configurable, use-case-specific features, such as writing a job summary.</li>
             <li><strong>Framework recipes</strong> — shared core features such as grammar correction, embedded across modules and customised per field.</li>
           </ul>
 
-          <h2 class="reveal">Designing around real people</h2>
-          <p class="reveal">I used short stories to keep the work grounded, starting with Maya, a recruiting officer at a large company who writes job summaries and descriptions to attract talent. The design was validated with HCM.</p>
-          <p class="reveal">Two more scenarios shaped the flows:</p>
-          <ul class="reveal">
-            <li><strong>Job description with fine control.</strong> A hiring manager asks Maya for a QA engineer job description, using information already in IFS but without the certification requirements. Advanced mode lets her switch those attributes off.</li>
-            <li><strong>Notes to structured text.</strong> Nina in HR Talent Acquisition has rough meeting notes and no time to write up activities for a performance evaluation page. Smart Editor turns the notes into clear content.</li>
-          </ul>
+        </div>
+      </div>
 
-          <h2 class="reveal">Validation</h2>
-          <p class="reveal">I validated the design in five steps, each feeding the next round of iteration:</p>
+      <!-- 05 · VALIDATION -->
+      <div class="container">
+        <div class="prose">
+          <h2 class="reveal" id="validation"><span class="cs-step">05 · Validation</span>Two rounds of checking, and the design changed because of them</h2>
+          <h3 class="reveal">How I validated it</h3>
+          <p class="reveal">Five steps, each feeding the next round of iteration:</p>
           <ul class="reveal">
             <li><strong>Usability validation</strong> — an internal test with HCM members to confirm the use case and check the design.</li>
             <li><strong>Stakeholder demo</strong> — shown at the UX/AI demo, where UX designers and product specialists shared ideas.</li>
@@ -168,28 +255,235 @@
             <li><strong>End-user validation</strong> — planned after refining the design with the feedback above (in progress).</li>
             <li><strong>Expert review</strong> — held weekly on the final designs, with product designers' input to be added.</li>
           </ul>
-          <figure class="figure-wide shot reveal">
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
             <img src="../assets/img/smart-editor/validation.png" alt="Validation steps: usability validation, stakeholder demo, heuristic validation, end-user validation, expert review." width="1920" height="1080" loading="lazy" />
           </figure>
+        </div>
+        <div class="prose">
+          <h3 class="reveal">Usability test: four experienced IFS Cloud users</h3>
+          <p class="reveal">The first round tested Smart Editor's ability to enhance written content, rewrite text a user provides, and generate content from predefined attributes. It set out to learn how people use the rewrite and configuration features, how usable it is to generate a draft from scratch, and how they react to AI suggestions across different roles and contexts.</p>
+          <p class="reveal">Four participants, all experienced IFS Cloud users, worked through three interactive Figma prototypes. They had not been told about the AI feature in advance, to prevent bias. A colleague led the interviews while I took the notes.</p>
+        </div>
 
-          <h2 class="reveal">Release plan</h2>
-          <h3 class="reveal">25R1 — released</h3>
-          <p class="reveal">Core functionality: users select full or partial text in supported fields with the mouse, and the AI spark button opens a compact pop-up with grammar fixes and improved text. They can accept a suggestion, discard it, or rewrite and regenerate.</p>
-          <h3 class="reveal">25R2 — next</h3>
+        <div class="wide reveal">
+          <div class="options">
+            <div class="option">
+              <span class="tag">Task 1</span>
+              <h4>Improving objective descriptions</h4>
+              <p>Rewrite a poorly written description with Smart Editor: open a note, select text and apply AI enhancements through the rewrite option.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Task 2</span>
+              <h4>Creating job summaries and descriptions</h4>
+              <p>Generate content for job posts in multi-text fields with the AI-activated pen icon, which needed a minimum amount of input before it was enabled.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Task 3</span>
+              <h4>Adjusting AI configuration</h4>
+              <p>Customise Smart Editor's predefined attributes, making sure certain parameters (for example “Job Certificate”) were excluded before regenerating content.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Turning notes into insights</h3>
+          <p class="reveal">After the interviews I moved every note onto a new board and grouped similar feedback across all four participants. That way feedback stopped being isolated remarks and became documented insights, each with its context, a participant quote and a classification. They fell into six themes.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="bias-grid">
+            <div class="bias-card"><h4>Control and confidence</h4><p>Many users were unsure about giving AI complete control. They valued features that let them review and approve AI contributions, and wanted explanations of AI behaviour to feel confident using it.</p></div>
+            <div class="bias-card"><h4>Anxiety around dependency</h4><p>Participants worried about losing critical thinking skills if AI use became habitual. They stressed a human-first approach, especially for strategic or creative work.</p></div>
+            <div class="bias-card"><h4>Productivity and return</h4><p>People judged Smart Editor by time saved against effort spent on corrections. Ambiguous configuration toggles made it feel cumbersome and dented the impression of productivity.</p></div>
+            <div class="bias-card"><h4>Interaction design</h4><p>“Enhance with AI” and “Rewrite” were confused for lack of clear differentiation. The small arrow to configuration lacked affordance, and the Smart Editor icon looked like an edit button.</p></div>
+            <div class="bias-card"><h4>Transparency and feedback</h4><p>Not knowing how AI rewrites text raised questions, and users disliked unprompted additions or omissions. Tooltips and visual cues helped but could be more persistent for first-time users.</p></div>
+            <div class="bias-card"><h4>Adaptability and utility</h4><p>Predefined attributes suited some, while others wanted more customisation or prompt-based control. Opening a larger dialog for long text was appreciated but needs clearer transitions. Perceived utility varied by role: field technicians saw value in summaries from real-time inputs like photos and time reports, corporate users in standardising documents, wary of losing personalisation.</p></div>
+          </div>
+        </div>
+
+        <div class="wide reveal">
+          <div class="quote-cards">
+            <figure class="quote-card">
+              <blockquote>“It's important not to let AI do all the work. I want to think about it first, not just confirm what the AI suggests”</blockquote>
+              <figcaption><b>Participant</b>Experienced IFS Cloud user, usability test</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“If I spend more time fixing its mistakes than writing from scratch, it's not productive.”</blockquote>
+              <figcaption><b>Participant</b>Experienced IFS Cloud user, usability test</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“What's the difference between ‘Enhance with AI’ or ‘Rewrite’? They look like separate buttons, but I don't get why.”</blockquote>
+              <figcaption><b>Participant</b>Experienced IFS Cloud user, usability test</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“I didn't realize the small arrow was for configurations. It's not clear what it does.”</blockquote>
+              <figcaption><b>Participant</b>Experienced IFS Cloud user, usability test</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“Where does the AI get its suggestions? Can I trust it's using the right data?”</blockquote>
+              <figcaption><b>Participant</b>Experienced IFS Cloud user, usability test</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“For field technicians, this could be great, AI could summarize photos, time logs, and materials used.”</blockquote>
+              <figcaption><b>Participant</b>Experienced IFS Cloud user, usability test</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">What it added up to</h3>
+          <p class="reveal"><strong>AI transparency and trust.</strong></p>
           <ul class="reveal">
-            <li><strong>Advanced mode</strong> with side-by-side comparison of original and AI-generated text, toggles for content attributes such as page information or certification data, and full manual editing of the AI output.</li>
-            <li><strong>Custom recipes</strong> that product teams define per use case, such as job summaries or feedback.</li>
-            <li><strong>Content generation from empty fields</strong>, so users can get a first draft or summary even when nothing is written yet.</li>
+            <li>Explicit indicators for AI-generated or modified text were seen as essential to maintain trust and accountability.</li>
+            <li>How AI uses data, such as sources and security, was a concern, especially in collaborative and compliance-heavy environments.</li>
+          </ul>
+          <p class="reveal"><strong>Suggested improvements.</strong></p>
+          <ul class="reveal">
+            <li>Rework labels like “Rewrite” and “Configuration” so they use user-friendly language and match people's mental models.</li>
+            <li>Give key controls, like the Smart Editor activation button, more visual prominence, to reduce hesitation in first interactions.</li>
+            <li>Introduce an optional learning mode with step-by-step guidance for new users, without overwhelming experienced ones.</li>
           </ul>
 
-          <h2 class="reveal">Where it stands</h2>
+          <h3 class="reveal">Heuristic validation: eleven IFS heuristics</h3>
+          <p class="reveal">I also checked the design against IFS's interaction design and usability heuristics. Each of the eleven is written up with how the design meets it, and one open item came out of it.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col">Heuristic</th><th scope="col">What the review found</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">1 · The design is as simple as possible</th><td>The interface emphasises essential editing tools and keeps the layout minimal and uncluttered, to prevent information overload. The focus stays on core tasks: writing, enhancing and revising.</td></tr>
+                <tr><th scope="row">2 · The user can always pause or cancel</th><td>Users can accept, discard or revert changes. A prominent Undo and the ability to restore the original content let them explore AI enhancements without losing their initial work.</td></tr>
+                <tr><th scope="row">3 · Task-centered information flow</th><td>Editing tools and AI suggestions are ordered by typical editing workflows, so users move from drafting to enhancing without unnecessary navigation. Response time was brought down to 7 seconds.</td></tr>
+                <tr><th scope="row">4 · Comprehensive support for user tasks</th><td>Task-specific guidance and help are built in. The Rewrite feature gives in-context suggestions, with clear guidance on what the AI has changed.</td></tr>
+                <tr><th scope="row">5 · IFS Design System adherence</th><td>The editor follows the IFS Design System's look and feel and can be customised per client branding. The consistency builds familiarity and trust.</td></tr>
+                <tr><th scope="row">6 · Tailored to user groups and context</th><td>Simple text enhancements for novices, and more advanced customisation for experienced users, across HCM, finance and supply chain.</td></tr>
+                <tr><th scope="row">7 · Error prevention</th><td>Confirmation steps come before significant AI-generated changes, and the UI avoids error-prone areas such as ambiguous icons or complex actions.</td></tr>
+                <tr><th scope="row">8 · Recognition over recall</th><td>Key actions like Accept and Discard are visible and clearly labelled, so users never need to remember steps from one part of the editor to another.</td></tr>
+                <tr><th scope="row">9 · Clear, user-centered messaging</th><td>Feedback, including AI suggestions and error messages, uses plain language that follows the IFS UX guidelines and guides users towards a solution.</td></tr>
+                <tr><th scope="row">10 · Real-time feedback</th><td>Users get immediate feedback on actions, with highlighted text and tooltips for suggestions and applied changes. Open item: an indicator for delays, while the AI is writing.</td></tr>
+                <tr><th scope="row">11 · Familiar terminology</th><td>Terms such as Rewrite, Accept and Undo match what users expect in an editor, and labels follow the IFS UX guidelines.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 · ITERATION -->
+      <div class="container">
+        <div class="prose">
+          <h2 class="reveal" id="iteration"><span class="cs-step">06 · Iteration</span>What changed after validation</h2>
+          <p class="reveal">The findings went straight into the design file, in a section called “After UT”. Each change answers something a participant said or the heuristic review flagged.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 340" role="img" aria-label="Before and after validation, as a schematic. The compact widget went from two buttons, Enhance with AI and Rewrite, plus a small arrow, to a single Improve Writing button with an expand icon and a hint to select a maximum of 2000 characters. The result widget kept Replace, Discard and Rewrite and gained a disclaimer that the feature is powered by AI and mistakes are possible. The activation icon went from a sparkle with a pen to a sparkle with a plus." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrSE" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <text x="40" y="30" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">AS TESTED</text>
+                <text x="520" y="30" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--accent-text)">AFTER VALIDATION</text>
+                <line x1="470" y1="20" x2="470" y2="320" stroke="var(--border)" />
+
+                <text x="40" y="62" font-size="11" fill="var(--text-soft)">Compact widget</text>
+                <rect x="40" y="76" width="122" height="34" rx="17" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="101" y="98" font-size="12" fill="var(--text)" text-anchor="middle">Enhance with AI</text>
+                <rect x="172" y="76" width="84" height="34" rx="17" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="214" y="98" font-size="12" fill="var(--text)" text-anchor="middle">Rewrite</text>
+                <circle cx="284" cy="93" r="12" fill="none" stroke="var(--text-faint)" stroke-width="1.5" /><path d="M281,88 l5,5 l-5,5" fill="none" stroke="var(--text-faint)" stroke-width="1.5" stroke-linecap="round" />
+                <text x="284" y="126" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">small arrow to configuration</text>
+                <line x1="400" y1="93" x2="486" y2="93" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrSE)" />
+                <rect x="520" y="76" width="160" height="34" rx="17" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.8" />
+                <path d="M540,84 L542.7,90.3 L549,93 L542.7,95.7 L540,102 L537.3,95.7 L531,93 L537.3,90.3 Z" fill="var(--accent)" />
+                <text x="560" y="98" font-size="12" font-weight="600" fill="var(--text)">Improve Writing</text>
+                <rect x="692" y="84" width="14" height="14" rx="2" fill="none" stroke="var(--accent)" stroke-width="1.5" /><path d="M698,94 l7,-7 m-4,0 h4 v4" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" />
+                <text x="520" y="126" font-size="10.5" fill="var(--text-soft)">Select maximum 2000 characters</text>
+
+                <text x="40" y="172" font-size="11" fill="var(--text-soft)">Result widget</text>
+                <rect x="40" y="186" width="78" height="32" rx="6" fill="var(--accent)" /><text x="79" y="206" font-size="12" font-weight="600" fill="#fff" text-anchor="middle">Replace</text>
+                <rect x="126" y="186" width="78" height="32" rx="6" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="165" y="206" font-size="12" fill="var(--text)" text-anchor="middle">Discard</text>
+                <rect x="212" y="186" width="78" height="32" rx="6" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="251" y="206" font-size="12" fill="var(--text)" text-anchor="middle">Rewrite</text>
+                <line x1="400" y1="202" x2="486" y2="202" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrSE)" />
+                <rect x="520" y="186" width="78" height="32" rx="6" fill="var(--accent)" /><text x="559" y="206" font-size="12" font-weight="600" fill="#fff" text-anchor="middle">Replace</text>
+                <rect x="606" y="186" width="78" height="32" rx="6" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="645" y="206" font-size="12" fill="var(--text)" text-anchor="middle">Discard</text>
+                <rect x="692" y="186" width="78" height="32" rx="6" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="731" y="206" font-size="12" fill="var(--text)" text-anchor="middle">Rewrite</text>
+                <circle cx="528" cy="240" r="6" fill="none" stroke="var(--text-soft)" stroke-width="1.2" /><text x="528" y="243.5" font-size="9" font-weight="600" fill="var(--text-soft)" text-anchor="middle">i</text>
+                <text x="542" y="244" font-size="10.5" fill="var(--text-soft)">Powered by AI, so surprises and mistakes are possible</text>
+
+                <text x="40" y="282" font-size="11" fill="var(--text-soft)">Activation icon</text>
+                <path d="M56,285 L59.3,292.7 L67,296 L59.3,299.3 L56,307 L52.7,299.3 L45,296 L52.7,292.7 Z" fill="var(--text-soft)" />
+                <path d="M72,300 l10,-10 l4,4 l-10,10 l-5,1 z" fill="none" stroke="var(--text-soft)" stroke-width="1.5" stroke-linejoin="round" />
+                <text x="100" y="304" font-size="11" fill="var(--text-soft)">looks like an edit button</text>
+                <line x1="400" y1="298" x2="486" y2="298" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrSE)" />
+                <path d="M536,285 L539.3,292.7 L547,296 L539.3,299.3 L536,307 L532.7,299.3 L525,296 L532.7,292.7 Z" fill="var(--accent)" />
+                <path d="M556,296 h10 m-5,-5 v10" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" />
+                <text x="584" y="304" font-size="11" fill="var(--text-soft)">starts without selecting text first</text>
+              </g>
+            </svg>
+            <figcaption>Three of the changes, redrawn as a schematic: one clearer button, a disclaimer in the result, and an icon that no longer reads as “edit”.</figcaption>
+          </figure>
+        </div>
+
+        <div class="wide reveal">
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col">Change</th><th scope="col">What I heard</th><th scope="col">What I changed</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">1 · Enhance UI clarity</th><td>“Enhance with AI” and “Rewrite” looked like separate buttons, and the first widget scored low on usability in the test.</td><td>The compact widget is now a single “Improve Writing” button with an expand icon.</td></tr>
+                <tr><th scope="row">2 · Adding a disclaimer</th><td>Explicit indicators for AI-generated text were seen as essential to maintain trust and accountability.</td><td>The result widget carries a short disclaimer: the feature is powered by AI, so surprises and mistakes are possible.</td></tr>
+                <tr><th scope="row">3 · Button names</th><td>Labels like “Rewrite” and “Configuration” needed to match users' mental models.</td><td>The button name changes as the widget expands: “Improve Writing” in the compact widget, “Rewrite” in the result.</td></tr>
+                <tr><th scope="row">4 · Smart Editor icon</th><td>The icon mimicked an edit button, and the activation control needed more visual prominence.</td><td>A sparkle with a plus replaces the sparkle with a pen, in the design system's AI colour tokens at a 45-degree gradient, 16 × 16 px. People can start Smart Editor without selecting text first.</td></tr>
+                <tr><th scope="row">5 · Text limit</th><td>If a limit exists on how much text can be selected, people need a heads-up, not a surprise.</td><td>A hint under the button states the limit (2000 characters) and shows when a selection runs past it. Whether to disable the button as well is still being explored.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">The design file holds more from this round: tooltips on the toggles to give more clarification, history tracking, and a loader animation for the waiting state, which is the delay indicator the heuristic review asked for.</p>
+        </div>
+      </div>
+
+      <!-- 07 · RESULT -->
+      <div class="container">
+        <div class="prose">
+          <h2 class="reveal" id="result"><span class="cs-step">07 · Result</span>Shipped in 25R1, with advanced mode next</h2>
+          <p class="reveal">The core release is live in IFS Cloud's central framework, so any product group can add Smart Editor to its own fields. The design was tested with four experienced IFS Cloud users, reviewed against eleven IFS heuristics, and changed in five places as a result. End-user validation is in progress and expert review continues weekly.</p>
+
           <div class="impact-stats reveal">
             <div class="stat"><b>25R1</b><span>Core Smart Editor released</span></div>
-            <div class="stat"><b>4+</b><span>Product areas it serves: projects, finance, supply chain, HCM</span></div>
-            <div class="stat"><b>25R2</b><span>Advanced mode and empty-field generation next</span></div>
+            <div class="stat"><b>4</b><span>Experienced IFS Cloud users tested three prototypes</span></div>
+            <div class="stat"><b>11</b><span>IFS heuristics reviewed, with one open item</span></div>
+            <div class="stat"><b>5</b><span>Design changes made after usability testing</span></div>
           </div>
           <!-- Add real adoption / task-time / satisfaction numbers here once you have them. -->
+        </div>
 
+        <div class="wide reveal">
+          <h3>Release plan</h3>
+          <div class="options">
+            <div class="option is-chosen">
+              <span class="tag is-accent">25R1 · Released</span>
+              <h4>Core functionality</h4>
+              <p>Users select full or partial text in supported fields with the mouse, and the AI spark button opens a compact pop-up with grammar fixes and improved text. They can accept a suggestion, discard it, or rewrite and regenerate.</p>
+            </div>
+            <div class="option">
+              <span class="tag">25R2 · Next</span>
+              <h4>Advanced mode and more</h4>
+              <p>Side-by-side comparison of original and AI-generated text, toggles for content attributes such as page information or certification data, and full manual editing of the AI output. Custom recipes that product teams define per use case, and content generation from empty fields, so users can get a first draft even when nothing is written yet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
           <h3 class="reveal">What's next for the design</h3>
           <ul class="reveal">
             <li>Controls for level of detail, tone and structure of the output</li>
@@ -197,14 +491,13 @@
             <li>Smaller screens and mobile (ongoing)</li>
             <li>Continued refinement of the current design</li>
           </ul>
-
         </div>
 
         <nav class="next-project reveal" aria-label="Next case study">
           <a href="date-filter-redesign.html">
             <span>
               <span class="eyebrow">Next case study</span>
-              <span class="np-title">Date Filter Re-Design</span>
+              <span class="np-title">Four ways to pick a date, and none of them worked</span>
             </span>
             <span class="arrow" aria-hidden="true">→</span>
           </a>
@@ -220,10 +513,10 @@
         <a href="../work.html">Work</a>
         <a href="../about.html">About</a>
         <a href="../assets/resume.pdf">Résumé</a>
-        <a href="mailto:you@example.com">Email</a>
+        <a href="mailto:dhanuliyanage.ux@gmail.com">Email</a>
         <a href="https://www.linkedin.com/">LinkedIn</a>
       </nav>
-      <p class="copy">© <span data-year>2026</span> Your Name. Built from scratch.</p>
+      <p class="copy">© <span data-year>2026</span> Dhanushka Liyanage. Built from scratch.</p>
     </div>
   </footer>
 

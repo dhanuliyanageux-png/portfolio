@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.className="js";</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Where should page search live? — Dhanushka Liyanage</title>
+  <meta name="description" content="Research case study: re-opening the placement of IFS Cloud's page search with two usability tests and a heuristic review, after a shipped relocation felt wrong." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=28" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html">Dhanushka&nbsp;Liyanage<span class="dot">.</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../work.html" aria-current="page">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="cs-header">
+        <div class="container">
+          <p class="eyebrow reveal">IFS Cloud · Research case study</p>
+          <h1 class="reveal">Where should page search live?</h1>
+          <p class="dek reveal">A relocation had already shipped, after the usual research, prototyping and validation. Then new evidence changed the answer. This is how I re-opened it, and what the research said.</p>
+        </div>
+      </header>
+
+      <div class="container">
+        <nav class="cs-toc reveal" aria-label="On this page">
+          <a href="#problem"><span>01</span>Problem</a>
+          <a href="#research"><span>02</span>Research</a>
+          <a href="#synthesis"><span>03</span>Synthesis</a>
+          <a href="#validation"><span>04</span>Validation</a>
+          <a href="#decision"><span>05</span>Decision</a>
+          <a href="#design"><span>06</span>Final design</a>
+          <a href="#result"><span>07</span>Result</a>
+        </nav>
+
+        <dl class="cs-meta reveal">
+          <div><dt>Role</dt><dd>Lead product designer — research and design</dd></div>
+          <div><dt>Methods</dt><dd>Moderated usability test, remote first-click test, heuristic review, synthesis</dd></div>
+          <div><dt>Participants</dt><dd>5 external users, then 10 internal users</dd></div>
+          <div><dt>Product</dt><dd>IFS Cloud — page search and global search</dd></div>
+        </dl>
+
+        <figure class="cs-hero figure-wide shot reveal">
+          <img src="../assets/img/search-relocation/placement-schematic.svg" alt="Schematic of an application page: the page-search icon shown dashed at the top right (where it was relocated to) and solid at the left (the recommended position), with an arrow between them." width="800" height="450" />
+          <figcaption>The question in one picture: where the page-search icon sits. Schematic, not the real interface.</figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <div class="prose">
+
+          <h2 class="reveal" id="problem"><span class="cs-step">01 · Problem</span>A relocation had shipped, and it felt wrong</h2>
+          <p class="reveal">IFS Cloud has two kinds of search. <strong>Global search</strong> lives in the application's top bar. <strong>Page search</strong> looks inside the page you are on: a list of projects, a table of documents, a record.</p>
+          <p class="reveal">Page search had recently been moved to a new position. That change had gone through the design team's usual process: research, prototype, user validation.</p>
+          <p class="reveal">At the same time I was working on introducing global search to IFS Cloud, and that forced me to reconsider where <em>both</em> searches sit in the application. When I looked closely at the relocated page search, it felt odd. There were several reasons, mostly to do with the page's information architecture. So I started the research again.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 400" role="img" aria-label="Nested scopes. Global search sits in the application's top bar and covers the whole application. Page search covers only the page you are on, such as a list of projects, a table of documents or a record." xmlns="http://www.w3.org/2000/svg">
+              <g font-family="Inter, sans-serif">
+                <rect x="20" y="20" width="560" height="360" rx="14" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <path d="M21,76 V34 a13,13 0 0 1 13,-13 H566 a13,13 0 0 1 13,13 V76 Z" fill="var(--bg-sunken)" />
+                <line x1="21" y1="76" x2="579" y2="76" stroke="var(--border)" />
+                <circle cx="46" cy="48" r="8" fill="var(--text-faint)" />
+                <rect x="190" y="34" width="200" height="28" rx="14" fill="var(--bg-elevated)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <circle cx="208" cy="48" r="5" fill="none" stroke="var(--text-soft)" stroke-width="1.5" />
+                <line x1="211.5" y1="51.5" x2="215" y2="55" stroke="var(--text-soft)" stroke-width="1.5" stroke-linecap="round" />
+                <rect x="226" y="45" width="110" height="6" rx="3" fill="var(--border)" />
+                <circle cx="548" cy="48" r="10" fill="var(--text-faint)" />
+
+                <rect x="44" y="96" width="512" height="244" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6 4" />
+                <text x="60" y="120" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--accent-text)">THIS PAGE</text>
+                <rect x="60" y="134" width="110" height="12" rx="3" fill="var(--text-soft)" />
+                <line x1="60" y1="170" x2="540" y2="170" stroke="var(--border)" />
+                <rect x="60" y="184" width="10" height="10" fill="var(--text-faint)" /><rect x="84" y="186" width="140" height="6" rx="3" fill="var(--text-faint)" /><rect x="260" y="186" width="90" height="6" rx="3" fill="var(--border)" /><rect x="400" y="186" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="60" y="212" width="10" height="10" fill="var(--text-faint)" /><rect x="84" y="214" width="140" height="6" rx="3" fill="var(--text-faint)" /><rect x="260" y="214" width="90" height="6" rx="3" fill="var(--border)" /><rect x="400" y="214" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="60" y="240" width="10" height="10" fill="var(--text-faint)" /><rect x="84" y="242" width="140" height="6" rx="3" fill="var(--text-faint)" /><rect x="260" y="242" width="90" height="6" rx="3" fill="var(--border)" /><rect x="400" y="242" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="60" y="268" width="10" height="10" fill="var(--text-faint)" /><rect x="84" y="270" width="140" height="6" rx="3" fill="var(--text-faint)" /><rect x="260" y="270" width="90" height="6" rx="3" fill="var(--border)" /><rect x="400" y="270" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="60" y="296" width="10" height="10" fill="var(--text-faint)" /><rect x="84" y="298" width="140" height="6" rx="3" fill="var(--text-faint)" /><rect x="260" y="298" width="90" height="6" rx="3" fill="var(--border)" /><rect x="400" y="298" width="70" height="6" rx="3" fill="var(--border)" />
+                <text x="40" y="366" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-soft)">THE WHOLE APPLICATION</text>
+
+                <rect x="620" y="40" width="18" height="18" rx="4" fill="var(--bg-elevated)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="650" y="54" font-size="13" font-weight="600" fill="var(--text)">Global search</text>
+                <text x="620" y="82" font-size="12" fill="var(--text-soft)">Lives in the application's top bar</text>
+                <text x="620" y="100" font-size="12" fill="var(--text-soft)">and covers the whole application.</text>
+
+                <rect x="620" y="140" width="18" height="18" rx="4" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 2" />
+                <text x="650" y="154" font-size="13" font-weight="600" fill="var(--text)">Page search</text>
+                <text x="620" y="182" font-size="12" fill="var(--text-soft)">Looks inside the page you are on:</text>
+                <text x="620" y="200" font-size="12" fill="var(--text-soft)">a list of projects, a table of</text>
+                <text x="620" y="218" font-size="12" fill="var(--text-soft)">documents, a record.</text>
+              </g>
+            </svg>
+            <figcaption>Two searches, two scopes. The question in this case study is about the inner one: where the page-search control sits inside the page.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">What I wanted to find out</h3>
+          <ul class="reveal">
+            <li>Can people find the relocated page search, and how long does it take them?</li>
+            <li>Does its new position fit how people scan and use these pages?</li>
+            <li>How do people think about global search and page search side by side?</li>
+          </ul>
+          <p class="reveal">The earlier round of research had pointed to the right-hand side. I wanted to test that again, with a different set of people and more than one method, so that no single test decided it.</p>
+
+          <h2 class="reveal" id="research"><span class="cs-step">02 · Research</span>Three studies, so no single test decided it</h2>
+          <p class="reveal">The relocation had already passed through research once. Re-opening it meant different people and more than one method, each answering the same question from a different angle.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 310" role="img" aria-label="How the question was re-opened. Earlier research, prototype and user validation led to a relocation that shipped to the right-hand side. Work on global search raised a doubt. That led to three studies: round one with five external users, round two with ten internal users, and a heuristic review with predicted-attention maps. Together they led to a recommendation to move page search to the left and keep validating." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrS2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif" text-anchor="middle">
+                <rect x="20" y="115" width="150" height="70" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="95" y="141" font-size="12.5" font-weight="600" fill="var(--text)">Earlier research</text>
+                <text x="95" y="159" font-size="11" fill="var(--text-soft)">Research, prototype,</text>
+                <text x="95" y="174" font-size="11" fill="var(--text-soft)">user validation</text>
+
+                <rect x="200" y="115" width="150" height="70" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="275" y="141" font-size="12.5" font-weight="600" fill="var(--text)">Relocation shipped</text>
+                <text x="275" y="159" font-size="11" fill="var(--text-soft)">Page search moved to</text>
+                <text x="275" y="174" font-size="11" fill="var(--text-soft)">the right-hand side</text>
+
+                <rect x="380" y="115" width="150" height="70" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="455" y="141" font-size="12.5" font-weight="600" fill="var(--text)">A doubt</text>
+                <text x="455" y="159" font-size="11" fill="var(--text-soft)">Global search work</text>
+                <text x="455" y="174" font-size="11" fill="var(--text-soft)">reopens the question</text>
+
+                <rect x="580" y="20" width="210" height="70" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="685" y="46" font-size="12.5" font-weight="600" fill="var(--text)">Round 1 · 5 external users</text>
+                <text x="685" y="66" font-size="11" fill="var(--text-soft)">Moderated, think-aloud tasks</text>
+
+                <rect x="580" y="115" width="210" height="70" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="685" y="141" font-size="12.5" font-weight="600" fill="var(--text)">Round 2 · 10 internal users</text>
+                <text x="685" y="161" font-size="11" fill="var(--text-soft)">Remote first-click survey</text>
+
+                <rect x="580" y="210" width="210" height="70" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="685" y="236" font-size="12.5" font-weight="600" fill="var(--text)">Heuristic review</text>
+                <text x="685" y="256" font-size="11" fill="var(--text-soft)">+ predicted-attention maps</text>
+
+                <rect x="830" y="115" width="150" height="70" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="905" y="141" font-size="12.5" font-weight="600" fill="var(--accent-text)">Recommendation</text>
+                <text x="905" y="159" font-size="11" fill="var(--accent-text)">Move it left, and</text>
+                <text x="905" y="174" font-size="11" fill="var(--accent-text)">keep validating</text>
+
+                <line x1="170" y1="150" x2="196" y2="150" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <line x1="350" y1="150" x2="376" y2="150" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <polyline points="530,150 553,150 553,55 576,55" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <line x1="530" y1="150" x2="576" y2="150" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <polyline points="530,150 553,150 553,245 576,245" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <polyline points="790,55 810,55 810,150 826,150" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <line x1="790" y1="150" x2="826" y2="150" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <polyline points="790,245 810,245 810,150 826,150" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrS2)" />
+                <text x="685" y="301" font-size="11" fill="var(--text-soft)">Three methods, so no single test decided it</text>
+              </g>
+            </svg>
+            <figcaption>How the question was re-opened: a doubt, three studies in parallel, one recommendation.</figcaption>
+          </figure>
+        </div>
+
+        <div class="wide reveal">
+          <h3>Three studies, one question</h3>
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col"></th><th scope="col">Round 1</th><th scope="col">Round 2</th><th scope="col">Heuristic review</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Who</th>
+                  <td>5 external users, some new to IFS Cloud, some long-time IFS Applications users</td>
+                  <td>10 internal users</td>
+                  <td>Me, against IFS's design heuristics and design-system checklist</td>
+                </tr>
+                <tr>
+                  <th scope="row">How</th>
+                  <td>Moderated, recorded sessions with think-aloud tasks on the relocated design</td>
+                  <td>Remote survey with a first-click test, comparing the two placements</td>
+                  <td>Checked the proposal against the heuristics and the design-system standards</td>
+                </tr>
+                <tr>
+                  <th scope="row">What it gave me</th>
+                  <td>Quantified findings, an adaptation story, personas, a journey map</td>
+                  <td>Click heatmaps, flow diagrams, and a view on whether the button was understood</td>
+                  <td>A structured check that the change was simple, visible and consistent</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">I also ran predicted-attention heatmaps of the page as a quantitative cross-check on where the eye lands first.</p>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Round 1: what people did</h3>
+          <p class="reveal">Five external users completed tasks on the relocated design while thinking aloud. The sample is small, so I treated the numbers as directional and spent most of the time on the reasons behind them.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="stat-grid">
+            <div class="stat-card"><b>4/5</b><span>had difficulty locating the new page-search icon at first</span></div>
+            <div class="stat-card"><b>5/5</b><span>adopted the new placement within a short time</span></div>
+            <div class="stat-card"><b>2/5</b><span>said they would prefer it on the left</span></div>
+            <div class="stat-card"><b>4/5</b><span>preferred global search when they could choose between it and a dedicated document portal</span></div>
+            <div class="stat-card"><b>3/5</b><span>described a learning curve moving from older IFS versions (Apps 9 or 10) to the Cloud interface</span></div>
+            <div class="stat-card"><b>2/5</b><span>compared IFS search with the universal search on their phones and computers</span></div>
+          </div>
+          <p class="note">A side finding pointed the same way: 5 of 5 struggled to find where to create a task, which is done with the bell icon. Icon-only controls carry a learning cost.</p>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Adaptation is real, and so is the cost of the first encounter</h3>
+          <p class="reveal">One participant met the relocated search three times. The first time, as someone who is not an expert user, she struggled for about a minute to find it. The second time she knew where to look and took under a minute. The third time she reached it within a second.</p>
+          <p class="reveal">She still said she would keep it on the left. Her words: <em>“Of course you will be used to it, but if I would give my opinion, I would keep it on the left side.”</em> Users expected to adapt to a placement they did not prefer, which is a different thing from it being the right placement.</p>
+
+          <h3 class="reveal">What the sessions added up to</h3>
+          <ul class="reveal">
+            <li><strong>Mixed reactions to the new position.</strong> Some users preferred the familiar left side from earlier versions, and said adaptation was possible with time.</li>
+            <li><strong>Two searches, two jobs.</strong> Global search felt more efficient for broad queries; page search was useful for specific, context-dependent ones. Several people wanted a unified experience like modern web apps.</li>
+            <li><strong>A clear preference for global search.</strong> Page search was valued for context but seen as less versatile.</li>
+            <li><strong>Relearning is costly for occasional users,</strong> and some confused the roles of global and page search.</li>
+            <li><strong>Requests:</strong> shared, saved searches (available in older versions), more intuitive document classification, and global search integrated with context-specific search.</li>
+          </ul>
+        </div>
+
+        <div class="wide reveal">
+          <div class="quote-cards">
+            <figure class="quote-card">
+              <blockquote>“I would prefer to keep it on the left side, but then of course if you know it's on the right side, you get used to it.”</blockquote>
+              <figcaption><b>Senior project manager</b>8+ years with IFS Applications</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“I find it difficult to find documents in IFS because I don't do it every day, so I have to relearn it.”</blockquote>
+              <figcaption><b>Department head</b>5 years with IFS Applications, intermittent use</figcaption>
+            </figure>
+            <figure class="quote-card">
+              <blockquote>“People are getting very used to universal search on their phones and on their computer, so the more similar to that we can make it, the better it is for most people.”</blockquote>
+              <figcaption><b>Junior business analyst</b>6 months with IFS Cloud</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="synthesis"><span class="cs-step">03 · Synthesis</span>Four personas, one journey, and eight reasons it felt wrong</h2>
+          <p class="reveal">I grouped participants into four personas along two lines: how long they had used IFS, and how often. A new active user, a new active user who knows the older IFS Applications, an experienced active user, and an experienced passive user. They gave the team something concrete to design and test against.</p>
+          <p class="reveal">The journey below follows the experienced passive user: five years with IFS Applications, using the system intermittently. It is where the relocation costs the most, because there is little habit to fall back on and the old muscle memory points to the wrong place.</p>
+        </div>
+
+        <div class="wide reveal">
+          <h3>Journey of an experienced, occasional user</h3>
+          <div class="jm-scroll" role="region" aria-label="Journey map, scrolls horizontally" tabindex="0">
+            <table class="jm">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Row</span></th>
+                  <th scope="col">Initial encounter</th>
+                  <th scope="col">Recognition</th>
+                  <th scope="col">Decision to use</th>
+                  <th scope="col">Interaction</th>
+                  <th scope="col">Results review</th>
+                  <th scope="col">Navigation and task completion</th>
+                  <th scope="col">Reflection</th>
+                  <th scope="col">Adaptation and feedback</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Actions</th>
+                  <td>Navigates to a page and notices the search in its new location, potentially on the right.</td>
+                  <td>Recognises the search icon and understands its purpose. Asks friends and colleagues for recommendations.</td>
+                  <td>Decides to search for something on the current page, and chooses page search over global search, understanding it is contextual.</td>
+                  <td>Clicks the search icon and adds a query related to the page content.</td>
+                  <td>Scans the results, judges their relevance, and may refine the query.</td>
+                  <td>Clicks a relevant record, navigates to the information on the page, and uses it to finish the task.</td>
+                  <td>Considers how well page search worked for the need at hand.</td>
+                  <td>Over time becomes more used to the new placement and how page search works.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Feeling</th>
+                  <td class="feel"><strong>Curious, potentially confused</strong>May be momentarily confused if expecting it on the left.</td>
+                  <td class="feel"><strong>Confused</strong>Familiar but slightly uncertain. Might compare it with the global search bar at the top.</td>
+                  <td class="feel"><strong>Contemplative, hopeful</strong></td>
+                  <td class="feel"><strong>Focused, slightly anxious</strong></td>
+                  <td class="feel"><strong>Potentially satisfied or frustrated</strong></td>
+                  <td class="feel"><strong>Expectant, curious</strong>Accomplished or disappointed by the end.</td>
+                  <td class="feel"><strong>Evaluative</strong>Compares with global search or earlier versions of the software.</td>
+                  <td class="feel"><strong>Gradually confident</strong>Engaged, or potentially resigned or frustrated.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Opportunities</th>
+                  <td><ul><li>Clear visual cues that highlight the new search location.</li></ul></td>
+                  <td><ul><li>Consistent iconography and styling, to build on existing mental models.</li></ul></td>
+                  <td><ul><li>Tooltips or quick guides explaining where to find things that have moved.</li></ul></td>
+                  <td><ul><li>A tailored experience for each user.</li></ul></td>
+                  <td><ul><li>Clear categorisation and sorting of results.</li></ul></td>
+                  <td><ul><li>Related information or quick actions based on the result.</li><li>Smooth scrolling or transition to the right section of the page.</li></ul></td>
+                  <td class="empty">Not yet identified.</td>
+                  <td><ul><li>Help people decide when to use page search or global search.</li><li>Personalised tips based on how they search.</li><li>Ways to give feedback on page search.</li></ul></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Why it felt wrong: eight reasons</h3>
+          <p class="reveal">The findings kept pointing the same way, so I looked for the mechanisms behind them. Almost all of them come down to one thing: the icon had moved away from where people expect to find it, and from where they naturally look.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="bias-grid">
+            <div class="bias-card"><h4>Expectancy violation</h4><p>People build mental models from their experience of the application. Moving an element from where they expect it breaks the model, causes confusion and raises cognitive load.</p></div>
+            <div class="bias-card"><h4>F-pattern reading</h4><p>Users scan in an F shape: top left, across, then down the left side. An icon on the right sits outside that path and is easier to overlook.</p></div>
+            <div class="bias-card"><h4>Change blindness</h4><p>People can fail to notice a change in what they see, especially when attention is elsewhere. Someone used to finding search on the left may simply not see it in its new place.</p></div>
+            <div class="bias-card"><h4>Habit and muscle memory</h4><p>Regular users' habits are tied to the left. Breaking them takes conscious effort and costs efficiency and patience in the short term.</p></div>
+            <div class="bias-card"><h4>Visual hierarchy</h4><p>Elements on the right can read as less important or secondary, which lowers the perceived importance of search.</p></div>
+            <div class="bias-card"><h4>Cognitive load</h4><p>There is already a learning curve with the new interface. Another change adds to the mental effort of using the system.</p></div>
+            <div class="bias-card"><h4>Left-side bias</h4><p>In left-to-right reading cultures, attention skews left. Important navigation is expected there, including key functions like search.</p></div>
+            <div class="bias-card"><h4>Consistency with other systems</h4><p>People are used to universal search on their devices. A search on the opposite side to the one they know can feel inconsistent with their wider digital experience.</p></div>
+          </div>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 380" role="img" aria-label="An illustration of the F-pattern on a list page. Attention runs across the top, in a shorter sweep lower down, and down the left side. A search icon at the top right sits outside that path, while the recommended position at the left, under the title, sits inside it." xmlns="http://www.w3.org/2000/svg">
+              <g font-family="Inter, sans-serif">
+                <rect x="20" y="20" width="560" height="340" rx="14" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <path d="M21,64 V34 a13,13 0 0 1 13,-13 H566 a13,13 0 0 1 13,13 V64 Z" fill="var(--bg-sunken)" />
+                <line x1="21" y1="64" x2="579" y2="64" stroke="var(--border)" />
+                <rect x="36" y="28" width="528" height="28" rx="8" fill="var(--accent)" fill-opacity="0.16" />
+                <rect x="36" y="100" width="330" height="28" rx="8" fill="var(--accent)" fill-opacity="0.16" />
+                <rect x="36" y="28" width="28" height="318" rx="8" fill="var(--accent)" fill-opacity="0.16" />
+
+                <rect x="84" y="78" width="110" height="12" rx="3" fill="var(--text-soft)" />
+                <circle cx="96" cy="114" r="8" fill="none" stroke="var(--accent)" stroke-width="2" />
+                <line x1="102" y1="120" x2="107" y2="125" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" />
+                <circle cx="540" cy="114" r="8" fill="none" stroke="var(--text-faint)" stroke-width="2" stroke-dasharray="3 3" />
+                <line x1="546" y1="120" x2="551" y2="125" stroke="var(--text-faint)" stroke-width="2" stroke-dasharray="2 2" stroke-linecap="round" />
+                <line x1="84" y1="156" x2="556" y2="156" stroke="var(--border)" />
+                <rect x="84" y="170" width="10" height="10" fill="var(--text-faint)" /><rect x="108" y="172" width="150" height="6" rx="3" fill="var(--text-faint)" /><rect x="300" y="172" width="90" height="6" rx="3" fill="var(--border)" /><rect x="440" y="172" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="84" y="198" width="10" height="10" fill="var(--text-faint)" /><rect x="108" y="200" width="150" height="6" rx="3" fill="var(--text-faint)" /><rect x="300" y="200" width="90" height="6" rx="3" fill="var(--border)" /><rect x="440" y="200" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="84" y="226" width="10" height="10" fill="var(--text-faint)" /><rect x="108" y="228" width="150" height="6" rx="3" fill="var(--text-faint)" /><rect x="300" y="228" width="90" height="6" rx="3" fill="var(--border)" /><rect x="440" y="228" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="84" y="254" width="10" height="10" fill="var(--text-faint)" /><rect x="108" y="256" width="150" height="6" rx="3" fill="var(--text-faint)" /><rect x="300" y="256" width="90" height="6" rx="3" fill="var(--border)" /><rect x="440" y="256" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="84" y="282" width="10" height="10" fill="var(--text-faint)" /><rect x="108" y="284" width="150" height="6" rx="3" fill="var(--text-faint)" /><rect x="300" y="284" width="90" height="6" rx="3" fill="var(--border)" /><rect x="440" y="284" width="70" height="6" rx="3" fill="var(--border)" />
+                <rect x="84" y="310" width="10" height="10" fill="var(--text-faint)" /><rect x="108" y="312" width="150" height="6" rx="3" fill="var(--text-faint)" /><rect x="300" y="312" width="90" height="6" rx="3" fill="var(--border)" /><rect x="440" y="312" width="70" height="6" rx="3" fill="var(--border)" />
+
+                <circle cx="544" cy="42" r="11" fill="var(--accent)" /><text x="544" y="46" font-size="12" font-weight="600" fill="#fff" text-anchor="middle">1</text>
+                <circle cx="346" cy="114" r="11" fill="var(--accent)" /><text x="346" y="118" font-size="12" font-weight="600" fill="#fff" text-anchor="middle">2</text>
+                <circle cx="50" cy="326" r="11" fill="var(--accent)" /><text x="50" y="330" font-size="12" font-weight="600" fill="#fff" text-anchor="middle">3</text>
+
+                <text x="660" y="46" font-size="13" font-weight="600" fill="var(--text)">1  Across the top</text>
+                <text x="660" y="76" font-size="13" font-weight="600" fill="var(--text)">2  A shorter sweep below</text>
+                <text x="660" y="106" font-size="13" font-weight="600" fill="var(--text)">3  Down the left side</text>
+
+                <circle cx="636" cy="170" r="8" fill="none" stroke="var(--text-faint)" stroke-width="2" stroke-dasharray="3 3" />
+                <text x="660" y="168" font-size="13" font-weight="600" fill="var(--text)">Relocated icon, top right</text>
+                <text x="660" y="188" font-size="12" fill="var(--text-soft)">Outside the path: 0% predicted</text>
+                <text x="660" y="204" font-size="12" fill="var(--text-soft)">attention in the model below.</text>
+
+                <circle cx="636" cy="250" r="8" fill="none" stroke="var(--accent)" stroke-width="2" />
+                <text x="660" y="248" font-size="13" font-weight="600" fill="var(--text)">Left, under the title</text>
+                <text x="660" y="268" font-size="12" fill="var(--text-soft)">Where people look first.</text>
+              </g>
+            </svg>
+            <figcaption>The F-pattern, as an illustration rather than data: the relocated icon sits outside the path. The predicted-attention maps below show the same shape.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">A cross-check: where the eye actually goes</h3>
+          <p class="reveal">To test the left-bias and F-pattern ideas, I ran predicted-attention maps on the relocated design (Attention Insight). They predict where attention lands on a first glance; they are a model, not eye tracking. Two things stood out.</p>
+          <ul class="reveal">
+            <li>Attention goes more to the left of the page than the right.</li>
+            <li>The relocated search icon, at the top right, scored <strong>0% predicted attention</strong>, below the tool's 5% average for a primary action. That fits one participant needing about a minute to find it.</li>
+          </ul>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <img src="../assets/img/search-relocation/heatmap-areas.png" alt="Predicted-attention heatmap of a list page in the relocated design. The search icon at the top right is boxed in red and labelled 0% attention, next to a panel noting its visibility is below the 5% average." width="1400" height="683" loading="lazy" />
+            <figcaption>Predicted attention on the relocated design. The search icon at the top right, boxed, gets 0% of first-glance attention.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/img/search-relocation/heatmap-pair.png" alt="Two views of the same page: a colour heatmap and a grayscale attention map. Attention concentrates at the top left and in the first columns of the list, and is low on the right." width="1800" height="484" loading="lazy" />
+            <figcaption>The same page as a heatmap (left) and an attention map (right). Attention pools at the top left and in the list; the top right stays cold.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="validation"><span class="cs-step">04 · Validation</span>Round 2 and a heuristic review tested the alternative</h2>
+          <p class="reveal">The first round told me the relocation had a discoverability cost. It could not tell me whether an alternative did better. So I ran a second round with internal users, using a remote survey with a first-click test. It compared the two placements and looked at how global search and page search work together. The task was concrete: search for all projects in “Closed” status.</p>
+          <ul class="reveal">
+            <li><strong>10 of 10</strong> participants found the search button quickly.</li>
+            <li>A few said the button was not self-explanatory, because it opens a search pane. That is a labelling and affordance problem, separate from placement.</li>
+          </ul>
+
+          <h3 class="reveal">Heuristic review</h3>
+          <p class="reveal">I also checked the proposal against IFS's design heuristics and the design-system checklist. The aim was to meet IFS Design System standards and to communicate the design clearly to engineering. Two of the heuristics stood out:</p>
+          <ul class="reveal">
+            <li><strong>“The design is as simple as possible.”</strong> Moving page search to the left puts a commonly used function in a more intuitive place. First-click time dropped from over a minute to seconds.</li>
+            <li><strong>“The user always knows what is going on.”</strong> A more visible icon gives immediate feedback when someone interacts with the page.</li>
+          </ul>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="decision"><span class="cs-step">05 · Decision</span>Keep the right-hand position, or change the placement?</h2>
+          <p class="reveal">The two rounds had shown different results, so the question became which recommendation the combined evidence could support.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="options">
+            <div class="option">
+              <span class="tag">Not chosen</span>
+              <h4>Keep the right-hand position and improve discoverability</h4>
+              <p>Adding a text label or similar would help people find the icon. But that does not address the placement itself, and the two tests had shown different results.</p>
+            </div>
+            <div class="option is-chosen">
+              <span class="tag is-accent">Recommended</span>
+              <h4>Change the placement</h4>
+              <p>This needs extra effort and more validation. But across the tests, the left side is consistently the more comfortable position for users.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="design"><span class="cs-step">06 · Final design</span>Search moves left, under the page title</h2>
+          <p class="reveal">Design was the smaller part of this project, but it is where the evidence lands. The revised page search does three things:</p>
+          <ul class="reveal">
+            <li><strong>It sits on the left, directly under the page title,</strong> where people look first.</li>
+            <li><strong>It is easy to discover.</strong> The button carries a text label as well as the icon, with the same styling as the other search controls, which answers the round-two feedback that an icon alone was not self-explanatory.</li>
+            <li><strong>It stays quiet until you need it.</strong> The button opens a pane. Filters, saved searches and an advanced mode live inside it.</li>
+          </ul>
+        </div>
+
+        <div class="wide reveal">
+          <div class="shot-grid">
+            <figure class="shot">
+              <img src="../assets/img/search-relocation/frame-254.png" alt="The revised page: a Search button sits at the left, directly under the page title." width="1280" height="720" loading="lazy" />
+              <figcaption><b>1 · Closed.</b> The Search button sits at the left, directly under the page title.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/search-relocation/frame-255.png" alt="The search pane open, showing filters for Definition, Company and More, a Favorites toggle, a blue Search button, an Advanced switch, and a Saved Search menu at the right." width="1280" height="720" loading="lazy" />
+              <figcaption><b>2 · Open.</b> One click opens the pane: filters, a Search button, an Advanced switch, and a Saved Search menu.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/search-relocation/frame-258.png" alt="The search pane with a Project filter chip added, showing PROJ200 and a clear control." width="1280" height="720" loading="lazy" />
+              <figcaption><b>3 · Filter added.</b> Filters appear as chips that can be cleared one by one.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/search-relocation/frame-293.png" alt="The search pane with a toggle for a default filter, Show only open recently closed or cancelled orders, and the Search button showing a result count of 24 plus." width="1280" height="720" loading="lazy" />
+              <figcaption><b>4 · Default filter.</b> A default filter can be switched on or off in place.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/search-relocation/frame-260.png" alt="The Search button showing a result count, Search (24+), with the Project filter chip applied." width="1280" height="720" loading="lazy" />
+              <figcaption><b>5 · Result count.</b> The button shows how many records match, so you know before you look.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/search-relocation/frame-266.png" alt="Advanced mode: the filters are replaced by a query field with a validity marker and a Search button, with a Basic link to switch back." width="1280" height="720" loading="lazy" />
+              <figcaption><b>6 · Advanced.</b> The filters give way to a query field, with a route back to Basic.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">The rest of the recommendations sit around the design. <strong>User education</strong> means interactive tutorials, subtle guidance and a searchable knowledge base of search tips. <strong>Personalisation</strong> means tailoring results by role and permissions, and letting people save and share searches, which older versions allowed and which the Saved Search menu makes room for. For the longer term I suggested a <strong>unified search experience</strong>: clear visual distinctions between global and page search, and possibly a smart search that picks the most relevant scope from the query.</p>
+
+          <h2 class="reveal" id="result"><span class="cs-step">07 · Result</span>Where it stands</h2>
+          <div class="impact-stats reveal">
+            <div class="stat"><b>4/5</b><span>struggled to find the relocated icon at first (round 1)</span></div>
+            <div class="stat"><b>10/10</b><span>found the search button quickly (round 2)</span></div>
+            <div class="stat"><b>&gt; 1 min → seconds</b><span>first-click time, before and after the placement change</span></div>
+          </div>
+          <!-- Add the current status here (accepted / in progress / shipped) once confirmed. -->
+
+          <h3 class="reveal">What I took from it</h3>
+          <ul class="reveal">
+            <li><strong>A decision that shipped can still be wrong,</strong> and the right response to a doubt is to test it, not to defend it.</li>
+            <li><strong>Two rounds disagreed,</strong> so I combined external and internal users with a heuristic review, and kept the recommendation paired with further validation.</li>
+            <li><strong>Small samples are directional.</strong> The reasons behind the numbers carried more weight than the numbers.</li>
+          </ul>
+        </div>
+
+        <nav class="next-project reveal" aria-label="Next case study">
+          <a href="smart-editor.html">
+            <span>
+              <span class="eyebrow">Next case study</span>
+              <span class="np-title">Smart Editor: AI writing help, built once and used everywhere</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="../index.html">Home</a>
+        <a href="../work.html">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+        <a href="mailto:dhanuliyanage.ux@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </nav>
+      <p class="copy">© <span data-year>2026</span> Dhanushka Liyanage. Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

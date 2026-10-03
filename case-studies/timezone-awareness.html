@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.className="js";</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One date, four clocks — Dhanushka Liyanage</title>
+  <meta name="description" content="Case study: leading the organisation-wide initiative that made every date in IFS Cloud honest about whose timezone it was showing — across search, settings, LOVs, record selectors, lists, tables and cards, shipped over two releases." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=28" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html">Dhanushka&nbsp;Liyanage<span class="dot">.</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../work.html" aria-current="page">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="cs-header">
+        <div class="container">
+          <p class="eyebrow reveal">IFS Cloud · Platform-wide initiative</p>
+          <h1 class="reveal">One date, four clocks: making timezone visible across IFS Cloud</h1>
+          <p class="dek reveal">IFS Cloud runs in dozens of countries at once, and almost every screen shows a date. A dispatcher in Saudi Arabia scheduling a technician in Canada for a customer three time zones away has no room to do that math by hand. I led the initiative that made every date in the product honest about whose clock it was reading from — across search, settings, LOVs, record selectors, lists, tables and cards — shipped over two releases.</p>
+        </div>
+      </header>
+
+      <div class="container">
+        <nav class="cs-toc reveal" aria-label="On this page">
+          <a href="#problem"><span>01</span>Problem</a>
+          <a href="#model"><span>02</span>Understanding</a>
+          <a href="#options"><span>03</span>Options</a>
+          <a href="#decision"><span>04</span>Decision</a>
+          <a href="#design"><span>05</span>Final design</a>
+          <a href="#result"><span>06</span>Result</a>
+        </nav>
+
+        <dl class="cs-meta reveal">
+          <div><dt>Role</dt><dd>Lead product designer — owned the initiative end to end</dd></div>
+          <div><dt>Scope</dt><dd>Search, settings, LOVs, record selectors, lists, tables and cards</dd></div>
+          <div><dt>Timeline</dt><dd>Designed and shipped across two releases</dd></div>
+          <div><dt>Product</dt><dd>IFS Cloud — an enterprise platform used across many countries and time zones</dd></div>
+        </dl>
+
+        <figure class="cs-hero figure-wide shot reveal">
+          <img src="../assets/img/timezone-awareness/productions-list-datetypes.png" alt="A Productions screen in IFS Cloud showing a field group with Scheduling Directions, Plant, Plant time zone (UTC+03 Arabia Standard Time), Customer, Customer Location and Customer Location Time zone (UTC-6 Central Standard Time, Alabama), plus five Date type fields each carrying its own timezone abbreviation. The top-right corner reads 'End User - Sri Lanka - IST'." width="1440" height="1024" />
+          <figcaption>The same field group, five date types, each reading from a different timezone — and a badge showing whose timezone the viewer themselves is in.</figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <div class="prose">
+
+          <h2 class="reveal" id="problem"><span class="cs-step">01 · Problem</span>One appointment, three time zones, and the math left to the user</h2>
+          <p class="reveal">Every person using IFS Cloud has two time zones that matter. There's the one their device or browser reports — their <strong>default timezone</strong>. And there's the one they're actually scheduled against, which might be a different country entirely — their <strong>working timezone</strong>. A dispatcher based in Colombo might be coordinating technicians and customers who are nowhere near Colombo at all.</p>
+
+          <div class="pullquote reveal">
+            <p>As a Dispatcher from Saudi Arabia, I want my technician from Canada to be sent to our customer's house — who lives in Canada, but in a different time zone. Canada alone has six time zones.</p>
+            <cite>The scenario used to scope the problem</cite>
+          </div>
+
+          <p class="reveal">Once a job like that is on the calendar, the confusion starts immediately. In the dispatcher's own timezone, the technician is due to arrive around 7 PM. At that exact moment, it's 11 AM for the customer, and 12 PM for the technician. Nobody involved wants to convert three times in their head just to confirm an appointment — and until this project, that's exactly what IFS Cloud asked them to do.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <img src="../assets/img/timezone-awareness/dispatcher-scenario.png" alt="Diagram: a Dispatcher in Saudi Arabia wants to dispatch a Technician to a Customer, who lives in Canada but in a different timezone. Three cards show Arabia Standard Time (UTC+3), 6/8/22 12 AM for the Dispatcher; Eastern Daylight Time Canada (UTC-4), 6/7/22 5 PM for the Technician; Central Standard Time Canada (UTC-6), 6/7/22 3 PM for the Customer." width="1900" height="320" loading="lazy" />
+            <figcaption>The real scenario used to scope the problem: three people, three time zones, one appointment.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="model"><span class="cs-step">02 · Understanding</span>Five kinds of dates, and one moment seen through four clocks</h2>
+          <p class="reveal">A date field in IFS Cloud looks the same everywhere: a value, maybe a calendar icon. Underneath, it doesn't behave the same way twice. Before any screen could show a timezone next to a date, the five ways a date could actually be sourced needed names and rules of their own:</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="bias-grid">
+            <div class="bias-card"><h4>Not timezone-aware</h4><p>A plain date or time value with no conversion logic at all — the baseline every other type was measured against.</p></div>
+            <div class="bias-card"><h4>Linked to an object, stored in UTC</h4><p>The value is stored in UTC and always displayed in the timezone of whatever it's attached to — a Plant, a Site, a Customer. A date tied to a Plant in Saudi Arabia shows Arabia Standard Time (UTC+3), no matter who's looking at it.</p></div>
+            <div class="bias-card"><h4>Linked to the viewer, stored in UTC</h4><p>Same UTC storage, but displayed in the viewer's own timezone instead. Someone in Sri Lanka sees that same instant converted to IST (UTC+5:30).</p></div>
+            <div class="bias-card"><h4>Linked to an object, stored locally</h4><p>The raw value already belongs to that object's timezone and is shown as-is, with no conversion at read time.</p></div>
+            <div class="bias-card"><h4>Linked to the viewer's working timezone</h4><p>Displayed against whichever timezone the person has actively set as their working timezone — not necessarily the one their browser reports.</p></div>
+          </div>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 400" role="img" aria-label="How each of the five date types is displayed. Not timezone-aware: shown as is. Linked to an object and stored in UTC: shown in the object's timezone, for example a Plant in Saudi Arabia shows Arabia Standard Time, UTC plus 3. Linked to the viewer and stored in UTC: shown in the viewer's timezone, for example IST for someone in Sri Lanka. Linked to an object and stored locally: shown as is, already in the object's timezone. Linked to the working timezone: shown in the timezone the person set as their working timezone." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrT1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <text x="30" y="28" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">DATE FIELD</text>
+                <text x="330" y="28" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">STARTS AS</text>
+                <text x="500" y="28" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">SHOWN IN</text>
+
+                <rect x="14" y="40" width="972" height="58" rx="10" fill="var(--bg)" stroke="var(--border)" />
+                <text x="30" y="65" font-size="13" font-weight="600" fill="var(--text)">Not timezone-aware</text><text x="30" y="83" font-size="11" fill="var(--text-soft)">A plain date or time value</text>
+                <rect x="330" y="55" width="110" height="28" rx="14" fill="var(--bg-sunken)" stroke="var(--border)" /><text x="385" y="73" font-size="11.5" fill="var(--text-soft)" text-anchor="middle">value</text>
+                <line x1="440" y1="69" x2="484" y2="69" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT1)" />
+                <rect x="490" y="46" width="486" height="46" rx="8" fill="var(--bg-sunken)" /><text x="506" y="66" font-size="12" font-weight="600" fill="var(--text)">As is, with no conversion</text><text x="506" y="83" font-size="11" fill="var(--text-soft)">The baseline every other type is measured against</text>
+
+                <rect x="14" y="110" width="972" height="58" rx="10" fill="var(--bg)" stroke="var(--border)" />
+                <text x="30" y="135" font-size="13" font-weight="600" fill="var(--text)">Linked to an object</text><text x="30" y="153" font-size="11" fill="var(--text-soft)">A Plant, a Site, a Customer</text>
+                <rect x="330" y="125" width="110" height="28" rx="14" fill="var(--accent-soft)" stroke="var(--accent)" /><text x="385" y="143" font-size="11.5" font-weight="600" fill="var(--accent-text)" text-anchor="middle">UTC</text>
+                <line x1="440" y1="139" x2="484" y2="139" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT1)" />
+                <rect x="490" y="116" width="486" height="46" rx="8" fill="var(--accent-soft)" /><text x="506" y="136" font-size="12" font-weight="600" fill="var(--accent-text)">The object's timezone</text><text x="506" y="153" font-size="11" fill="var(--accent-text)">A Plant in Saudi Arabia shows Arabia Standard Time (UTC+3), whoever looks</text>
+
+                <rect x="14" y="180" width="972" height="58" rx="10" fill="var(--bg)" stroke="var(--border)" />
+                <text x="30" y="205" font-size="13" font-weight="600" fill="var(--text)">Linked to the viewer</text><text x="30" y="223" font-size="11" fill="var(--text-soft)">Whoever is looking at the screen</text>
+                <rect x="330" y="195" width="110" height="28" rx="14" fill="var(--accent-soft)" stroke="var(--accent)" /><text x="385" y="213" font-size="11.5" font-weight="600" fill="var(--accent-text)" text-anchor="middle">UTC</text>
+                <line x1="440" y1="209" x2="484" y2="209" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT1)" />
+                <rect x="490" y="186" width="486" height="46" rx="8" fill="var(--accent-soft)" /><text x="506" y="206" font-size="12" font-weight="600" fill="var(--accent-text)">The viewer's own timezone</text><text x="506" y="223" font-size="11" fill="var(--accent-text)">Someone in Sri Lanka sees the same instant in IST (UTC+5:30)</text>
+
+                <rect x="14" y="250" width="972" height="58" rx="10" fill="var(--bg)" stroke="var(--border)" />
+                <text x="30" y="275" font-size="13" font-weight="600" fill="var(--text)">Linked to an object</text><text x="30" y="293" font-size="11" fill="var(--text-soft)">Stored locally instead of in UTC</text>
+                <rect x="330" y="265" width="110" height="28" rx="14" fill="var(--bg-sunken)" stroke="var(--border)" /><text x="385" y="283" font-size="11.5" fill="var(--text-soft)" text-anchor="middle">local value</text>
+                <line x1="440" y1="279" x2="484" y2="279" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT1)" />
+                <rect x="490" y="256" width="486" height="46" rx="8" fill="var(--bg-sunken)" /><text x="506" y="276" font-size="12" font-weight="600" fill="var(--text)">As is, in the object's timezone</text><text x="506" y="293" font-size="11" fill="var(--text-soft)">The value already belongs there, so nothing converts at read time</text>
+
+                <rect x="14" y="320" width="972" height="58" rx="10" fill="var(--bg)" stroke="var(--border)" />
+                <text x="30" y="345" font-size="13" font-weight="600" fill="var(--text)">Linked to the working timezone</text><text x="30" y="363" font-size="11" fill="var(--text-soft)">Set by the person, not the browser</text>
+                <rect x="330" y="335" width="110" height="28" rx="14" fill="var(--bg-sunken)" stroke="var(--border)" /><text x="385" y="353" font-size="11.5" fill="var(--text-soft)" text-anchor="middle">value</text>
+                <line x1="440" y1="349" x2="484" y2="349" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT1)" />
+                <rect x="490" y="326" width="486" height="46" rx="8" fill="var(--accent-soft)" /><text x="506" y="346" font-size="12" font-weight="600" fill="var(--accent-text)">The working timezone they chose</text><text x="506" y="363" font-size="11" fill="var(--accent-text)">Not necessarily the one their browser reports</text>
+              </g>
+            </svg>
+            <figcaption>The five behaviours as rules: what a date starts as, and whose clock it is shown in. Highlighted rows convert; the others show the value as it is.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">One moment, four clocks</h3>
+          <p class="reveal">The scheduling card made the problem concrete. A single record could legitimately show the same instant four different ways at once, and all four needed to be visible without turning the row into a spreadsheet:</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col">Whose time</th><th scope="col">What they'd see</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">My date, as entered</th><td>6/08/2022, 12:00 AM</td></tr>
+                <tr><th scope="row">Stored value (UTC)</th><td>6/07/2022, 09:00 PM</td></tr>
+                <tr><th scope="row">Customer's time zone</th><td>6/07/2022, 03:00 PM</td></tr>
+                <tr><th scope="row">Technician's time zone</th><td>6/07/2022, 05:00 PM</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 900 330" role="img" aria-label="One instant shown on four clocks. The stored value is 9:00 PM on 6/07 in UTC. The same instant is 12:00 AM on 6/08 for the dispatcher in Arabia Standard Time, UTC plus 3; 5:00 PM on 6/07 for the technician in Eastern Daylight Time, UTC minus 4; and 3:00 PM on 6/07 for the customer in Central Standard Time, UTC minus 6." xmlns="http://www.w3.org/2000/svg">
+              <g font-family="Inter, sans-serif">
+                <text x="620" y="28" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--accent-text)" text-anchor="middle">THE SAME INSTANT</text>
+                <line x1="330" y1="80" x2="880" y2="80" stroke="var(--border)" stroke-width="2" />
+                <line x1="330" y1="150" x2="880" y2="150" stroke="var(--border)" stroke-width="2" />
+                <line x1="330" y1="220" x2="880" y2="220" stroke="var(--border)" stroke-width="2" />
+                <line x1="330" y1="290" x2="880" y2="290" stroke="var(--border)" stroke-width="2" />
+                <line x1="620" y1="40" x2="620" y2="316" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 4" />
+
+                <text x="20" y="76" font-size="13" font-weight="600" fill="var(--text)">Dispatcher</text><text x="20" y="94" font-size="11" fill="var(--text-soft)">Arabia Standard Time (UTC+3)</text>
+                <text x="20" y="146" font-size="13" font-weight="600" fill="var(--text)">Stored value</text><text x="20" y="164" font-size="11" fill="var(--text-soft)">UTC, the one underlying instant</text>
+                <text x="20" y="216" font-size="13" font-weight="600" fill="var(--text)">Technician</text><text x="20" y="234" font-size="11" fill="var(--text-soft)">Eastern Daylight Time, Canada (UTC−4)</text>
+                <text x="20" y="286" font-size="13" font-weight="600" fill="var(--text)">Customer</text><text x="20" y="304" font-size="11" fill="var(--text-soft)">Central Standard Time, Canada (UTC−6)</text>
+
+                <text x="600" y="70" font-size="11" fill="var(--text-soft)" text-anchor="end">+3 h from UTC</text>
+                <text x="600" y="140" font-size="11" fill="var(--text-soft)" text-anchor="end">stored</text>
+                <text x="600" y="210" font-size="11" fill="var(--text-soft)" text-anchor="end">−4 h from UTC</text>
+                <text x="600" y="280" font-size="11" fill="var(--text-soft)" text-anchor="end">−6 h from UTC</text>
+
+                <circle cx="620" cy="80" r="7" fill="var(--accent)" /><circle cx="620" cy="150" r="7" fill="var(--accent)" /><circle cx="620" cy="220" r="7" fill="var(--accent)" /><circle cx="620" cy="290" r="7" fill="var(--accent)" />
+
+                <text x="640" y="71" font-size="13" font-weight="600" fill="var(--text)">6/08/2022 · 12:00 AM</text>
+                <text x="640" y="141" font-size="13" font-weight="600" fill="var(--text)">6/07/2022 · 09:00 PM</text>
+                <text x="640" y="211" font-size="13" font-weight="600" fill="var(--text)">6/07/2022 · 05:00 PM</text>
+                <text x="640" y="281" font-size="13" font-weight="600" fill="var(--text)">6/07/2022 · 03:00 PM</text>
+              </g>
+            </svg>
+            <figcaption>One instant on four clocks. Each person reads a time that is correct for them, and nobody converts by hand.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <figure class="shot reveal">
+            <img src="../assets/img/timezone-awareness/four-clocks-card.png" alt="The expanded timezone card for a date field: Time zone UTC+03 Arabia Standard Time (Saudi Arabia); UTC 6/12/2022, 04:00 PM; Customer's Time CST 06/12/2022, 11:00 AM; Technician's Time EDT 06/12/2022, 12:00 PM." width="380" height="280" loading="lazy" />
+            <figcaption>The actual card: one date field, expanded into every timezone that mattered for that job.</figcaption>
+          </figure>
+
+          <p class="reveal">Four clocks, one underlying instant. A dispatcher, their technician and a customer could each look at the same record and see a time that was correct <em>for them</em>, without anyone converting anything by hand.</p>
+
+          <h2 class="reveal" id="options"><span class="cs-step">03 · Options</span>Three ways to show a timezone without cluttering the screen</h2>
+          <p class="reveal">IFS Cloud is dense. A date sitting in a list row already competes with a dozen other columns; a date inside a record selector has a whole calendar and time picker built around it. I explored three ways to put a timezone next to a date without it reading as noise:</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="options">
+            <div class="option">
+              <span class="tag">Option 1</span>
+              <h4>Abbreviation + tooltip</h4>
+              <p>A short label (IST, AST, UTC+3) sitting quietly next to the value, with the full timezone name available on hover.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Option 2</span>
+              <h4>Icon + card</h4>
+              <p>A small icon that expands into a card showing the same instant across every timezone that mattered for that record.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Option 3</span>
+              <h4>Built into the calendar</h4>
+              <p>The timezone shown directly inside the date picker itself, so it's part of choosing a date rather than an addition to it.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <img src="../assets/img/timezone-awareness/design-options.png" alt="Two design directions compared, each with the same Field Group, Tables/list, and Input Field examples. Option 1, Abbreviation + Tooltip: a short timezone code sits next to the value, with a full tooltip on hover. Option 2, Icon + Card: a clock icon expands into a card listing List Table, Card and Input Field views." width="3300" height="1000" loading="lazy" />
+            <figcaption>Two of the three directions, tested against the same real field group and list so they were comparable on equal footing.</figcaption>
+          </figure>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <img src="../assets/img/timezone-awareness/calendar-design-options.png" alt="Calendar Designs: two options for a date and time picker with a timezone dropdown built in, one showing a simple label, the other showing the full list of timezones with the current one highlighted. A third exploration, Other Feature, pins the most-used time zones to the top of that list." width="1850" height="2000" loading="lazy" />
+            <figcaption>The third direction: timezone built into the calendar itself, plus an exploration for pinning the time zones people actually use.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="decision"><span class="cs-step">04 · Decision</span>None of the three won outright, so density decided</h2>
+          <p class="reveal">None of the three won outright — the surfaces were too different in size and density for one answer to fit all of them. What shipped was contextual: a quiet abbreviation for tight spaces like list and table cells and search, the expandable card for record selectors and LOVs where someone genuinely needed to compare times, and the calendar treatment built directly into the date and date-range pickers — including the Quick Ranges panel I later built into the <a href="date-filter-redesign.html">date filter redesign</a>, which grew out of this same initiative.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 300" role="img" aria-label="Which treatment shipped where. Tight spaces such as list and table cells and search use an abbreviation with a tooltip. Record selectors and LOVs, where times get compared, use an icon that expands to a card. Date and date-range pickers have the timezone built into the calendar." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrT3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="20" y="20" width="430" height="74" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="40" y="52" font-size="13" font-weight="600" fill="var(--text)">Tight spaces</text><text x="40" y="72" font-size="11.5" fill="var(--text-soft)">List and table cells, search</text>
+                <line x1="450" y1="57" x2="510" y2="57" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT3)" />
+                <rect x="516" y="20" width="464" height="74" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <rect x="532" y="47" width="46" height="20" rx="10" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5" /><text x="555" y="61" font-size="10.5" font-weight="600" fill="var(--accent-text)" text-anchor="middle">IST</text>
+                <text x="598" y="50" font-size="13" font-weight="600" fill="var(--accent-text)">Abbreviation + tooltip</text><text x="598" y="70" font-size="11.5" fill="var(--accent-text)">A quiet short label; the full name on hover</text>
+
+                <rect x="20" y="106" width="430" height="74" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="40" y="138" font-size="13" font-weight="600" fill="var(--text)">Where times get compared</text><text x="40" y="158" font-size="11.5" fill="var(--text-soft)">Record selectors and LOVs</text>
+                <line x1="450" y1="143" x2="510" y2="143" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT3)" />
+                <rect x="516" y="106" width="464" height="74" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <circle cx="555" cy="143" r="14" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" /><line x1="555" y1="143" x2="555" y2="134" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" /><line x1="555" y1="143" x2="562" y2="147" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" />
+                <text x="598" y="136" font-size="13" font-weight="600" fill="var(--accent-text)">Icon + card</text><text x="598" y="156" font-size="11.5" fill="var(--accent-text)">Expands to the same instant in every timezone that matters</text>
+
+                <rect x="20" y="192" width="430" height="74" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="40" y="224" font-size="13" font-weight="600" fill="var(--text)">Where a date is chosen</text><text x="40" y="244" font-size="11.5" fill="var(--text-soft)">Date and date-range pickers</text>
+                <line x1="450" y1="229" x2="510" y2="229" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrT3)" />
+                <rect x="516" y="192" width="464" height="74" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <rect x="532" y="215" width="46" height="30" rx="4" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5" /><line x1="532" y1="224" x2="578" y2="224" stroke="var(--accent)" stroke-width="1.5" /><circle cx="544" cy="234" r="2" fill="var(--accent)" /><circle cx="555" cy="234" r="2" fill="var(--accent)" /><circle cx="566" cy="234" r="2" fill="var(--accent)" />
+                <text x="598" y="222" font-size="13" font-weight="600" fill="var(--accent-text)">Built into the calendar</text><text x="598" y="242" font-size="11.5" fill="var(--accent-text)">Part of choosing the date, including Quick Ranges</text>
+              </g>
+            </svg>
+            <figcaption>Density decided the treatment. Lists and tables also offer the card on demand, so the same instant can be expanded without adding a column.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="design"><span class="cs-step">05 · Final design</span>Everywhere a date could hide: five areas of the product</h2>
+          <p class="reveal">The initiative touched five areas of the product, each with its own constraints on space and context:</p>
+          <ul class="reveal">
+            <li><strong>Search</strong> — date search fields gained a visible working-timezone indicator and a timezone-aware Quick Ranges panel.</li>
+            <li><strong>Configuration</strong> — a new Date Options section in Settings: a toggle to show or hide timezone information globally, and a choice between Default and Working timezone. Pick Working, and the field switches from read-only text to a dropdown, with your most-used zones pinned to the top.</li>
+          </ul>
+        </div>
+
+        <div class="wide reveal">
+          <div class="shot-grid">
+            <figure class="shot">
+              <img src="../assets/img/timezone-awareness/settings-default-radio.png" alt="Settings, Date Options: Show time zone set to Default time zone (radio button selected), with Work time zone shown as static read-only text reading UTC +5:30 Sri Jayewardenepura Kotte." width="1440" height="660" loading="lazy" />
+              <figcaption><b>Default time zone</b> — the working-timezone field shows as plain, read-only text.</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="../assets/img/timezone-awareness/settings-custom-radio.png" alt="Settings, Date Options: Show time zone set to Custom time zone (radio button selected), with Active time zone now shown as an editable dropdown reading UTC +5:30 Sri Jayewardenepura Kotte." width="1440" height="660" loading="lazy" />
+              <figcaption><b>Custom time zone</b> — the same field becomes a live dropdown the moment you opt in.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="prose">
+          <ul class="reveal">
+            <li><strong>LOVs</strong> — value lists that included a date carried their timezone with them, so picking a value never silently swapped which clock you were looking at.</li>
+            <li><strong>Record selectors</strong> — the calendar and time widget respond live: change the timezone dropdown and the whole picker's date and time recalculate in front of you, instead of waiting for a save.</li>
+            <li><strong>Lists, tables and cards</strong> — the highest-density surfaces got the card treatment: the same instant broken into every timezone that mattered, on demand, without adding a column.</li>
+          </ul>
+
+          <h3 class="reveal">Getting the edge cases right</h3>
+          <ul class="reveal">
+            <li><strong>Creating a value works exactly as before.</strong> The only difference is a small indicator showing which timezone that field is reading from.</li>
+            <li><strong>Clearing a date doesn't clear its timezone.</strong> The field goes empty; the timezone context stays, ready for the next value.</li>
+            <li><strong>A toast confirms the change after saving,</strong> so switching your working timezone in Settings never leaves you guessing whether it took.</li>
+          </ul>
+
+          <h2 class="reveal" id="result"><span class="cs-step">06 · Result</span>A consistent answer to “whose clock is this?”</h2>
+          <p class="reveal">This wasn't a project with a single conversion number to report. It was infrastructure: a consistent answer to "whose clock is this?" that had to hold up the same way across search, settings, LOVs, record selectors, lists, tables and cards, for every country IFS Cloud runs in. The scale that made it "huge" in the first place is exactly what makes it hard to compress into one before/after metric — so here are the honest counts instead.</p>
+          <div class="impact-stats reveal">
+            <div class="stat"><b>5</b><span>Distinct date-field behaviours unified under one timezone model</span></div>
+            <div class="stat"><b>5</b><span>Areas of the application redesigned — search, configuration, LOVs, record selectors, and lists/tables/cards</span></div>
+            <div class="stat"><b>2</b><span>Releases to design and ship the full scope</span></div>
+          </div>
+
+          <h3 class="reveal">What I took from it</h3>
+          <ul class="reveal">
+            <li><strong>One visual pattern doesn't have to mean one underlying behaviour.</strong> Five different ways of sourcing a timezone could all show up as the same quiet abbreviation next to a date — the complexity belonged in the data model, not on the screen.</li>
+            <li><strong>Density should decide the treatment, not consistency for its own sake.</strong> A list row, a record selector and a settings page all needed timezone to be visible, but forcing the same component into all three would have made the simplest surfaces the most cluttered.</li>
+            <li><strong>Infrastructure work doesn't always have a headline metric.</strong> The real measure of success here was that an initiative this wide shipped coherently, across two releases, without anyone needing to do timezone math by hand.</li>
+          </ul>
+
+        </div>
+
+        <nav class="next-project reveal" aria-label="Next case study">
+          <a href="skapp-design-system.html">
+            <span>
+              <span class="eyebrow">Next case study</span>
+              <span class="np-title">Rebuilding Skapp's design system, component by component</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="../index.html">Home</a>
+        <a href="../work.html">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+        <a href="mailto:dhanuliyanage.ux@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </nav>
+      <p class="copy">© <span data-year>2026</span> Dhanushka Liyanage. Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.className="js";</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rebuilding Skapp's design system — Dhanushka Liyanage</title>
+  <meta name="description" content="Case study: as Lead UX Designer at Rootcode, owning and rebuilding the design system for Skapp — an enterprise business-operations platform — from component-level foundations in Figma through to shipped documentation and a team contribution model." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=28" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html">Dhanushka&nbsp;Liyanage<span class="dot">.</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../work.html" aria-current="page">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="cs-header">
+        <div class="container">
+          <p class="eyebrow reveal">Rootcode · Skapp · Design system</p>
+          <h1 class="reveal">Rebuilding Skapp's design system, component by component</h1>
+          <p class="dek reveal"><a href="https://www.skapp.com/">Skapp</a> replaces the seven-to-ten separate tools a growing team would otherwise stitch together — project management, people management, time tracking, time-off, e-signatures, invoicing — with one platform. That range is exactly what makes its design system hard: a kanban board, an org chart, a signature flow and an invoice all have to feel like the same product. As Lead UX Designer, I owned that system end to end and rebuilt it from the component level up, in Figma and in code, with the team who'd actually use it.</p>
+        </div>
+      </header>
+
+      <div class="container">
+        <nav class="cs-toc reveal" aria-label="On this page">
+          <a href="#problem"><span>01</span>Problem</a>
+          <a href="#audit"><span>02</span>Audit</a>
+          <a href="#foundations"><span>03</span>Foundations</a>
+          <a href="#components"><span>04</span>Components</a>
+          <a href="#governance"><span>05</span>Governance</a>
+          <a href="#maintenance"><span>06</span>Maintenance</a>
+          <a href="#result"><span>07</span>Outcome</a>
+        </nav>
+
+        <dl class="cs-meta reveal">
+          <div><dt>Role</dt><dd>Lead UX Designer — owned and rebuilt the design system end to end</dd></div>
+          <div><dt>Scope</dt><dd>Foundations, component library, documentation, contribution model</dd></div>
+          <div><dt>Product</dt><dd>Skapp — an enterprise business-operations platform (skapp.com)</dd></div>
+          <div><dt>Company</dt><dd>Rootcode</dd></div>
+        </dl>
+
+        <figure class="cs-hero figure-wide reveal">
+          <svg viewBox="0 0 900 480" role="img" aria-label="A four-layer stack: Foundations at the base defines Components, which assemble into Patterns, which compose into Product surfaces — Project boards, People, Time tracking and Invoicing — at the top." xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);">
+            <defs>
+              <marker id="arrHero" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+              </marker>
+            </defs>
+            <g font-family="Inter, sans-serif">
+              <rect x="20" y="30" width="860" height="70" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" />
+              <rect x="42" y="50" width="46" height="30" rx="4" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5" />
+              <line x1="42" y1="59" x2="88" y2="59" stroke="var(--accent)" stroke-width="1.5" />
+              <text x="106" y="60" font-size="14" font-weight="600" fill="var(--accent-text)">Product surfaces</text>
+              <text x="876" y="60" font-size="11" fill="var(--accent-text)" text-anchor="end">Project boards · People · Time tracking · Invoicing</text>
+
+              <line x1="450" y1="100" x2="450" y2="148" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrHero)" />
+              <text x="466" y="128" font-size="11" fill="var(--text-soft)">compose</text>
+
+              <rect x="20" y="150" width="860" height="70" rx="10" fill="var(--bg)" stroke="currentColor" />
+              <rect x="42" y="170" width="10" height="10" fill="var(--text-soft)" />
+              <rect x="56" y="170" width="10" height="10" fill="var(--text-faint)" />
+              <rect x="42" y="184" width="10" height="10" fill="var(--text-faint)" />
+              <rect x="56" y="184" width="10" height="10" fill="var(--text-soft)" />
+              <text x="106" y="180" font-size="14" font-weight="600" fill="var(--text)">Patterns</text>
+              <text x="876" y="180" font-size="11" fill="var(--text-soft)" text-anchor="end">Data table · Form flow · Empty state</text>
+
+              <line x1="450" y1="220" x2="450" y2="268" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrHero)" />
+              <text x="466" y="248" font-size="11" fill="var(--text-soft)">assemble into</text>
+
+              <rect x="20" y="270" width="860" height="70" rx="10" fill="var(--bg)" stroke="currentColor" />
+              <rect x="40" y="295" width="48" height="20" rx="10" fill="none" stroke="var(--text-soft)" stroke-width="1.5" />
+              <text x="106" y="300" font-size="14" font-weight="600" fill="var(--text)">Components</text>
+              <text x="876" y="300" font-size="11" fill="var(--text-soft)" text-anchor="end">Button · Input · Table row · Avatar</text>
+
+              <line x1="450" y1="340" x2="450" y2="388" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrHero)" />
+              <text x="466" y="368" font-size="11" fill="var(--text-soft)">define</text>
+
+              <rect x="20" y="390" width="860" height="70" rx="10" fill="var(--bg)" stroke="currentColor" />
+              <circle cx="52" cy="425" r="8" fill="var(--accent)" />
+              <circle cx="68" cy="425" r="8" fill="var(--text-soft)" />
+              <circle cx="84" cy="425" r="8" fill="var(--text-faint)" />
+              <text x="106" y="420" font-size="14" font-weight="600" fill="var(--text)">Foundations</text>
+              <text x="876" y="420" font-size="11" fill="var(--text-soft)" text-anchor="end">Color · Type · Space · Radius · Elevation</text>
+            </g>
+          </svg>
+          <figcaption>The system rebuilt bottom-up: foundations define components, components assemble into patterns, patterns compose into every surface Skapp ships.</figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <div class="prose">
+
+          <h2 class="reveal" id="problem"><span class="cs-step">01 · Problem</span>One platform, six modules, and a single product feel</h2>
+          <p class="reveal">Skapp's whole pitch is consolidation: instead of running a separate project tool, HR system, time tracker, e-signature app and invoicing tool, a team runs one platform. That's a great pitch for the person buying the software. It's a hard brief for the person designing it, because it means Skapp's own product has to cover kanban boards and Scrum flows, org charts and employee profiles, clock-in time tracking, leave calendars, legally-binding signature flows, and invoices tied to logged hours — all under one roof, all expected to feel like the same product.</p>
+          <p class="reveal">A design system for something that wide can't be a button and a color palette bolted on afterward. It has to hold together across project-management-flavoured screens, HR-flavoured screens, and finance-flavoured screens without each one quietly drifting into its own dialect.</p>
+
+          <h2 class="reveal" id="audit"><span class="cs-step">02 · Audit</span>Before rebuilding anything, I catalogued what actually existed</h2>
+          <p class="reveal">By the time I took ownership, Skapp had grown the way most fast-moving products do: components got built for the screen in front of a designer that week, not for reuse, and the gap between what Figma said and what shipped in code widened with every sprint. Before rebuilding anything, I spent time cataloguing what actually existed — walking every screen across Project, People, Time Tracking, Time-off, E-signatures and Invoicing, and pulling out every variant of every component I found along the way.</p>
+          <p class="reveal">None of it was wrong exactly — each screen had made sense in isolation at the time it was built. The audit wasn't about assigning blame for that; it was about having a real inventory to rebuild from, instead of guessing at what "the button" or "the filter" was supposed to look like. Six categories came up over and over:</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg viewBox="0 0 1000 460" role="img" aria-label="Six categories of inconsistency found in the audit: buttons with three different corner-radius values, two separate filter patterns doing the same job, no consistent breadcrumb pattern, several different dropdown implementations, status badges whose color meant different things on different screens, and spacing values picked by eye rather than a shared scale." xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);">
+              <g font-family="Inter, sans-serif">
+
+                <!-- Card 1: Buttons -->
+                <rect x="20" y="20" width="300" height="200" rx="12" fill="var(--bg)" stroke="currentColor" stroke-width="1.2" />
+                <rect x="44" y="50" width="78" height="26" rx="3" fill="none" stroke="var(--text-faint)" stroke-width="1.3" />
+                <rect x="62" y="64" width="78" height="26" rx="10" fill="none" stroke="var(--text-soft)" stroke-width="1.3" />
+                <rect x="80" y="78" width="78" height="26" rx="13" fill="none" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="44" y="142" font-size="13" font-weight="600" fill="var(--text)">Buttons</text>
+                <text x="44" y="164" font-size="11" fill="var(--text-soft)">Three corner-radius values</text>
+                <text x="44" y="180" font-size="11" fill="var(--text-soft)">for the same Save action</text>
+
+                <!-- Card 2: Filters -->
+                <rect x="350" y="20" width="300" height="200" rx="12" fill="var(--bg)" stroke="currentColor" stroke-width="1.2" />
+                <rect x="374" y="54" width="180" height="22" rx="5" fill="none" stroke="var(--text-faint)" stroke-width="1.3" />
+                <rect x="382" y="60" width="30" height="10" rx="5" fill="var(--text-faint)" />
+                <rect x="418" y="60" width="30" height="10" rx="5" fill="var(--text-faint)" />
+                <rect x="374" y="84" width="130" height="22" rx="11" fill="none" stroke="var(--accent)" stroke-width="1.5" />
+                <circle cx="386" cy="95" r="4" fill="var(--accent)" />
+                <text x="374" y="142" font-size="13" font-weight="600" fill="var(--text)">Filters</text>
+                <text x="374" y="164" font-size="11" fill="var(--text-soft)">Two separate filter patterns</text>
+                <text x="374" y="180" font-size="11" fill="var(--text-soft)">doing the same job</text>
+
+                <!-- Card 3: Breadcrumbs -->
+                <rect x="680" y="20" width="300" height="200" rx="12" fill="var(--bg)" stroke="currentColor" stroke-width="1.2" />
+                <circle cx="708" cy="70" r="5" fill="var(--text-soft)" />
+                <line x1="713" y1="70" x2="743" y2="70" stroke="var(--text-soft)" stroke-width="1.3" />
+                <circle cx="748" cy="70" r="5" fill="var(--text-soft)" />
+                <line x1="753" y1="70" x2="783" y2="70" stroke="var(--text-faint)" stroke-width="1.3" stroke-dasharray="3 3" />
+                <circle cx="790" cy="70" r="6" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 2" />
+                <text x="704" y="142" font-size="13" font-weight="600" fill="var(--text)">Breadcrumbs</text>
+                <text x="704" y="164" font-size="11" fill="var(--text-soft)">No consistent pattern —</text>
+                <text x="704" y="180" font-size="11" fill="var(--text-soft)">present on some pages, gone on others</text>
+
+                <!-- Card 4: Dropdowns -->
+                <rect x="20" y="240" width="300" height="200" rx="12" fill="var(--bg)" stroke="currentColor" stroke-width="1.2" />
+                <rect x="44" y="270" width="68" height="26" rx="4" fill="none" stroke="var(--text-faint)" stroke-width="1.3" />
+                <polygon points="98,281 104,281 101,286" fill="var(--text-faint)" />
+                <rect x="122" y="270" width="68" height="26" rx="4" fill="none" stroke="var(--text-soft)" stroke-width="1.3" />
+                <polygon points="176,279 182,279 182,287 176,287" fill="none" stroke="var(--text-soft)" stroke-width="1.2" />
+                <rect x="200" y="270" width="68" height="26" rx="13" fill="none" stroke="var(--accent)" stroke-width="1.5" />
+                <path d="M250,281 l4,4 l4,-4" fill="none" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="44" y="362" font-size="13" font-weight="600" fill="var(--text)">Dropdowns</text>
+                <text x="44" y="384" font-size="11" fill="var(--text-soft)">Several different builds, each</text>
+                <text x="44" y="400" font-size="11" fill="var(--text-soft)">behaving slightly differently</text>
+
+                <!-- Card 5: Badges & status -->
+                <rect x="350" y="240" width="300" height="200" rx="12" fill="var(--bg)" stroke="currentColor" stroke-width="1.2" />
+                <circle cx="384" cy="266" r="6" fill="#D98A2B" />
+                <text x="398" y="270" font-size="11" fill="var(--text-soft)">Pending</text>
+                <circle cx="384" cy="290" r="6" fill="#D98A2B" />
+                <text x="398" y="294" font-size="11" fill="var(--text-soft)">In review</text>
+                <circle cx="384" cy="314" r="6" fill="var(--accent)" />
+                <text x="398" y="318" font-size="11" fill="var(--text-soft)">Pending</text>
+                <text x="374" y="362" font-size="13" font-weight="600" fill="var(--text)">Badges &amp; status</text>
+                <text x="374" y="384" font-size="11" fill="var(--text-soft)">The same color meant different</text>
+                <text x="374" y="400" font-size="11" fill="var(--text-soft)">things on different screens</text>
+
+                <!-- Card 6: Spacing -->
+                <rect x="680" y="240" width="300" height="200" rx="12" fill="var(--bg)" stroke="currentColor" stroke-width="1.2" />
+                <line x1="704" y1="320" x2="964" y2="320" stroke="var(--text-faint)" stroke-width="1.2" />
+                <line x1="704" y1="310" x2="704" y2="330" stroke="var(--text-soft)" stroke-width="1.3" />
+                <line x1="726" y1="310" x2="726" y2="330" stroke="var(--text-soft)" stroke-width="1.3" />
+                <line x1="770" y1="310" x2="770" y2="330" stroke="var(--text-soft)" stroke-width="1.3" />
+                <line x1="792" y1="310" x2="792" y2="330" stroke="var(--accent)" stroke-width="1.5" />
+                <line x1="856" y1="310" x2="856" y2="330" stroke="var(--text-soft)" stroke-width="1.3" />
+                <text x="704" y="362" font-size="13" font-weight="600" fill="var(--text)">Spacing</text>
+                <text x="704" y="384" font-size="11" fill="var(--text-soft)">No shared scale — gaps picked</text>
+                <text x="704" y="400" font-size="11" fill="var(--text-soft)">by eye, screen by screen</text>
+              </g>
+            </svg>
+            <figcaption>Six categories that came up again and again in the audit — the real inventory the rebuild was scoped against, not a guess at what needed fixing.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">Once the inventory was in front of me, three things fell out of it: which components had genuinely useful variants worth keeping, which variants were accidental — the same thing built twice, slightly differently — and which screens were quietly using no shared component at all. That prioritised the rebuild: start with whatever showed up most often across the audit, since that's where the inconsistency was doing the most visible damage.</p>
+
+          <h2 class="reveal" id="foundations"><span class="cs-step">03 · Foundations</span>Foundations first, in three tiers of tokens</h2>
+          <p class="reveal">Before touching a single component, I rebuilt the foundations: color, type, spacing, radius and elevation, defined once as tokens and mapped as Figma variables. I structured them in three tiers rather than one flat list. Global tokens held the raw palette and scale — values with no opinion about where they'd be used. Semantic tokens gave those values a role, like <code>color-action-primary</code> or <code>space-comfortable</code>. Component tokens then pointed at a semantic token for one specific job, like a button's background.</p>
+          <p class="reveal">The extra layer looks like overhead until you need to re-theme something: change what <code>color-action-primary</code> points to, and every semantic and component token built on it follows automatically — nobody has to go and edit the button.</p>
+        </div>
+
+        <div class="wide reveal">
+          <h3>Decision · How should the tokens be structured?</h3>
+          <div class="options">
+            <div class="option">
+              <span class="tag">The alternative</span>
+              <h4>One flat list of tokens</h4>
+              <p>Simpler to read, but every component would carry its own raw value, so re-theming something means editing each component by hand.</p>
+            </div>
+            <div class="option is-chosen">
+              <span class="tag is-accent">Chosen</span>
+              <h4>Three tiers: global, semantic, component</h4>
+              <p>Raw values hold no opinion, semantic tokens give them a role, component tokens use that role for one job. Change what <code>color-action-primary</code> points to and everything built on it follows.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg viewBox="0 0 1000 340" role="img" aria-label="Three tiers of design tokens: a global token blue.600 is given a role as the semantic token color-action-primary, which is then applied to the component token button-primary-bg. Global tokens blue.700 and semantic color-action-primary-hover follow the same path to button-primary-bg-hover." xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);">
+              <defs>
+                <marker id="arrT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+                </marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="30" y="40" width="260" height="260" rx="10" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="160" y="68" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Global tokens</text>
+
+                <rect x="50" y="110" width="220" height="46" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <circle cx="72" cy="133" r="8" fill="#2F43E0" />
+                <text x="90" y="137" font-size="12" fill="var(--accent-text)">blue.600</text>
+
+                <rect x="50" y="190" width="220" height="46" rx="6" fill="var(--bg-sunken)" stroke="currentColor" stroke-width="1.5" />
+                <circle cx="72" cy="213" r="8" fill="#1B2AA8" />
+                <text x="90" y="217" font-size="12" fill="var(--text)">blue.700</text>
+
+                <line x1="290" y1="133" x2="364" y2="133" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrT)" />
+                <line x1="290" y1="213" x2="364" y2="213" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrT)" />
+                <text x="327" y="118" font-size="10" fill="var(--text-soft)" text-anchor="middle">given a role</text>
+
+                <rect x="370" y="40" width="260" height="260" rx="10" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="500" y="68" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Semantic tokens</text>
+
+                <rect x="390" y="110" width="220" height="46" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="500" y="137" font-size="11" fill="var(--accent-text)" text-anchor="middle">color-action-primary</text>
+
+                <rect x="390" y="190" width="220" height="46" rx="6" fill="var(--bg-sunken)" stroke="currentColor" stroke-width="1.5" />
+                <text x="500" y="217" font-size="10.5" fill="var(--text)" text-anchor="middle">color-action-primary-hover</text>
+
+                <line x1="630" y1="133" x2="704" y2="133" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arrT)" />
+                <line x1="630" y1="213" x2="704" y2="213" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrT)" />
+                <text x="667" y="118" font-size="10" fill="var(--text-soft)" text-anchor="middle">applied to</text>
+
+                <rect x="710" y="40" width="260" height="260" rx="10" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="840" y="68" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Component tokens</text>
+
+                <rect x="730" y="110" width="220" height="46" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="840" y="137" font-size="11" fill="var(--accent-text)" text-anchor="middle">button-primary-bg</text>
+
+                <rect x="730" y="190" width="220" height="46" rx="6" fill="var(--bg-sunken)" stroke="currentColor" stroke-width="1.5" />
+                <text x="840" y="217" font-size="10.5" fill="var(--text)" text-anchor="middle">button-primary-bg-hover</text>
+              </g>
+            </svg>
+            <figcaption>One global color, given a role, given a job on one component. Change <code>blue.600</code> once, and both the semantic and component layers inherit it automatically.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">That's the token system's job done at the scale of a single value. The same mechanism plays out at the scale of a whole component: every button on the product reads from the same component token, so one change moves everywhere that token is used at once.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg viewBox="0 0 900 380" role="img" aria-label="A color token defines a Button component. That same Button is reused as-is across the Project board, Time tracking and Invoicing surfaces, so a single token change updates every one of them at once." xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);">
+              <defs>
+                <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+                </marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="20" y="160" width="160" height="60" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <circle cx="46" cy="190" r="8" fill="var(--accent)" />
+                <text x="64" y="184" font-size="12" font-weight="600" fill="var(--text)">Token</text>
+                <text x="64" y="200" font-size="11" fill="var(--text-soft)">--color-primary</text>
+
+                <line x1="180" y1="190" x2="296" y2="190" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr1)" />
+                <text x="238" y="178" font-size="11" fill="var(--text-soft)" text-anchor="middle">defines</text>
+
+                <rect x="300" y="160" width="160" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="380" y="184" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Button</text>
+                <text x="380" y="200" font-size="11" fill="var(--text-soft)" text-anchor="middle">component</text>
+
+                <polyline points="460,190 520,190 660,70" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr1)" />
+                <polyline points="460,190 660,190" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr1)" />
+                <polyline points="460,190 520,190 660,310" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr1)" />
+                <text x="500" y="142" font-size="11" fill="var(--text-soft)">used in</text>
+
+                <rect x="660" y="40" width="220" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="770" y="75" font-size="12" fill="var(--text)" text-anchor="middle">Project board</text>
+
+                <rect x="660" y="160" width="220" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="770" y="195" font-size="12" fill="var(--text)" text-anchor="middle">Time tracking</text>
+
+                <rect x="660" y="280" width="220" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="770" y="315" font-size="12" fill="var(--text)" text-anchor="middle">Invoicing</text>
+              </g>
+            </svg>
+            <figcaption>Change the token once, and the button updates everywhere it's already in use — no hunting through screens to fix drift by hand.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="components"><span class="cs-step">04 · Components</span>Rebuilding the library from the atoms up, with one dependency rule</h2>
+          <p class="reveal">With foundations in place, I rebuilt the components themselves from the atoms up — inputs, buttons, table rows, avatars, badges — auditing each one against how it actually got used across Project, People, Time Tracking and Invoicing, not how it was originally invented in isolation for a single screen. Variants and states that turned out to be one-offs got folded back into the closest real pattern; ones that were genuinely different got documented as their own thing instead of a lookalike that quietly behaved differently.</p>
+          <p class="reveal">I kept the library to one rule: each layer only depends on the layer below it, never sideways. Primitives — an icon, a badge, an avatar — are the smallest reusable pieces. Components are built from primitives: a table row is an avatar, two text styles and a badge, composed once and reused everywhere a row appears. Patterns are built from components: a data table is table rows plus a header plus pagination. A pattern can reach down into components; two components never quietly depend on each other.</p>
+          <p class="reveal">In Figma, that meant splitting the single sprawling file I inherited into three published libraries — Foundations, Components and Patterns — each versioned on its own and consumed downstream. A product file always pulled from a known, published source instead of a local copy someone had detached and started editing in place, which was the single biggest cause of the drift I'd catalogued in the audit.</p>
+        </div>
+
+        <div class="wide reveal">
+          <h3>Decision · Where should the library live?</h3>
+          <div class="options">
+            <div class="option">
+              <span class="tag">The alternative</span>
+              <h4>One sprawling Figma file</h4>
+              <p>What I inherited. Local copies could be detached and edited in place, the single biggest cause of the drift in the audit.</p>
+            </div>
+            <div class="option is-chosen">
+              <span class="tag is-accent">Chosen</span>
+              <h4>Three published libraries</h4>
+              <p>Foundations, Components and Patterns, each versioned on its own, so a product file always pulls from a known, published source.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 440" role="img" aria-label="The library architecture. Three published, versioned Figma libraries, Foundations, Components and Patterns, feed product files. A detached local copy edited in place was the source of drift. Each layer depends only on the layer below: a data table pattern reaches down into table row components, a table row is built from primitives such as an avatar and a badge, and two components never quietly depend on each other." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrL1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="20" y="20" width="300" height="70" rx="10" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" />
+                <text x="40" y="49" font-size="13" font-weight="600" fill="var(--text)">Product files</text><text x="40" y="69" font-size="11.5" fill="var(--text-soft)">Always pull a published source</text>
+                <rect x="20" y="130" width="300" height="70" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="40" y="159" font-size="13" font-weight="600" fill="var(--accent-text)">Patterns library</text><text x="40" y="179" font-size="11.5" fill="var(--accent-text)">Built from components</text>
+                <rect x="20" y="240" width="300" height="70" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="40" y="269" font-size="13" font-weight="600" fill="var(--accent-text)">Components library</text><text x="40" y="289" font-size="11.5" fill="var(--accent-text)">Built from primitives</text>
+                <rect x="20" y="350" width="300" height="70" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="40" y="379" font-size="13" font-weight="600" fill="var(--accent-text)">Foundations library</text><text x="40" y="399" font-size="11.5" fill="var(--accent-text)">Tokens, mapped as Figma variables</text>
+
+                <line x1="170" y1="348" x2="170" y2="314" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrL1)" />
+                <line x1="170" y1="238" x2="170" y2="204" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrL1)" />
+                <line x1="170" y1="128" x2="170" y2="94" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrL1)" />
+                <text x="186" y="335" font-size="11" fill="var(--text-soft)">published, versioned</text>
+                <text x="186" y="225" font-size="11" fill="var(--text-soft)">published, versioned</text>
+                <text x="186" y="115" font-size="11" fill="var(--text-soft)">published, versioned</text>
+
+                <rect x="350" y="20" width="150" height="70" rx="10" fill="none" stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="5 4" />
+                <text x="365" y="49" font-size="12" font-weight="600" fill="var(--text-soft)">Detached local copy</text><text x="365" y="67" font-size="11" fill="var(--text-faint)">edited in place  ✕</text>
+                <line x1="350" y1="55" x2="326" y2="55" stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrL1)" />
+                <text x="425" y="108" font-size="11" fill="var(--text-soft)" text-anchor="middle">the biggest cause of drift</text>
+
+                <text x="560" y="34" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">ONE RULE: DEPEND DOWN, NEVER SIDEWAYS</text>
+
+                <rect x="560" y="70" width="150" height="44" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="635" y="97" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Data table</text>
+                <line x1="710" y1="92" x2="746" y2="92" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrL1)" />
+                <rect x="750" y="70" width="190" height="44" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="845" y="97" font-size="12" fill="var(--text)" text-anchor="middle">Table rows + header + paging</text>
+                <text x="975" y="98" font-size="16" font-weight="600" fill="var(--accent)" text-anchor="end">✓</text>
+                <text x="560" y="140" font-size="11.5" fill="var(--text-soft)">A pattern reaches down into components.</text>
+
+                <rect x="560" y="200" width="150" height="44" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="635" y="227" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Table row</text>
+                <line x1="710" y1="222" x2="746" y2="222" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrL1)" />
+                <rect x="750" y="200" width="190" height="44" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="845" y="227" font-size="12" fill="var(--text)" text-anchor="middle">Avatar, two text styles, badge</text>
+                <text x="975" y="228" font-size="16" font-weight="600" fill="var(--accent)" text-anchor="end">✓</text>
+                <text x="560" y="270" font-size="11.5" fill="var(--text-soft)">A component is composed once from primitives.</text>
+
+                <rect x="560" y="330" width="150" height="44" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="635" y="357" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Button</text>
+                <line x1="716" y1="352" x2="744" y2="352" stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="4 3" />
+                <text x="730" y="348" font-size="14" font-weight="600" fill="var(--text-faint)" text-anchor="middle">✕</text>
+                <rect x="750" y="330" width="190" height="44" rx="8" fill="var(--bg)" stroke="var(--text-soft)" stroke-width="1.5" /><text x="845" y="357" font-size="12" font-weight="600" fill="var(--text)" text-anchor="middle">Input</text>
+                <text x="560" y="400" font-size="11.5" fill="var(--text-soft)">Two components never quietly depend on each other.</text>
+              </g>
+            </svg>
+            <figcaption>Three published libraries, each consumed by the layer above, and one rule inside them: a layer only reaches down, never sideways.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="governance"><span class="cs-step">05 · Governance</span>Documentation and a contribution model, so the system scales past one person</h2>
+          <h3 class="reveal">Documentation as a first-class deliverable</h3>
+          <p class="reveal">"From Figma level to documentation level" was the brief, and I treated documentation as part of the component, not an afterthought once it shipped. Every component's doc page covered its anatomy, its variants and states, content guidelines, accessibility notes, and a live reference — written for whoever was reaching for it under deadline, not for a design-system connoisseur reading it cover to cover.</p>
+
+          <h3 class="reveal">A contribution model, not a bottleneck</h3>
+          <p class="reveal">A system this wide can't be maintained by one person reviewing every pixel. The part of the job that mattered as much as the components themselves was the process around them: a way for anyone on the team to request a pattern, get it checked against what already existed, and — if it really was new — design, build and document it without waiting in a queue behind me.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg viewBox="0 0 1000 400" role="img" aria-label="A squad's request for a pattern is checked against the existing library. If it already exists, the request is resolved by reusing the existing component. If not, it goes through design in Figma, build and documentation in code, then ships — and every shipped component feeds back into the library for the next request." xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);">
+              <defs>
+                <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="currentColor" />
+                </marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="20" y="110" width="170" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="105" y="136" font-size="12" fill="var(--text)" text-anchor="middle">A squad needs</text>
+                <text x="105" y="152" font-size="12" fill="var(--text)" text-anchor="middle">a pattern</text>
+
+                <line x1="190" y1="140" x2="214" y2="140" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr2)" />
+
+                <polygon points="300,85 380,140 300,195 220,140" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="300" y="136" font-size="11" fill="var(--accent-text)" text-anchor="middle">Already in</text>
+                <text x="300" y="150" font-size="11" fill="var(--accent-text)" text-anchor="middle">the library?</text>
+
+                <line x1="380" y1="140" x2="454" y2="140" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr2)" />
+                <text x="417" y="128" font-size="11" fill="var(--text-soft)" text-anchor="middle">no</text>
+
+                <rect x="460" y="110" width="200" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="560" y="136" font-size="12" fill="var(--text)" text-anchor="middle">Design in Figma</text>
+                <text x="560" y="152" font-size="11" fill="var(--text-soft)" text-anchor="middle">reusing existing tokens</text>
+
+                <line x1="660" y1="140" x2="714" y2="140" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr2)" />
+
+                <rect x="720" y="110" width="180" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="810" y="136" font-size="12" fill="var(--text)" text-anchor="middle">Build + document</text>
+                <text x="810" y="152" font-size="11" fill="var(--text-soft)" text-anchor="middle">in code</text>
+
+                <polyline points="300,195 300,280 454,280" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr2)" />
+                <text x="330" y="270" font-size="11" fill="var(--text-soft)">yes — reuse it</text>
+
+                <rect x="460" y="250" width="200" height="60" rx="8" fill="var(--bg)" stroke="currentColor" stroke-width="1.5" />
+                <text x="560" y="276" font-size="12" fill="var(--text)" text-anchor="middle">Reuse the existing</text>
+                <text x="560" y="292" font-size="12" fill="var(--text)" text-anchor="middle">component as-is</text>
+
+                <polyline points="810,170 810,180" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr2)" />
+                <polyline points="660,280 810,280 810,242" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#arr2)" />
+
+                <rect x="720" y="180" width="180" height="60" rx="8" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
+                <text x="810" y="216" font-size="12" font-weight="600" fill="var(--accent-text)" text-anchor="middle">Ship it</text>
+
+                <polyline points="900,195 940,195 940,40 300,40 300,83" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arr2)" />
+                <text x="620" y="30" font-size="11" fill="var(--text-soft)" text-anchor="middle">back into the library, for the next request</text>
+              </g>
+            </svg>
+            <figcaption>Most requests get resolved by reuse. Only a genuinely new need goes through the full design-build-document cycle — and once it ships, it becomes part of what the next request gets checked against.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="maintenance"><span class="cs-step">06 · Maintenance</span>Keeping it alive, every release</h2>
+          <p class="reveal">A design system that stops changing the day it launches is already dying. Maintaining Skapp's meant a few unglamorous habits, kept up every release rather than revisited once a quarter:</p>
+          <ul class="reveal">
+            <li><strong>Version every library change.</strong> A breaking update to a component never landed on a product file unannounced — squads could see what changed and choose when to pull it in, instead of finding out from a broken screen.</li>
+            <li><strong>Deprecate with a path, not a warning.</strong> A component that had been superseded got marked deprecated alongside the component that replaced it and a note on how to migrate — never just "do not use," which only tells someone what to avoid, not what to do instead.</li>
+            <li><strong>Treat Figma and code as out of sync the moment either one changes,</strong> not months later when someone finally notices the documentation screenshot doesn't match what shipped. That's the same discipline the audit was built to catch in the first place — just applied continuously instead of once.</li>
+          </ul>
+          <p class="reveal">None of that is glamorous work, but skipping it is exactly how a system ends up needing to be rebuilt from scratch a second time.</p>
+
+          <h2 class="reveal" id="result"><span class="cs-step">07 · Outcome</span>Scope and durability, not a single number</h2>
+          <p class="reveal">This wasn't a project with a single conversion number to report — it was infrastructure, owned and maintained over time rather than shipped once. The honest measure of it is scope and durability, not a before/after metric invented to fill a slide.</p>
+          <div class="impact-stats reveal">
+            <div class="stat"><b>6</b><span>Product modules — Project, People, Time Tracking, Time-off, E-signatures and Invoicing — unified under one system</span></div>
+            <div class="stat"><b>3</b><span>Layers rebuilt from the ground up: foundations, components, and documented patterns</span></div>
+            <div class="stat"><b>2025</b><span>The year Skapp, built on this foundation, won APICTA and the NBQSA Silver Award for Business Services</span></div>
+          </div>
+
+          <h3 class="reveal">What I took from it</h3>
+          <ul class="reveal">
+            <li><strong>The governance model is as much the deliverable as the components.</strong> A library nobody outside me could contribute to would have stopped scaling the moment the product did.</li>
+            <li><strong>Reuse has to be the easy path, not a rule someone has to remember.</strong> Checking the library before designing anything new is what actually kept the system from sprawling — not a guideline saying to check it.</li>
+            <li><strong>A system this wide only holds together at the foundation level.</strong> Trying to keep a kanban board, a signature flow and an invoice consistent screen-by-screen would never have worked; keeping their tokens consistent did.</li>
+          </ul>
+
+        </div>
+
+        <nav class="next-project reveal" aria-label="Next case study">
+          <a href="search-relocation.html">
+            <span>
+              <span class="eyebrow">Next case study</span>
+              <span class="np-title">Where should page search live? Re-opening a shipped decision</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="../index.html">Home</a>
+        <a href="../work.html">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+        <a href="mailto:dhanuliyanage.ux@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </nav>
+      <p class="copy">© <span data-year>2026</span> Dhanushka Liyanage. Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

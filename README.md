@@ -35,7 +35,7 @@ assets/
 
 All copy is placeholder. Search-and-replace these:
 
-- [ ] **`Your Name`** → your name (appears in every page's `<title>`, header, footer)
+- [x] **Name** — set to Dhanushka Liyanage (every page's `<title>`, header banner, footer, About heading)
 - [ ] **`you@example.com`** → your email
 - [ ] **`https://www.linkedin.com/`** → your LinkedIn URL
 - [ ] **`Your City`**, hero tagline, and the "meta-inline" line in `index.html`
@@ -72,3 +72,39 @@ It's static, so anything works:
 ## License
 
 Yours. Do what you like with it.
+
+## Hero character
+
+The home-page hero is one section: your intro copy on the left and an interactive
+character on the right (they stack on screens narrower than ~980px, copy first).
+She watches your real cursor.
+
+- **Follows the cursor:** move the mouse and her head turns toward it, smoothly,
+  from far left through facing you to far right.
+- **Greets you:** rest the cursor near her for a moment and she notices you, takes
+  the headset off, waves and points down at the portfolio once, then goes back to
+  her laptop. It won't repeat for ~14 seconds, so sweeping the cursor across the
+  page doesn't set it off.
+- **Goes back to work:** leave the window or stop moving for a few seconds and she
+  returns to typing at her laptop.
+- **Never locks you out:** the hover greeting happens once per visit, and if you move
+  the cursor well away mid-greeting she stops and follows it. Clicking her (or the
+  keyboard "Say hello" button) greets any time.
+- **Small remarks:** park the cursor far to one side and a small message appears
+  ("Anyone here on the left?").
+- **Phones / touch:** there's no cursor, so she greets once when she scrolls into
+  view; tap to replay.
+
+- **Text:** the headline, intro, role line and buttons are `.hero__copy` in
+  `index.html`; the speech pills are in `assets/js/hero.js` (`LINES` and `CUES`); the
+  cursor hint is `.stage__hint`.
+- **Look:** the stage is plain white. Her laptop is recoloured to silver inside the
+  frames, and the frames' backdrop is normalised to white with the edges faded out
+  (see `tools/build-hero-frames.swift`).
+- **Frames:** 182 JPEGs in `assets/hero/` (about 7.9 MB, loaded in the background
+  after the first paint). To regenerate them from a different video, see the
+  header of `tools/build-hero-frames.swift`.
+- **Reduced motion:** the character stays still and the left/right areas just show
+  their message.
+- `assets/img/herovideo.mp4` is the original clip and is no longer used by the
+  page; delete it if you don't need it.
