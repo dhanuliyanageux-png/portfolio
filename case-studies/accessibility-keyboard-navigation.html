@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>document.documentElement.className="js";</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search without a mouse — Dhanushka Liyanage</title>
+  <meta name="description" content="Case study: designing keyboard navigation for IFS Cloud's search, filter and search-context panes using WCAG and the ARIA authoring practices — from requirements and competitor review, through two competing models, to a control-by-control spec and QA on the build." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=29" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html">Dhanushka&nbsp;Liyanage<span class="dot">.</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../work.html" aria-current="page">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+      <header class="cs-header">
+        <div class="container">
+          <p class="eyebrow reveal">IFS Cloud · Accessibility</p>
+          <h1 class="reveal">Search without a mouse: keyboard navigation for IFS Cloud</h1>
+          <p class="dek reveal">To search in IFS Cloud you had to click into every field you wanted to use, and click again for every list of values. I was the main designer for a keyboard model for search, filter and search-context panes, built on WCAG and the ARIA authoring practices. The first design I drew turned out to be the wrong one, and an accessibility review is what showed me.</p>
+        </div>
+      </header>
+
+      <div class="container">
+        <nav class="cs-toc reveal" aria-label="On this page">
+          <a href="#problem"><span>01</span>Problem</a>
+          <a href="#research"><span>02</span>Research</a>
+          <a href="#options"><span>03</span>Options</a>
+          <a href="#design"><span>04</span>Final design</a>
+          <a href="#testing"><span>05</span>Testing</a>
+          <a href="#result"><span>06</span>Result</a>
+        </nav>
+
+        <dl class="cs-meta reveal">
+          <div><dt>Role</dt><dd>Main designer for the keyboard interaction model</dd></div>
+          <div><dt>Scope</dt><dd>Search, filter and search-context panes, extending to record selectors and LOVs</dd></div>
+          <div><dt>Standards</dt><dd>WCAG, Level AA · WAI-ARIA Authoring Practices</dd></div>
+          <div><dt>Product</dt><dd>IFS Cloud — an enterprise platform with a very large user base</dd></div>
+        </dl>
+
+        <figure class="cs-hero figure-wide shot reveal">
+          <svg class="diagram" viewBox="0 0 1000 170" role="img" aria-label="The process in six steps: requirements, research into standards and peers, two competing keyboard models, an ARIA review that changed the model, prototype tests, and a control-by-control spec checked against the build." xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrKP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+            </defs>
+            <g font-family="Inter, sans-serif">
+              <rect x="10" y="38" width="140" height="84" rx="12" fill="var(--bg)" stroke="var(--border)" />
+              <text x="26" y="62" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">01</text>
+              <text x="26" y="84" font-size="13" font-weight="600" fill="var(--text)">Requirements</text>
+              <text x="26" y="104" font-size="11" fill="var(--text-soft)">Why, what, who</text>
+              <line x1="152" y1="80" x2="176" y2="80" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKP)" />
+
+              <rect x="178" y="38" width="140" height="84" rx="12" fill="var(--bg)" stroke="var(--border)" />
+              <text x="194" y="62" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">02</text>
+              <text x="194" y="84" font-size="13" font-weight="600" fill="var(--text)">Research</text>
+              <text x="194" y="104" font-size="11" fill="var(--text-soft)">Standards + peers</text>
+              <line x1="320" y1="80" x2="344" y2="80" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKP)" />
+
+              <rect x="346" y="38" width="140" height="84" rx="12" fill="var(--bg)" stroke="var(--border)" />
+              <text x="362" y="62" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">03</text>
+              <text x="362" y="84" font-size="13" font-weight="600" fill="var(--text)">Two models</text>
+              <text x="362" y="104" font-size="11" fill="var(--text-soft)">Tab vs menubar</text>
+              <line x1="488" y1="80" x2="512" y2="80" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKP)" />
+
+              <rect x="514" y="38" width="140" height="84" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" />
+              <text x="530" y="62" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--accent-text)">04</text>
+              <text x="530" y="84" font-size="13" font-weight="600" fill="var(--accent-text)">ARIA review</text>
+              <text x="530" y="104" font-size="11" fill="var(--accent-text)">Changed the model</text>
+              <line x1="656" y1="80" x2="680" y2="80" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKP)" />
+
+              <rect x="682" y="38" width="140" height="84" rx="12" fill="var(--bg)" stroke="var(--border)" />
+              <text x="698" y="62" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">05</text>
+              <text x="698" y="84" font-size="13" font-weight="600" fill="var(--text)">Prototype tests</text>
+              <text x="698" y="104" font-size="11" fill="var(--text-soft)">Three prototypes</text>
+              <line x1="824" y1="80" x2="848" y2="80" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKP)" />
+
+              <rect x="850" y="38" width="140" height="84" rx="12" fill="var(--bg)" stroke="var(--border)" />
+              <text x="866" y="62" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">06</text>
+              <text x="866" y="84" font-size="13" font-weight="600" fill="var(--text)">Spec + build QA</text>
+              <text x="866" y="104" font-size="11" fill="var(--text-soft)">Control by control</text>
+            </g>
+          </svg>
+          <figcaption>The process, in the order it actually happened. The review in step 4 is where the direction changed.</figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <div class="prose">
+
+          <h2 class="reveal" id="problem"><span class="cs-step">01 · Problem</span>Every field you wanted to search on was a click away, and so was every list of values</h2>
+          <p class="reveal">Search, filter and search-context panes are where people in IFS Cloud start almost every task. They were built for the mouse. To put a value in a search you clicked the field. To pick from a list of values (LOV) you clicked again, and with an advanced LOV you clicked again after that. For someone who can't use a mouse, that isn't slow. It is a wall.</p>
+
+          <div class="pullquote reveal">
+            <p>Users find it hard to navigate the search, filter and search-context panes by keyboard, and rely on the mouse.</p>
+            <cite>The problem statement, as written at the start</cite>
+          </div>
+
+          <p class="reveal">The need wasn't only about assistive technology. People who work in dense data screens all day expect to tab through fields and pick from LOVs and enumerations without reaching for the mouse. The capability already existed in other IFS products, and competitors such as SAP and Salesforce let you move through search fields easily. In IFS Cloud, the existing keyboard support for these panes was none.</p>
+
+          <h3 class="reveal">What the work had to deliver</h3>
+          <ul class="reveal">
+            <li><strong>Enter runs the search.</strong> Focus and the search action respond to the keyboard the way people expect.</li>
+            <li><strong>Move through search, search-context and filter fields</strong> from the keyboard alone.</li>
+            <li><strong>Choose values with directional keys</strong> once a field has focus. The mouse stays optional, apart from possibly date and date-time pickers.</li>
+            <li><strong>Serve all IFS end users</strong>, including people with low vision, blindness or motor impairments, with WCAG Level AA as the bar: keyboard operability, contrast, concise language.</li>
+          </ul>
+          <p class="reveal">One constraint sat over all of it. The framework had to support the model, so a proof of concept ran in parallel to confirm the design was technically possible before anyone committed to it.</p>
+
+          <h2 class="reveal" id="research"><span class="cs-step">02 · Research</span>Learn the keys people already know, then what the standards say</h2>
+
+          <h3 class="reveal">The keys no design is allowed to fight</h3>
+          <p class="reveal">I started by listing the interactions every user already carries from the browser and operating system: Tab and Shift+Tab, Enter, the arrow keys, Escape, Ctrl/Cmd+F, Up and Down in autocomplete, Alt+Shift+Left/Right for history, Ctrl/Cmd+A. The rule that came out of the list was simple: a custom interaction must never collide with one of these.</p>
+
+          <h3 class="reveal">What IFS already did, and the principles behind it</h3>
+          <p class="reveal">Aurena, the IFS Cloud client, already had a small amount of keyboard behaviour: Tab moves through the top bar, Space opens and closes the menu pane, and Enter or Space plus the arrows work through the account menu. Behind that sat the IFS keyboard principles I needed the new model to follow:</p>
+          <ul class="reveal">
+            <li><strong>Tab</strong> is the main focus mover, <strong>Shift+Tab</strong> goes back.</li>
+            <li><strong>Arrow keys</strong> move within a single component.</li>
+            <li><strong>Enter or Space</strong> selects or toggles, and <strong>Esc</strong> exits.</li>
+            <li>Focus order runs upper-left to lower-right, though initial focus can go to where the user most likely wants to be.</li>
+            <li>Fewer interactions is better. For example, expanding “More” puts focus straight into its first item.</li>
+          </ul>
+
+          <h3 class="reveal">How others did it</h3>
+          <p class="reveal">I read the keyboard documentation for SAP Business ByDesign and for Oracle's applet-style screens to see how other enterprise products treat dense search forms.</p>
+
+          <h3 class="reveal">What the standards say</h3>
+          <p class="reveal">The design hypothesis was that an efficient keyboard model, grounded in WCAG and ARIA, would give a more inclusive experience, using ARIA roles, states and properties and meeting Level AA. The ARIA Authoring Practices Guide is where that stopped being abstract. Its menubar and menu patterns describe exactly the kind of widget a row of search attributes is:</p>
+          <ul class="reveal">
+            <li>The whole widget is <strong>one stop in the tab sequence</strong>. Arrow keys move inside it.</li>
+            <li>Opening a menu puts focus on its <strong>first item</strong>.</li>
+            <li><strong>Enter</strong> opens a submenu. <strong>Space</strong> toggles checkbox and radio items.</li>
+          </ul>
+          <p class="reveal">For this first pass I left LOVs, the calendar, the Advanced button and “More” out of scope, so the model could be settled on the simplest controls first.</p>
+
+          <h2 class="reveal" id="options"><span class="cs-step">03 · Options</span>Tab between attributes, or treat the pane as a menubar?</h2>
+          <p class="reveal">I designed two models for moving between the attributes of a search, and put the first one in front of an accessibility reviewer.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="options options--2">
+            <div class="option">
+              <span class="tag">Option A · first design</span>
+              <h4>Tab through every attribute</h4>
+              <p>Tab moves focus from one search attribute to the next, and Enter opens the submenu of the attribute that has focus. It is the model people already know from forms, and it was the one I drew first.</p>
+            </div>
+            <div class="option is-chosen">
+              <span class="tag is-accent">Option B · chosen</span>
+              <h4>Arrow keys inside a menubar</h4>
+              <p>The attributes are treated as one menubar. Left and Right move focus between menu buttons, Up and Down move inside an open submenu, and Tab leaves the whole bar. This is the ARIA menubar pattern applied to search.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Why the review overturned Option A</h3>
+          <p class="reveal">The reviewer's note on my first storyboard was direct: we shouldn't be using Tab to move between the search attributes, and we should see those elements as a menubar. The practical consequence is easy to see. With Tab as the mover, every attribute in the pane is its own stop in the tab sequence, so a keyboard user presses Tab through all of them to reach the Search button, and every added filter makes that trip longer. A menubar costs one stop however many attributes it holds.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 310" role="img" aria-label="Two ways to move through four search attributes. A, Tab for every attribute: five tab stops, one per attribute plus the Search button. B, one tab stop with arrow keys inside: the whole bar is one tab stop, the left and right arrows move between attributes, and Search is the second tab stop." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrKT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+                <marker id="arrKA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <text x="30" y="26" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">A · TAB THROUGH EVERY ATTRIBUTE</text>
+
+                <rect x="30" y="48" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="100" y="75" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 1</text>
+                <rect x="220" y="48" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="290" y="75" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 2</text>
+                <rect x="410" y="48" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="480" y="75" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 3</text>
+                <rect x="600" y="48" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="670" y="75" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 4</text>
+                <rect x="800" y="48" width="120" height="44" rx="10" fill="var(--bg-sunken)" stroke="var(--border)" /><text x="860" y="75" font-size="12.5" font-weight="600" fill="var(--text)" text-anchor="middle">Search</text>
+
+                <line x1="176" y1="70" x2="214" y2="70" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKT)" /><text x="195" y="62" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">Tab</text>
+                <line x1="366" y1="70" x2="404" y2="70" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKT)" /><text x="385" y="62" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">Tab</text>
+                <line x1="556" y1="70" x2="594" y2="70" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKT)" /><text x="575" y="62" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">Tab</text>
+                <line x1="746" y1="70" x2="794" y2="70" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKT)" /><text x="770" y="62" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">Tab</text>
+
+                <g fill="var(--text-soft)">
+                  <circle cx="30" cy="48" r="11" /><circle cx="220" cy="48" r="11" /><circle cx="410" cy="48" r="11" /><circle cx="600" cy="48" r="11" /><circle cx="800" cy="48" r="11" />
+                </g>
+                <g font-size="11" font-weight="600" fill="var(--bg)" text-anchor="middle">
+                  <text x="30" y="52">1</text><text x="220" y="52">2</text><text x="410" y="52">3</text><text x="600" y="52">4</text><text x="800" y="52">5</text>
+                </g>
+                <text x="30" y="120" font-size="12.5" fill="var(--text-soft)">5 tab stops to reach Search, and one more for every attribute added.</text>
+
+                <line x1="30" y1="148" x2="970" y2="148" stroke="var(--border)" />
+
+                <text x="30" y="178" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--accent-text)">B · ONE TAB STOP, ARROW KEYS INSIDE</text>
+
+                <rect x="18" y="196" width="740" height="68" rx="14" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6 4" />
+                <rect x="30" y="208" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="100" y="235" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 1</text>
+                <rect x="220" y="208" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="290" y="235" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 2</text>
+                <rect x="410" y="208" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="480" y="235" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 3</text>
+                <rect x="600" y="208" width="140" height="44" rx="10" fill="var(--bg)" stroke="var(--border)" /><text x="670" y="235" font-size="12.5" fill="var(--text)" text-anchor="middle">Attribute 4</text>
+                <rect x="800" y="208" width="120" height="44" rx="10" fill="var(--bg-sunken)" stroke="var(--border)" /><text x="860" y="235" font-size="12.5" font-weight="600" fill="var(--text)" text-anchor="middle">Search</text>
+
+                <line x1="176" y1="230" x2="214" y2="230" stroke="var(--accent)" stroke-width="1.5" marker-start="url(#arrKA)" marker-end="url(#arrKA)" /><text x="195" y="222" font-size="10.5" font-weight="600" fill="var(--accent-text)" text-anchor="middle">← →</text>
+                <line x1="366" y1="230" x2="404" y2="230" stroke="var(--accent)" stroke-width="1.5" marker-start="url(#arrKA)" marker-end="url(#arrKA)" /><text x="385" y="222" font-size="10.5" font-weight="600" fill="var(--accent-text)" text-anchor="middle">← →</text>
+                <line x1="556" y1="230" x2="594" y2="230" stroke="var(--accent)" stroke-width="1.5" marker-start="url(#arrKA)" marker-end="url(#arrKA)" /><text x="575" y="222" font-size="10.5" font-weight="600" fill="var(--accent-text)" text-anchor="middle">← →</text>
+
+                <line x1="762" y1="230" x2="794" y2="230" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKT)" /><text x="778" y="222" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">Tab</text>
+
+                <circle cx="18" cy="196" r="11" fill="var(--accent)" /><text x="18" y="200" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">1</text>
+                <circle cx="800" cy="208" r="11" fill="var(--accent)" /><text x="800" y="212" font-size="11" font-weight="600" fill="#fff" text-anchor="middle">2</text>
+                <text x="30" y="292" font-size="12.5" fill="var(--text-soft)">2 tab stops however many attributes there are: the bar, then Search.</text>
+              </g>
+            </svg>
+            <figcaption>The two models compared, with illustrative attributes. Numbered circles mark tab stops. In B the dashed outline is a single focus region that arrow keys travel inside.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">The reviewer also noted that Enter and Down arrow can both open a menu item's submenu, which is how the ARIA pattern works. I carried that straight into the final design. Opening on either key means people who reach for the arrow keys and people who reach for Enter are both right.</p>
+
+          <h3 class="reveal">A second decision: what happens to text you typed and left behind?</h3>
+          <p class="reveal">Moving by keyboard means leaving a field is easy, sometimes mid-typing. I laid out the three things the interface could do with text sitting in a search box when focus leaves it:</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="options">
+            <div class="option">
+              <span class="tag">Option 1</span>
+              <h4>Discard it</h4>
+              <p>Moving away throws the text out, as if it was never typed. It is predictable, but it silently loses work.</p>
+            </div>
+            <div class="option is-chosen">
+              <span class="tag is-accent">Option 2 · leaning</span>
+              <h4>Keep it as search criteria</h4>
+              <p>The text stays and becomes part of the search, or the interface asks. I leaned this way, and the build was later checked with Enter saving the typed text as the filter.</p>
+            </div>
+            <div class="option">
+              <span class="tag">Option 3</span>
+              <h4>Hold it as a saved search criterion</h4>
+              <p>The text is kept as a criterion to come back to, not applied at once. It keeps the work without surprising the results.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h2 class="reveal" id="design"><span class="cs-step">04 · Final design</span>One tab stop, arrows inside, Enter and Esc as the way in and out</h2>
+          <p class="reveal">The final spec, <em>Interaction Guideline for Search, Filter and Search Context panes</em>, turns the menubar model into rules for each kind of control. Tab remains the way to leave the bar and reach buttons such as Search. Everything inside it moves on arrow keys.</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col">Control</th><th scope="col">Keyboard behaviour</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Menu buttons</th><td>Left and Right arrows move focus between the buttons. Enter or Down arrow opens the dropdown.</td></tr>
+                <tr><th scope="row">Text and number values</th><td>Down arrow or Enter opens the dropdown with focus in the field. Down moves on through the field's own controls, and Up reverses. In the field, Left and Right move the text cursor.</td></tr>
+                <tr><th scope="row">Saved values</th><td>Focus lands on the menu button first. Enter or Down opens the menu with the saved values, and Enter on the close (✕) clears the value.</td></tr>
+                <tr><th scope="row">Checkboxes</th><td>Space toggles.</td></tr>
+                <tr><th scope="row">Enumerations</th><td>Up and Down move through values. Enter selects one and closes. Space toggles checkboxes, and Enter activates the Set button when there is one.</td></tr>
+                <tr><th scope="row">Search / Apply, Clear / Reset</th><td>Enter activates them.</td></tr>
+                <tr><th scope="row">3-dot menu, Saved Search menu</th><td>Enter or Down arrow opens them.</td></tr>
+                <tr><th scope="row">Everywhere</th><td>Enter or Down arrow opens menus, but not click activations. Esc closes any open menu, dropdown or help guide.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">Inside a text field: a short focus path</h3>
+          <p class="reveal">A text or number value is the richest case, because the field carries its own small controls. Rather than make people Tab into each one, the arrow keys walk the same path in both directions:</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 290" role="img" aria-label="Focus path in a text or number value: Menu button, then text field, then clear, then match case, then help guide, moving forward with the Down arrow. Enter or Down opens from the menu button. The Up arrow reverses the path one stop at a time. In the field the left and right arrows move the cursor, Enter on clear removes the value, Space toggles match case, Enter toggles the help guide. Esc closes the dropdown or help guide." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrKF" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)" /></marker>
+                <marker id="arrKB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <text x="14" y="26" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">FOCUS STOP</text>
+
+                <rect x="14" y="44" width="130" height="56" rx="12" fill="var(--bg)" stroke="var(--border)" /><text x="79" y="78" font-size="13" font-weight="600" fill="var(--text)" text-anchor="middle">Menu button</text>
+                <rect x="224" y="44" width="130" height="56" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" /><text x="289" y="78" font-size="13" font-weight="600" fill="var(--accent-text)" text-anchor="middle">Text field</text>
+                <rect x="434" y="44" width="130" height="56" rx="12" fill="var(--bg)" stroke="var(--border)" /><text x="499" y="78" font-size="13" font-weight="600" fill="var(--text)" text-anchor="middle">✕ Clear</text>
+                <rect x="644" y="44" width="130" height="56" rx="12" fill="var(--bg)" stroke="var(--border)" /><text x="709" y="78" font-size="13" font-weight="600" fill="var(--text)" text-anchor="middle">Aa Match case</text>
+                <rect x="854" y="44" width="130" height="56" rx="12" fill="var(--bg)" stroke="var(--border)" /><text x="919" y="78" font-size="13" font-weight="600" fill="var(--text)" text-anchor="middle">? Help guide</text>
+
+                <line x1="150" y1="72" x2="218" y2="72" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrKF)" /><text x="184" y="62" font-size="10.5" font-weight="600" fill="var(--accent-text)" text-anchor="middle">Enter or ↓</text>
+                <line x1="360" y1="72" x2="428" y2="72" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrKF)" /><text x="394" y="62" font-size="12" font-weight="600" fill="var(--accent-text)" text-anchor="middle">↓</text>
+                <line x1="570" y1="72" x2="638" y2="72" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrKF)" /><text x="604" y="62" font-size="12" font-weight="600" fill="var(--accent-text)" text-anchor="middle">↓</text>
+                <line x1="780" y1="72" x2="848" y2="72" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrKF)" /><text x="814" y="62" font-size="12" font-weight="600" fill="var(--accent-text)" text-anchor="middle">↓</text>
+
+                <path d="M919,106 L919,128 L294,128 L294,106" fill="none" stroke="var(--text-soft)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrKB)" />
+                <text x="606" y="146" font-size="11.5" font-weight="600" fill="var(--text-soft)" text-anchor="middle">↑ steps back one stop at a time</text>
+
+                <text x="14" y="188" font-size="10" font-weight="600" letter-spacing="1.2" fill="var(--text-faint)">KEYS AT EACH STOP</text>
+                <g font-size="12" fill="var(--text-soft)" text-anchor="middle">
+                  <text x="79" y="212">Enter or ↓ opens</text>
+                  <text x="289" y="212">← → move the cursor</text>
+                  <text x="499" y="212">Enter clears the value</text>
+                  <text x="709" y="212">Space toggles</text>
+                  <text x="919" y="212">Enter toggles</text>
+                </g>
+
+                <rect x="14" y="236" width="970" height="38" rx="19" fill="var(--bg-sunken)" stroke="var(--border)" />
+                <text x="499" y="260" font-size="12.5" fill="var(--text)" text-anchor="middle"><tspan font-weight="600">Esc</tspan> closes the open dropdown or help guide, and closes the help guide first if both are open.</text>
+              </g>
+            </svg>
+            <figcaption>The path inside a text or number value. Forward and back use the same two arrow keys, so there is nothing extra to learn.</figcaption>
+          </figure>
+        </div>
+
+        <div class="wide reveal">
+          <div class="shot-side">
+            <figure class="shot">
+              <img src="../assets/img/accessibility/inner-focus.png" alt="Three stacked field cards, each labelled Project with the value ABC and three small controls on the right: clear, match case and help. In the first card a dark focus ring surrounds the clear control, in the second the match case control, in the third the help control." width="312" height="346" loading="lazy" />
+              <figcaption>The same field with focus on clear, match case and help.</figcaption>
+            </figure>
+            <div>
+              <h4>Focus you can see</h4>
+              <p>The design draws a strong focus ring on each stop in the path, so a keyboard user can tell at a glance where they are.</p>
+              <ul>
+                <li><strong>Down</strong> moves from the field into clear, match case and help. <strong>Up</strong> goes back.</li>
+                <li><strong>Space</strong> turns Match Case on and off.</li>
+                <li><strong>Enter</strong> shows or hides the help guide.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">The question that needed the most careful answer: what does Enter do?</h3>
+          <p class="reveal">Early in review, someone asked whether Enter should run the search even when focus is somewhere else in the pane. The honest answer is that it depends on a user setting, “Run search”, so the spec spells out both paths instead of picking one.</p>
+        </div>
+
+        <div class="wide reveal">
+          <figure class="shot">
+            <svg class="diagram" viewBox="0 0 1000 312" role="img" aria-label="Decision flow for Enter on a value. Enter on a value updates the criteria. Then the Run search setting decides. If it is set to when criteria is changed, the search runs and focus ends on the collapsed field with its criteria active. If it is set to only when the Search button is pressed, the search does not run, and the user tabs to the Search button and presses Enter." xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrKE" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--text-soft)" /></marker>
+              </defs>
+              <g font-family="Inter, sans-serif">
+                <rect x="14" y="120" width="190" height="64" rx="12" fill="var(--bg)" stroke="var(--border)" />
+                <text x="30" y="148" font-size="13" font-weight="600" fill="var(--text)">Enter on a value</text>
+                <text x="30" y="167" font-size="11" fill="var(--text-soft)">in an open field</text>
+                <line x1="206" y1="152" x2="244" y2="152" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKE)" />
+
+                <rect x="250" y="120" width="190" height="64" rx="12" fill="var(--bg)" stroke="var(--border)" />
+                <text x="266" y="148" font-size="13" font-weight="600" fill="var(--text)">Criteria updated</text>
+                <text x="266" y="167" font-size="11" fill="var(--text-soft)">the field holds the value</text>
+                <line x1="442" y1="152" x2="480" y2="152" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKE)" />
+
+                <rect x="486" y="120" width="190" height="64" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" />
+                <text x="502" y="148" font-size="13" font-weight="600" fill="var(--accent-text)">“Run search” setting</text>
+                <text x="502" y="167" font-size="11" fill="var(--accent-text)">decides what happens next</text>
+
+                <polyline points="676,152 710,152 710,80 734,80" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKE)" />
+                <polyline points="710,152 710,232 734,232" fill="none" stroke="var(--text-soft)" stroke-width="1.5" marker-end="url(#arrKE)" />
+
+                <rect x="740" y="34" width="246" height="92" rx="12" fill="var(--bg)" stroke="var(--accent)" />
+                <text x="756" y="58" font-size="10" font-weight="600" letter-spacing="1.1" fill="var(--accent-text)">WHEN CRITERIA IS CHANGED</text>
+                <text x="756" y="80" font-size="13" font-weight="600" fill="var(--text)">Search runs</text>
+                <text x="756" y="99" font-size="11" fill="var(--text-soft)">Focus lands on the collapsed field,</text>
+                <text x="756" y="114" font-size="11" fill="var(--text-soft)">with its criteria active</text>
+
+                <rect x="740" y="186" width="246" height="92" rx="12" fill="var(--bg)" stroke="var(--border)" />
+                <text x="756" y="210" font-size="10" font-weight="600" letter-spacing="1.1" fill="var(--text-faint)">ONLY WHEN SEARCH IS PRESSED</text>
+                <text x="756" y="232" font-size="13" font-weight="600" fill="var(--text)">Search waits</text>
+                <text x="756" y="251" font-size="11" fill="var(--text-soft)">Tab to the Search button,</text>
+                <text x="756" y="266" font-size="11" fill="var(--text-soft)">then Enter to run it</text>
+              </g>
+            </svg>
+            <figcaption>One key, two outcomes, both written down. In the first case, to run the same search again you open the field and press Enter, or Tab to Search.</figcaption>
+          </figure>
+        </div>
+
+        <div class="prose">
+          <h3 class="reveal">The tricky areas I wrote down on purpose</h3>
+          <ul class="reveal">
+            <li><strong>Esc closes the help guide first</strong>, then the dropdown, one layer per press.</li>
+            <li><strong>Click activations are separate.</strong> A control that is activated by click, such as a tooltip trigger, opens on Enter only and closes on Esc. Enter or Down arrow opening a menu does not apply to it.</li>
+            <li><strong>Tabbing into the whole search pane</strong> as one region was deliberately left out of this pass.</li>
+            <li><strong>One technical problem went to engineering:</strong> opening the help guide moved focus back to the field instead of keeping it where the user was.</li>
+          </ul>
+
+          <h2 class="reveal" id="testing"><span class="cs-step">05 · Testing</span>Prototypes, reviews, and walking the real build against the spec</h2>
+          <p class="reveal">Validation happened in layers. The storyboard of key interactions, drawn against the ARIA guidelines, went through the accessibility review described above. I built test designs and three test prototypes to try the model, and the open questions that came out of those rounds, such as whether Down arrow should work in a given place and whether Advanced should count as a search, went back into the spec as revisions.</p>
+          <p class="reveal">Once there was a build, I walked it control by control against the spec and logged every deviation. The deviations were the useful part:</p>
+        </div>
+
+        <div class="wide reveal">
+          <div class="compare-scroll">
+            <table class="compare">
+              <thead>
+                <tr><th scope="col">Control</th><th scope="col">What I checked</th><th scope="col">What I found</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Text field</th><td>Down arrow or Enter opens the dropdown and the field takes focus. Enter saves the text as a filter. The filter and its values form one focus area, with the clear button as its own. Esc closes.</td><td>Pressing a key the field doesn't use more than five times in a row triggered a client error.</td></tr>
+                <tr><th scope="row">Number field</th><td>The same pattern as the text field.</td><td>The same bug, at an even lower threshold: more than three unassociated key presses.</td></tr>
+                <tr><th scope="row">Enumeration</th><td>Down arrow opens, and focus should land on the first value. Up and Down move. Space selects several, then Set plus Enter saves them. Enter selects the highlighted value.</td><td>Focus did not land on the first value when the list opened. With several values selected, Enter selected only the focused one.</td></tr>
+                <tr><th scope="row">(Multi) LOV text field</th><td>Down arrow or Enter opens the dropdown. Down from the field moves to the Find button, and Enter on it opens the advanced multi-LOV dialog. Esc closes.</td><td>A small alignment issue on the Find button, passed to the developer who owned it.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p class="reveal">None of these were problems with the model. They were the kind of edge a spec only reveals once you press the keys. That is also why the spec spells out where focus goes after each key, not only what each key does.</p>
+
+          <h2 class="reveal" id="result"><span class="cs-step">06 · Result</span>A keyboard model with one rule per control, grounded in the standard</h2>
+          <p class="reveal">The outcome of this work is a documented, standards-based keyboard model for IFS Cloud's search, filter and search-context panes, with a rule for every control type and an answer for the awkward cases. It reached from the simplest text field to the multi-LOV dialog. Its value is in coverage and consistency rather than a single before-and-after number, so here are the honest counts:</p>
+          <div class="impact-stats reveal">
+            <div class="stat"><b>2</b><span>Keyboard models designed and compared, with one chosen after review</span></div>
+            <div class="stat"><b>3</b><span>Test prototypes used to try the interaction model</span></div>
+            <div class="stat"><b>4</b><span>Control types checked step by step against the spec: text, number, enumeration and LOV</span></div>
+          </div>
+
+          <h3 class="reveal">What I took from it</h3>
+          <ul class="reveal">
+            <li><strong>Start from the pattern that already exists.</strong> The ARIA menubar pattern had answered my hardest question before I asked it, and following it meant the behaviour would also be what screen reader users expect.</li>
+            <li><strong>Get the first design in front of a specialist early.</strong> My first model looked reasonable and would have made every added filter a longer trip to the Search button. A short review was cheaper than shipping it.</li>
+            <li><strong>Write the spec as questions and answers.</strong> “What does Enter do?” had two correct answers depending on a setting, and the spec is far more useful for saying so.</li>
+            <li><strong>Test the build key by key.</strong> The defects were all at the edges, such as repeated keys and focus that didn't land where it should, and only showed up with a real keyboard.</li>
+          </ul>
+
+        </div>
+
+        <nav class="next-project reveal" aria-label="Next case study">
+          <a href="skapp-design-system.html">
+            <span>
+              <span class="eyebrow">Next case study</span>
+              <span class="np-title">Rebuilding Skapp's design system, component by component</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="../index.html">Home</a>
+        <a href="../work.html">Work</a>
+        <a href="../about.html">About</a>
+        <a href="../assets/resume.pdf">Résumé</a>
+        <a href="mailto:dhanuliyanage.ux@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/">LinkedIn</a>
+      </nav>
+      <p class="copy">© <span data-year>2026</span> Dhanushka Liyanage. Built from scratch.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
