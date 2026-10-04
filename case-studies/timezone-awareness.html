@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/style.css?v=29" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=30" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232F43E0'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='Georgia,serif'%3EY%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
@@ -47,6 +47,7 @@
           <a href="#decision"><span>04</span>Decision</a>
           <a href="#design"><span>05</span>Final design</a>
           <a href="#result"><span>06</span>Result</a>
+          <a href="#files"><span>07</span>NDA-protected designs</a>
         </nav>
 
         <dl class="cs-meta reveal">
@@ -335,6 +336,26 @@
 
         </div>
 
+        <section class="vault reveal" id="files" data-vault data-iv="NHMkOBhsj7HvuZS5" data-ct="FxlKB9aAYGig+3x6Ou7vp2IOadVaXIO14AJPSCqUZRJ56tONSQcebNAtf/OIBabDxl6gBorpaa/QRy+GUxXkl8xbHrfUlqHwG2ZBWHgXfPP6b8kJMy0mwo6BEy9xlSvurPvFLq4NsgCDFQOw9G4TPvrkz0P322xI7fo8yPgjfG5zaTWeGVPpRLDobbboQSkEXpXkeUWUVF7ae0iXL+BHSznFBWiclYpE2zc3qhtVrUqrfco44iuekvXstOJzVh099v+NpDXhODh/OClnOzxOPYKm4cdh3t7+AHjksvrjlTdNiprwql38MA9c40NrRsUvH3DVstJKetF8C3Fy4tDcm/NPO5IxTXz+UGoLksLIHaE0toe373qduBV+zmnlB/sK9Spbtyv2+9YggCTUnf/JEEyrYOXhc2fsL6SYkXXqVCyWe37Gj9qBZnw3CattczgisxbmCNYL0McpmrGIHpzRT9cNUzlS+iPffF/svHdEulRygwDoFipeaj9QX75tQsYrT7iDw3H3pc6gF4hORp3VFzEUxRjy5+kkFWZ1ZhsIgZDBCf1WcF3HD0w2/4HiEXTJM8h+mASTGKw17mAwwjup/nhzftA1+CMKDvcr7ONIpw==" aria-labelledby="vault-title">
+          <div class="vault__lock" aria-hidden="true">
+            <svg viewBox="0 0 64 72" fill="none"><path class="shackle" d="M19 34V24a13 13 0 0 1 26 0v10" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><rect class="body" x="9" y="32" width="46" height="34" rx="9"/><circle class="keyhole" cx="32" cy="46" r="4.5"/><rect class="keyhole" x="30" y="48" width="4" height="9" rx="2"/></svg>
+          </div>
+          <div class="vault__body">
+            <p class="eyebrow">Under NDA</p>
+            <h2 id="vault-title">NDA-protected designs and files</h2>
+            <p class="vault__intro" aria-live="polite">This case study shows what I can share publicly. If you would like to see more of the design work behind it, the NDA-protected designs and files are here. Enter the password I shared with you to open them.</p>
+            <form class="vault__form">
+              <label class="visually-hidden" for="vault-pw">Password</label>
+              <input id="vault-pw" type="password" placeholder="Password" autocomplete="off" />
+              <button type="submit">Unlock files</button>
+            </form>
+            <p class="vault__status" role="status"></p>
+            <p class="vault__hint">Want to see more and don't have the password? <a href="mailto:dhanuliyanage.ux@gmail.com,dhanuliyanage18@gmail.com?subject=Access%20request%3A%20NDA-protected%20designs%20and%20files%20%28Timezone%20awareness%29&amp;body=Hi%20Dhanushka%2C%0D%0A%0D%0AI%27d%20like%20to%20access%20the%20NDA-protected%20designs%20and%20files%20for%20the%20%22Timezone%20awareness%22%20case%20study%20on%20your%20portfolio.%0D%0A%0D%0AName%3A%0D%0ACompany%20%2F%20role%3A%0D%0AWhat%20I%27d%20like%20to%20see%20%28optional%29%3A%0D%0A%0D%0AThank%20you%21">Request access by email</a>. It opens a ready-written message to me.</p>
+            <noscript><p class="vault__hint">Unlocking the files needs JavaScript.</p></noscript>
+          </div>
+          <ul class="vault__files" hidden></ul>
+        </section>
+
         <nav class="next-project reveal" aria-label="Next case study">
           <a href="accessibility-keyboard-navigation.html">
             <span>
@@ -363,5 +384,6 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vault.js"></script>
 </body>
 </html>

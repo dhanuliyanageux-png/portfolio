@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Lock design files</title>
+  <style>
+    body { font: 16px/1.5 -apple-system, "Inter", sans-serif; max-width: 52rem; margin: 2rem auto; padding: 0 1.25rem; color: #1a1a1a; }
+    label { display: block; font-weight: 600; margin-top: 1.25rem; }
+    input, textarea { width: 100%; box-sizing: border-box; font: inherit; padding: .6rem .75rem; border: 1px solid #bbb; border-radius: 8px; }
+    textarea { min-height: 9rem; font-family: ui-monospace, monospace; font-size: .85rem; }
+    button { font: inherit; font-weight: 600; margin-top: 1rem; padding: .65rem 1.2rem; border: 0; border-radius: 999px; background: #2f43e0; color: #fff; cursor: pointer; }
+    pre { background: #f3f1ec; padding: 1rem; border-radius: 8px; overflow: auto; white-space: pre-wrap; word-break: break-all; font-size: .8rem; }
+    small { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Lock design files</h1>
+  <p>Encrypts a list of links with your password, entirely in this browser tab. Nothing is sent anywhere. Use the <strong>same password</strong> for every case study, so one unlock opens them all.</p>
+
+  <label for="pw">Password</label>
+  <input id="pw" type="text" autocomplete="off" />
+  <small>Use a long passphrase (four or more random words). Anyone can download the encrypted data, so a short password can be guessed offline.</small>
+
+  <label for="files">Files, one per line: <code>Kind | Title | Description | URL</code></label>
+  <textarea id="files" spellcheck="false">Figma board | Usability test analysis | How the test results were synthesised. | https://www.figma.com/board/...</textarea>
+
+  <button id="go">Encrypt</button>
+
+  <h2>Result</h2>
+  <p>Paste these two values onto the <code>&lt;section class="vault" data-vault …&gt;</code> of the case study.</p>
+  <pre id="out">—</pre>
+
+  <script src="../assets/js/vault.js"></script>
+  <script>
+    document.getElementById("go").addEventListener("click", function () {
+      var pw = document.getElementById("pw").value;
+      var files = document.getElementById("files").value.split("\n").map(function (l) { return l.trim(); }).filter(Boolean).map(function (l) {
+        var p = l.split("|").map(function (s) { return s.trim(); });
+        return { k: p[0], t: p[1], d: p[2], u: p.slice(3).join("|") };
+      });
+      if (!pw || !files.length) { document.getElementById("out").textContent = "Enter a password and at least one file."; return; }
+      Vault.encrypt(pw, files).then(function (r) {
+        document.getElementById("out").textContent = 'data-iv="' + r.iv + '" data-ct="' + r.ct + '"';
+      });
+    });
+  </script>
+</body>
+</html>

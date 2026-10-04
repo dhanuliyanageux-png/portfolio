@@ -1079,3 +1079,95 @@ figure.shot figcaption b { color: var(--text-soft); font-weight: 600; }
 .shot-side ul { margin: 0; padding-left: 1.1rem; }
 .shot-side li + li { margin-top: 0.45rem; }
 @media (max-width: 700px) { .shot-side { grid-template-columns: 1fr; } .shot-side figure.shot { max-width: 312px; } }
+
+/* =========================================================
+   Locked design files ("vault") at the end of a case study
+   ========================================================= */
+.vault {
+  --v-bg: #14161f;
+  --v-fg: #f4f2ec;
+  --v-soft: #b9b6ad;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  align-items: start;
+  margin-block: clamp(2.5rem, 6vw, 4rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--v-bg);
+  color: var(--v-fg);
+  border-radius: calc(var(--radius) + 6px);
+  overflow: hidden;
+}
+.vault::before { /* faint grid, like the back of a blueprint */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(120deg, #000, transparent 70%);
+  mask-image: linear-gradient(120deg, #000, transparent 70%);
+  pointer-events: none;
+}
+.vault > * { position: relative; }
+.vault__lock { width: clamp(56px, 8vw, 84px); color: var(--v-fg); }
+.vault__lock svg { display: block; width: 100%; height: auto; overflow: visible; }
+.vault__lock .shackle { transform-box: view-box; transform-origin: 19px 34px; transition: transform .5s cubic-bezier(.3,1.4,.5,1); }
+.vault.is-open .vault__lock .shackle { transform: rotate(-32deg) translateY(-3px); }
+.vault__lock .keyhole { fill: var(--v-bg); transition: opacity .3s; }
+.vault.is-open .vault__lock .keyhole { opacity: 0; }
+.vault__lock .body { fill: #8f9bff; transition: fill .4s; }
+.vault.is-open .vault__lock .body { fill: #7ee0a8; }
+.vault .eyebrow { color: #aab3ff; margin-bottom: .5rem; }
+.vault h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); line-height: 1.1; margin: 0 0 .75rem; color: var(--v-fg); }
+.vault__intro { color: var(--v-soft); max-width: 52ch; margin: 0 0 1.25rem; }
+.vault__form { display: flex; flex-wrap: wrap; gap: .6rem; max-width: 30rem; }
+.vault__form input {
+  flex: 1 1 12rem; min-width: 0;
+  font: inherit; font-size: 1rem; color: var(--v-fg);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px; padding: .7rem 1.1rem;
+}
+.vault__form input::placeholder { color: #8d8a82; }
+.vault__form input:focus-visible, .vault__form button:focus-visible, .vault__file:focus-visible, .vault__hint a:focus-visible {
+  outline: 3px solid #aab3ff; outline-offset: 3px;
+}
+.vault__form button {
+  font: inherit; font-weight: 600; cursor: pointer; border: 0; border-radius: 999px;
+  padding: .7rem 1.4rem; background: var(--v-fg); color: var(--v-bg);
+}
+.vault__form button:hover { background: #fff; }
+.vault__form button:disabled { opacity: .6; cursor: progress; }
+.vault.is-wrong .vault__form input { border-color: #ff9d9d; animation: vault-shake .35s; }
+@keyframes vault-shake { 20%{transform:translateX(-6px)} 50%{transform:translateX(6px)} 80%{transform:translateX(-3px)} }
+.vault__status { min-height: 1.4em; margin: .6rem 0 0; font-size: var(--step--1); color: #ffb4b4; }
+.vault__status:empty { min-height: 0; margin: 0; }
+.vault__hint { margin: .5rem 0 0; font-size: var(--step--1); color: var(--v-soft); }
+.vault__hint a { color: var(--v-fg); }
+.vault__files { grid-column: 1 / -1; list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.vault__files[hidden], .vault__form[hidden], .vault__hint[hidden] { display: none; }
+.vault__file {
+  position: relative; display: flex; flex-direction: column; gap: .45rem; height: 100%;
+  padding: 1.35rem 1.1rem 1rem; text-decoration: none; color: var(--v-bg);
+  background: var(--v-fg); border-radius: 4px 14px 14px 14px;
+  animation: vault-in .5s both;
+}
+.vault__file::before { /* folder tab */
+  content: ""; position: absolute; left: 0; top: -9px; width: 44%; height: 10px;
+  background: inherit; border-radius: 8px 8px 0 0;
+}
+.vault__files li:nth-child(2) .vault__file { animation-delay: .08s; }
+.vault__files li:nth-child(3) .vault__file { animation-delay: .16s; }
+.vault__files li:nth-child(n+4) .vault__file { animation-delay: .24s; }
+@keyframes vault-in { from { opacity: 0; transform: translateY(10px); } }
+.vault__file:hover { background: #fff; transform: translateY(-2px); }
+.vault__file { transition: transform .2s, background .2s; }
+.vault__kind { align-self: flex-start; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-text); background: var(--accent-soft); border-radius: 999px; padding: .2rem .6rem; }
+.vault__file-title { font-family: var(--font-display); font-size: var(--step-1); line-height: 1.15; }
+.vault__file-desc { font-size: var(--step--1); color: #4a4741; }
+.vault__open { margin-top: auto; padding-top: .5rem; font-size: var(--step--1); font-weight: 600; color: var(--accent-text); }
+@media (max-width: 560px) { .vault { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  .vault *, .vault *::before { animation: none !important; transition: none !important; }
+}
